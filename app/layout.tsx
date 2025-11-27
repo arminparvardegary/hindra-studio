@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
+import LoadingScreen from "@/components/LoadingScreen";
+import ScrollProgress from "@/components/ScrollProgress";
+import FloatingActions from "@/components/FloatingActions";
+import NoiseOverlay from "@/components/NoiseOverlay";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,7 +34,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased bg-white text-black`}
       >
+        <LoadingScreen />
+        <ScrollProgress />
+        <CustomCursor />
+        <NoiseOverlay />
         {children}
+        <FloatingActions />
       </body>
     </html>
   );
