@@ -1,116 +1,174 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-type CardProps = {
-  src: string;
-  alt: string;
-  href: string;
-  title: string;
-  variant?: "standard" | "wide";
-  priority?: boolean;
-};
+const projects = [
+  {
+    id: "project-1",
+    title: "Brand Identity",
+    subtitle: "TechFlow",
+    description: "Complete visual identity for a SaaS startup",
+    image: "/images/ford.png",
+    tags: ["Branding", "Strategy"],
+    color: "#DCDFFF",
+  },
+  {
+    id: "project-2",
+    title: "Web Development",
+    subtitle: "Bloom",
+    description: "E-commerce website for sustainable fashion",
+    image: "/images/ford.png",
+    tags: ["Development", "UI/UX"],
+    color: "#E9DCC8",
+  },
+  {
+    id: "project-3",
+    title: "Motion Design",
+    subtitle: "Artisan",
+    description: "Animated brand identity for creative agency",
+    image: "/images/ford.png",
+    tags: ["Motion", "Animation"],
+    color: "#DCDFFF",
+  },
+];
 
-function Card({ src, alt, href, title, variant = "standard", priority }: CardProps) {
-  const ratioClass =
-    variant === "wide"
-      ? "aspect-[32/9] sm:aspect-[28/9] lg:aspect-[32/9]"
-      : "aspect-[16/9]";
+function ProjectCard({ 
+  project, 
+  index 
+}: { 
+  project: typeof projects[0]; 
+  index: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -15]);
 
   return (
-    <Link
-      href={href}
-      aria-label={title}
-      className="group block rounded-2xl overflow-hidden bg-[#DCDFFF] ring-1 ring-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+    <motion.div
+      ref={cardRef}
+      style={{ y, scale, opacity, rotateX }}
+      className="sticky top-32"
     >
-      <div className={`relative ${ratioClass}`}>
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes={
-            variant === "wide"
-              ? "(min-width:1280px) 1120px, (min-width:1024px) 90vw, 100vw"
-              : "(min-width:1280px) 560px, (min-width:1024px) 45vw, (min-width:640px) 90vw, 100vw"
-          }
-          priority={priority}
-        />
+      <Link href={`/works/${project.id}`} className="block group">
+        <div 
+          className="relative rounded-3xl overflow-hidden"
+          style={{ backgroundColor: project.color }}
+        >
+          <div className="grid md:grid-cols-2 gap-8 p-8 md:p-12">
+            {/* Content */}
+            <div className="flex flex-col justify-center order-2 md:order-1">
+              <span className="text-sm font-medium text-black/50 mb-2">
+                0{index + 1}
+              </span>
+              <h3 className="text-3xl md:text-4xl font-bold text-black mb-2">
+                {project.title}
+              </h3>
+              <p className="text-xl text-black/70 mb-4">
+                {project.subtitle}
+              </p>
+              <p className="text-black/60 mb-6">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-1.5 bg-black/10 rounded-full text-sm text-black"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="inline-flex items-center gap-2 text-black font-medium group-hover:gap-4 transition-all">
+                View Project
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
 
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Hover caption */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="px-6 py-3 bg-white text-black rounded-full font-medium text-sm">
-            View Project
-          </span>
+            {/* Image */}
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden order-1 md:order-2">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+            </div>
+          </div>
         </div>
-        
-        {/* Title overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/70 to-transparent">
-          <h3 className="text-white text-lg sm:text-xl font-semibold">
-            {title}
-          </h3>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }
 
 export default function WorksSection() {
-  const IMG = "/images/ford.png";
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <section aria-labelledby="works-title" className="w-full py-16 sm:py-20 lg:py-24">
+    <section ref={containerRef} className="relative py-20 sm:py-28">
       <div className="container-custom">
         {/* Header */}
-        <div className="mb-8 sm:mb-10 lg:mb-12 flex items-baseline justify-between gap-4">
-          <div>
-            <span className="tag mb-3">Portfolio</span>
-            <h2 id="works-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black">
-              Our Works
-            </h2>
-          </div>
+        <motion.div 
+          style={{ y: headerY, opacity: headerOpacity }}
+          className="text-center mb-16 sticky top-20"
+        >
+          <span className="tag mb-4">Portfolio</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-4">
+            Our Works
+          </h2>
+          <p className="text-lg text-black/60 max-w-2xl mx-auto">
+            Selected projects we&apos;re proud of. Each represents a unique 
+            challenge and creative solution.
+          </p>
+        </motion.div>
 
+        {/* Projects */}
+        <div className="space-y-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+
+        {/* View All CTA */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mt-20"
+        >
           <Link
             href="/works"
-            className="group inline-flex items-center gap-2 text-sm sm:text-base text-black/60 hover:text-black transition-colors"
+            className="inline-flex items-center gap-3 text-lg font-medium text-black hover:gap-5 transition-all"
           >
-            View all
-            <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            View all projects
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card
-            src={IMG}
-            alt="Ford project preview"
-            href="/works/ford-1"
-            title="Ford Project — Concept 1"
-          />
-          <Card
-            src={IMG}
-            alt="Ford project preview"
-            href="/works/ford-2"
-            title="Ford Project — Concept 2"
-          />
-
-          <div className="md:col-span-2">
-            <Card
-              src={IMG}
-              alt="Ford project wide hero"
-              href="/works/ford-hero"
-              title="Ford Project — Hero"
-              variant="wide"
-              priority
-            />
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

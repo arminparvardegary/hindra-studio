@@ -1,53 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Chen",
-    role: "CEO at TechFlow",
+    quote: "Hindra Studio transformed our brand identity completely. Their attention to detail and creative vision exceeded our expectations.",
+    author: "Sarah Chen",
+    role: "CEO, TechFlow",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
-    content: "Hindra transformed our brand identity completely. Their attention to detail and creative vision exceeded all expectations.",
-    rating: 5,
-    bg: "bg-[#DCDFFF]",
   },
   {
     id: 2,
-    name: "Marcus Johnson",
-    role: "Founder at Startify",
+    quote: "Working with them was a game-changer. Our new website increased conversions by 150% in just three months.",
+    author: "Michael Torres",
+    role: "Founder, Bloom",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
-    content: "Working with Hindra was a game-changer. They don't just design, they craft experiences that resonate with our audience.",
-    rating: 5,
-    bg: "bg-[#E9DCC8]",
   },
   {
     id: 3,
-    name: "Emily Watson",
-    role: "Marketing Director at Bloom",
+    quote: "The motion design work they delivered was absolutely stunning. Our brand videos now actually get watched till the end.",
+    author: "Emily Watson",
+    role: "Marketing Director, Artisan",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-    content: "The team at Hindra understood our vision from day one. They delivered a brand that perfectly captures our essence.",
-    rating: 5,
-    bg: "bg-[#DCDFFF]",
-  },
-  {
-    id: 4,
-    name: "David Park",
-    role: "CTO at NexGen",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
-    content: "Exceptional work! Hindra's minimalist approach brought clarity to our complex product. Highly recommended.",
-    rating: 5,
-    bg: "bg-[#E9DCC8]",
-  },
-  {
-    id: 5,
-    name: "Lisa Thompson",
-    role: "Creative Director at Artisan",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
-    content: "From concept to execution, Hindra delivered excellence. Our new identity has received countless compliments.",
-    rating: 5,
-    bg: "bg-[#DCDFFF]",
   },
 ];
 
@@ -55,148 +32,162 @@ const logos = [
   { name: "Carsome", src: "/logo-carsome.webp" },
   { name: "Kumu", src: "/logo-kumu_2025-04-02-191834_xdcl.webp" },
   { name: "Van Heusen", src: "/logo-vanheusen.webp" },
+  { name: "Ford", src: "/images/ford.png" },
 ];
 
 export default function Testimonial() {
-  const logoRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
 
-  const cardXRef = useRef(0);
-  const logoXRef = useRef(0);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  // Logo animation
-  useEffect(() => {
-    const el = logoRef.current;
-    if (!el) return;
+  const nextTestimonial = () => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
-    let frame: number;
-    const tick = () => {
-      logoXRef.current -= 1;
-      el.style.transform = `translateX(${logoXRef.current}px)`;
-      frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
-  // Card animation
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-
-    let frame: number;
-    const tick = () => {
-      if (!isPaused) {
-        cardXRef.current -= 0.5;
-        el.style.transform = `translateX(${cardXRef.current}px)`;
-      }
-      frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [isPaused]);
-
-  const infiniteLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
-  const infiniteCards = [...testimonials, ...testimonials, ...testimonials, ...testimonials, ...testimonials];
+  const prevTestimonial = () => {
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   return (
-    <section className="py-20 sm:py-28 overflow-hidden bg-white">
-      {/* Section header */}
-      <div className="container-custom mb-16 text-center">
-        <span className="tag mb-4">
-          Testimonials
-        </span>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black mb-4">
-          Loved by teams worldwide
-        </h2>
-        <p className="max-w-2xl mx-auto text-lg text-black/60">
-          Don&apos;t just take our word for it. Here&apos;s what our clients have to say about working with us.
-        </p>
+    <section
+      ref={containerRef}
+      className="relative py-20 sm:py-28 lg:py-32 overflow-hidden"
+    >
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-[#DCDFFF]/30 blur-[120px]"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
       </div>
 
-      {/* Logo marquee */}
-      <div className="mb-16" style={{ transform: "rotate(-3deg)" }}>
-        <div className="py-6 bg-black">
-          <div ref={logoRef} className="flex items-center gap-20 will-change-transform">
-            {infiniteLogos.map((logo, i) => (
-              <Image
-                key={i}
-                src={logo.src}
-                alt={logo.name}
-                width={120}
-                height={40}
-                className="h-8 w-auto select-none brightness-0 invert opacity-60"
-              />
+      <motion.div 
+        style={{ y, opacity }}
+        className="container-custom relative z-10"
+      >
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="tag mb-4">Testimonials</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-4">
+            What clients say
+          </h2>
+          <p className="text-lg text-black/60 max-w-2xl mx-auto">
+            Don&apos;t just take our word for it. Here&apos;s what our clients have to say 
+            about working with us.
+          </p>
+        </div>
+
+        {/* Testimonial Carousel */}
+        <div className="max-w-4xl mx-auto">
+          <div className="relative bg-[#F8F8F8] rounded-3xl p-8 sm:p-12 lg:p-16">
+            {/* Quote icon */}
+            <div className="absolute top-8 left-8 text-6xl text-black/10 font-serif">
+              &ldquo;
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-center"
+              >
+                <p className="text-xl sm:text-2xl lg:text-3xl text-black leading-relaxed mb-8">
+                  {testimonials[activeIndex].quote}
+                </p>
+                
+                <div className="flex flex-col items-center">
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden mb-4 ring-4 ring-white">
+                    <Image
+                      src={testimonials[activeIndex].avatar}
+                      alt={testimonials[activeIndex].author}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="text-lg font-semibold text-black">
+                    {testimonials[activeIndex].author}
+                  </div>
+                  <div className="text-sm text-black/50">
+                    {testimonials[activeIndex].role}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button
+                onClick={prevTestimonial}
+                className="p-3 rounded-full bg-black/5 hover:bg-black/10 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === activeIndex 
+                        ? "w-8 bg-black" 
+                        : "bg-black/20 hover:bg-black/40"
+                    }`}
+                  />
+                ))}
+              </div>
+              
+              <button
+                onClick={nextTestimonial}
+                className="p-3 rounded-full bg-black/5 hover:bg-black/10 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Logo strip */}
+        <div className="mt-20">
+          <p className="text-center text-sm text-black/40 uppercase tracking-widest mb-8">
+            Trusted by leading companies
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-12">
+            {logos.map((logo, index) => (
+              <motion.div
+                key={logo.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative h-10 w-28 grayscale hover:grayscale-0 transition-all"
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  fill
+                  className="object-contain"
+                />
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Testimonial cards */}
-      <div
-        className="mt-8"
-        style={{ transform: "rotate(-3deg)" }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <div ref={cardRef} className="flex gap-6 will-change-transform">
-          {infiniteCards.map((testimonial, i) => (
-            <div
-              key={`${testimonial.id}-${i}`}
-              className={`shrink-0 w-[380px] p-8 rounded-3xl ${testimonial.bg} transition-all duration-300 hover:shadow-lg`}
-            >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, j) => (
-                  <svg key={j} className="w-5 h-5 text-black fill-current" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-
-              {/* Content */}
-              <p className="text-black/80 text-lg leading-relaxed mb-6">
-                &ldquo;{testimonial.content}&rdquo;
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <Image
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-semibold text-black">{testimonial.name}</p>
-                  <p className="text-sm text-black/50">{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="container-custom mt-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { value: "50+", label: "Happy Clients" },
-            { value: "98%", label: "Satisfaction Rate" },
-            { value: "250+", label: "Projects Delivered" },
-            { value: "15", label: "Team Members" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="text-4xl sm:text-5xl font-bold text-black mb-2">{stat.value}</p>
-              <p className="text-black/50">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

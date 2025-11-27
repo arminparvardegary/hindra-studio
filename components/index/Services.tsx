@@ -1,93 +1,173 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
-type Service = {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  features: string[];
-};
-
-const SERVICES: Service[] = [
+const services = [
   {
+    id: "01",
     title: "Brand Identity",
-    description: "Turn scattered assets into a clear, memorable brand that grows with you",
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-      </svg>
-    ),
-    features: ["Logo Design", "Color Systems", "Typography", "Brand Guidelines"],
+    description: "Complete visual identity systems that capture your essence and set you apart from the competition.",
+    features: ["Logo Design", "Brand Guidelines", "Visual Systems", "Brand Strategy"],
+    color: "#DCDFFF",
   },
   {
+    id: "02",
     title: "Web Development",
-    description: "Fast, clean websites that work on every device and load in a blink",
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-      </svg>
-    ),
-    features: ["React/Next.js", "Responsive Design", "Performance", "SEO Ready"],
+    description: "Fast, beautiful, and responsive websites that convert visitors into customers.",
+    features: ["React / Next.js", "E-commerce", "CMS Integration", "Performance"],
+    color: "#E9DCC8",
   },
   {
+    id: "03",
     title: "Motion Design",
-    description: "Videos and animations people actually want to watch and share",
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    features: ["UI Animations", "Explainer Videos", "Social Content", "Brand Motion"],
+    description: "Captivating animations and videos that bring your brand to life.",
+    features: ["2D Animation", "3D Animation", "Video Production", "Explainer Videos"],
+    color: "#DCDFFF",
   },
   {
+    id: "04",
     title: "UI/UX Design",
-    description: "Interfaces that feel natural and help users get things done",
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-      </svg>
-    ),
-    features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-  },
-  {
-    title: "AI Integration",
-    description: "Smart use of AI so you can ship more and stress less",
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    features: ["Workflow Automation", "Content Generation", "Smart Tools", "Process Optimization"],
-  },
-  {
-    title: "Strategy",
-    description: "Honest advice on what works and what does not for your goals",
-    icon: (
-      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    features: ["Market Research", "Brand Positioning", "Growth Planning", "Consulting"],
+    description: "User-centered design that makes complex simple and delightful to use.",
+    features: ["User Research", "Wireframing", "Prototyping", "User Testing"],
+    color: "#E9DCC8",
   },
 ];
 
-export default function ServicesSection() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
   });
+
+  const x = useTransform(
+    scrollYProgress, 
+    [0, 0.5], 
+    [index % 2 === 0 ? -100 : 100, 0]
+  );
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const rotateY = useTransform(
+    scrollYProgress, 
+    [0, 0.5], 
+    [index % 2 === 0 ? -10 : 10, 0]
+  );
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ x, opacity, rotateY }}
+      className={`grid md:grid-cols-2 gap-8 items-center ${
+        index % 2 === 1 ? "md:flex-row-reverse" : ""
+      }`}
+    >
+      {/* Content */}
+      <div className={`space-y-6 ${index % 2 === 1 ? "md:order-2" : ""}`}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.1 }}
+          className="text-sm font-medium text-black/40"
+        >
+          {service.id}
+        </motion.div>
+        
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.2 }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black"
+        >
+          {service.title}
+        </motion.h3>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3 }}
+          className="text-lg text-black/60 leading-relaxed"
+        >
+          {service.description}
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.4 }}
+          className="flex flex-wrap gap-2"
+        >
+          {service.features.map((feature) => (
+            <span
+              key={feature}
+              className="px-4 py-2 bg-black/5 rounded-full text-sm text-black/70"
+            >
+              {feature}
+            </span>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Visual */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className={`relative aspect-square rounded-3xl overflow-hidden ${
+          index % 2 === 1 ? "md:order-1" : ""
+        }`}
+        style={{ backgroundColor: service.color }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div
+            className="text-[120px] sm:text-[180px] font-bold text-black/10"
+            animate={{ 
+              rotate: [0, 5, -5, 0],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{ duration: 6, repeat: Infinity }}
+          >
+            {service.id}
+          </motion.div>
+        </div>
+        
+        {/* Floating elements */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-20 h-20 rounded-full bg-white/30"
+          animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/4 w-14 h-14 rounded-lg bg-black/10"
+          animate={{ y: [0, 15, 0], rotate: [0, 45, 0] }}
+          transition={{ duration: 5, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/3 w-8 h-8 rounded-full bg-white/50"
+          animate={{ y: [0, -10, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export default function Services() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
@@ -102,98 +182,51 @@ export default function ServicesSection() {
 
   return (
     <section
-      ref={ref}
-      aria-labelledby="services-title"
-      className="py-24 sm:py-32 bg-white"
+      ref={containerRef}
+      className="relative py-20 sm:py-28 lg:py-32 overflow-hidden"
     >
-      <div className="container-custom">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="tag-soft mb-4">
-            What we do
-          </span>
-          <h2
-            id="services-title"
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black mb-4"
-          >
-            Services
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg text-black/60">
-            We mix design, development, motion and smart use of AI so you can 
-            ship more, stress less and look as strong as the work you deliver.
-          </p>
-        </motion.div>
+      {/* Animated background */}
+      <motion.div
+        style={{ y: backgroundY }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#DCDFFF]/30 blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[#E9DCC8]/30 blur-[100px]" />
+      </motion.div>
 
-        {/* Services Grid */}
+      <div className="container-custom relative z-10">
+        {/* Header */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mb-16 sm:mb-20"
         >
-          {SERVICES.map((service, index) => (
-            <motion.div
-              key={service.title}
-              variants={itemVariants}
-              className={`group relative p-8 rounded-3xl transition-all duration-500 hover:shadow-lg ${
-                index % 2 === 0 ? 'bg-[#DCDFFF]/50 hover:bg-[#DCDFFF]' : 'bg-[#E9DCC8]/50 hover:bg-[#E9DCC8]'
-              }`}
-            >
-              {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center mb-6 text-white">
-                {service.icon}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-semibold text-black mb-3">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-black/60 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* Features */}
-              <ul className="space-y-2">
-                {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-sm text-black/70">
-                    <svg className="w-4 h-4 text-black shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-black/50 mb-4">
-            Have a specific need? We&apos;re flexible and love a good challenge.
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 text-black font-medium hover:gap-3 transition-all"
+          <motion.span variants={itemVariants} className="tag mb-4">
+            What We Do
+          </motion.span>
+          <motion.h2
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6"
           >
-            Let&apos;s talk about your project
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+            Our Services
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-lg sm:text-xl text-black/60 max-w-2xl mx-auto"
+          >
+            We offer a full range of design and development services to help 
+            your brand stand out and succeed.
+          </motion.p>
         </motion.div>
+
+        {/* Services Grid */}
+        <div className="space-y-20 sm:space-y-32">
+          {services.map((service, index) => (
+            <ServiceCard key={service.id} service={service} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
