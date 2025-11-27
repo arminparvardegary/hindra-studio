@@ -8,15 +8,55 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 
-const categories = ["All", "Branding", "Web Design", "Motion", "Strategy"];
+const categories = ["All", "Branding", "Web Design", "Motion", "E-commerce"];
 
 const projects = [
+  {
+    id: "ford-mustang",
+    title: "Ford Mustang",
+    category: "Web Design",
+    description: "A complete digital experience redesign for Ford's legendary muscle car",
+    image: "/images/ford.png",
+    tags: ["Automotive", "3D Experience", "UI/UX"],
+    year: "2024",
+    featured: true,
+  },
+  {
+    id: "kumu-app",
+    title: "Kumu",
+    category: "Branding",
+    description: "Brand identity and mobile app design for Southeast Asia's fastest-growing platform",
+    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
+    tags: ["Mobile App", "Brand Identity", "UI/UX"],
+    year: "2024",
+    featured: true,
+  },
+  {
+    id: "carsome",
+    title: "Carsome",
+    category: "E-commerce",
+    description: "Complete brand refresh and e-commerce platform for Southeast Asia's largest car marketplace",
+    image: "/logo-carsome.webp",
+    tags: ["E-commerce", "Branding", "Web Platform"],
+    year: "2023",
+    featured: true,
+  },
+  {
+    id: "van-heusen",
+    title: "Van Heusen",
+    category: "E-commerce",
+    description: "Digital campaign and e-commerce experience for the iconic fashion brand",
+    image: "/logo-vanheusen.webp",
+    tags: ["Fashion", "E-commerce", "Campaign"],
+    year: "2023",
+    featured: true,
+  },
   {
     id: "techflow",
     title: "TechFlow",
     category: "Branding",
-    description: "Complete brand identity for a SaaS startup",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop",
+    description: "Complete brand identity for a B2B SaaS startup",
+    image: "/images/ford.png",
     tags: ["Logo", "Brand Guidelines", "Visual Identity"],
     year: "2024",
   },
@@ -25,17 +65,8 @@ const projects = [
     title: "Bloom",
     category: "Web Design",
     description: "E-commerce website for a sustainable fashion brand",
-    image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
+    image: "/logo-vanheusen.webp",
     tags: ["UI/UX", "Development", "E-commerce"],
-    year: "2024",
-  },
-  {
-    id: "nexgen",
-    title: "NexGen",
-    category: "Branding",
-    description: "Tech company rebrand with a focus on innovation",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop",
-    tags: ["Rebrand", "Strategy", "Guidelines"],
     year: "2024",
   },
   {
@@ -43,44 +74,17 @@ const projects = [
     title: "Artisan",
     category: "Motion",
     description: "Animated brand identity for a creative agency",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=600&fit=crop",
+    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
     tags: ["Motion Graphics", "Animation", "Video"],
-    year: "2023",
-  },
-  {
-    id: "startify",
-    title: "Startify",
-    category: "Web Design",
-    description: "Landing page for a startup accelerator program",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    tags: ["Landing Page", "UI Design", "Development"],
     year: "2023",
   },
   {
     id: "greenleaf",
     title: "GreenLeaf",
-    category: "Strategy",
-    description: "Brand strategy for an eco-friendly product line",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop",
-    tags: ["Brand Strategy", "Research", "Positioning"],
-    year: "2023",
-  },
-  {
-    id: "soundwave",
-    title: "Soundwave",
     category: "Branding",
-    description: "Visual identity for a music streaming platform",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&h=600&fit=crop",
-    tags: ["Logo", "App Design", "Brand System"],
-    year: "2023",
-  },
-  {
-    id: "freshbites",
-    title: "FreshBites",
-    category: "Web Design",
-    description: "Food delivery app design and development",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop",
-    tags: ["App Design", "UI/UX", "Development"],
+    description: "Brand strategy for an eco-friendly product line",
+    image: "/logo-carsome.webp",
+    tags: ["Brand Strategy", "Research", "Positioning"],
     year: "2023",
   },
 ];
@@ -107,9 +111,7 @@ export default function WorksPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
-            <span className="tag mb-6">
-              Our Work
-            </span>
+            <span className="tag mb-6">Our Work</span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
               Selected projects we&apos;re proud of
             </h1>
@@ -150,10 +152,7 @@ export default function WorksPage() {
       {/* Projects Grid */}
       <section className="pb-24 sm:pb-32">
         <div className="container-custom">
-          <motion.div
-            layout
-            className="grid md:grid-cols-2 gap-8"
-          >
+          <motion.div layout className="grid md:grid-cols-2 gap-8">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <motion.article
@@ -168,23 +167,25 @@ export default function WorksPage() {
                   onMouseLeave={() => setHoveredProject(null)}
                 >
                   <Link href={`/works/${project.id}`}>
-                    <div className={`relative aspect-[4/3] rounded-3xl overflow-hidden mb-6 ${index % 2 === 0 ? 'bg-[#DCDFFF]' : 'bg-[#E9DCC8]'}`}>
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      
+                    <div
+                      className={`relative aspect-[4/3] rounded-3xl overflow-hidden mb-6 ${
+                        index % 2 === 0 ? "bg-[#DCDFFF]" : "bg-[#E9DCC8]"
+                      }`}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center p-8">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-contain p-8 transition-transform duration-700 group-hover:scale-110"
+                        />
+                      </div>
+
                       {/* Overlay */}
-                      <div
-                        className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      />
-                      
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                       {/* View Project Button */}
-                      <div
-                        className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      >
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <motion.span
                           initial={{ scale: 0.8, opacity: 0 }}
                           animate={
@@ -198,12 +199,14 @@ export default function WorksPage() {
                         </motion.span>
                       </div>
 
-                      {/* Category badge */}
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-black">
-                          {project.category}
-                        </span>
-                      </div>
+                      {/* Featured badge */}
+                      {project.featured && (
+                        <div className="absolute top-4 left-4">
+                          <span className="px-3 py-1.5 bg-black text-white rounded-full text-xs font-medium">
+                            Featured
+                          </span>
+                        </div>
+                      )}
 
                       {/* Year */}
                       <div className="absolute top-4 right-4">
@@ -214,16 +217,16 @@ export default function WorksPage() {
                     </div>
 
                     <div>
-                      <h2 className="text-2xl font-bold text-black mb-2 group-hover:text-black/70 transition-colors">
-                        {project.title}
-                      </h2>
+                      <div className="flex items-center gap-3 mb-2">
+                        <h2 className="text-2xl font-bold text-black group-hover:text-black/70 transition-colors">
+                          {project.title}
+                        </h2>
+                        <span className="text-sm text-black/40">{project.category}</span>
+                      </div>
                       <p className="text-black/60 mb-4">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="tag"
-                          >
+                          <span key={tag} className="tag">
                             {tag}
                           </span>
                         ))}
@@ -258,7 +261,12 @@ export default function WorksPage() {
             >
               Start a project
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </Link>
           </motion.div>
