@@ -12,6 +12,9 @@ const words = [
   "Innovation",
 ];
 
+// Create reversed array without mutating original
+const wordsReversed = [...words].reverse();
+
 export default function ScrollText() {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -24,6 +27,10 @@ export default function ScrollText() {
   const x2 = useTransform(scrollYProgress, [0, 1], ["-50%", "0%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.3, 1, 1, 0.3]);
 
+  // Create stable arrays for rendering
+  const row1Words = [...words, ...words, ...words];
+  const row2Words = [...wordsReversed, ...wordsReversed, ...wordsReversed];
+
   return (
     <section
       ref={containerRef}
@@ -35,8 +42,8 @@ export default function ScrollText() {
           style={{ x: x1 }}
           className="flex items-center gap-8 sm:gap-12 whitespace-nowrap mb-6"
         >
-          {[...words, ...words, ...words].map((word, index) => (
-            <div key={index} className="flex items-center gap-8 sm:gap-12">
+          {row1Words.map((word, index) => (
+            <div key={`row1-${index}`} className="flex items-center gap-8 sm:gap-12">
               <span className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-black/10">
                 {word}
               </span>
@@ -50,9 +57,12 @@ export default function ScrollText() {
           style={{ x: x2 }}
           className="flex items-center gap-8 sm:gap-12 whitespace-nowrap"
         >
-          {[...words.reverse(), ...words, ...words].map((word, index) => (
-            <div key={index} className="flex items-center gap-8 sm:gap-12">
-              <span className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-transparent stroke-text">
+          {row2Words.map((word, index) => (
+            <div key={`row2-${index}`} className="flex items-center gap-8 sm:gap-12">
+              <span 
+                className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-transparent"
+                style={{ WebkitTextStroke: "2px rgba(0, 0, 0, 0.1)" }}
+              >
                 {word}
               </span>
               <span className="text-3xl sm:text-5xl text-black/20">◆</span>
@@ -60,13 +70,6 @@ export default function ScrollText() {
           ))}
         </motion.div>
       </motion.div>
-
-      {/* Add CSS for stroke text */}
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 2px rgba(0, 0, 0, 0.1);
-        }
-      `}</style>
     </section>
   );
 }
