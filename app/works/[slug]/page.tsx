@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, use } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -276,7 +276,8 @@ We developed a comprehensive brand strategy that positions GreenLeaf as the frie
   },
 };
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -287,7 +288,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
-  const project = projects[params.slug];
+  const project = projects[slug];
 
   if (!project) {
     notFound();
