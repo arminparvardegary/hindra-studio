@@ -2,8 +2,7 @@ import NavBar from "@/components/NavBar";
 import Header from "@/components/Header";
 import Hero from "@/components/index/Hero";
 import Showcase from "@/components/index/ShowCase";
-import Works from "@/components/index/Works";
-import Services from "@/components/index/Services";
+import ServicesPicker from "@/components/index/ServicesPicker";
 import Whyus from "@/components/index/WhyUs";
 import Scrolltext from "@/components/index/ScrollText";
 import Testimonial from "@/components/index/Testimonial";
@@ -16,8 +15,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Showcase />
-      <Works />
-      <Services />
+      <ServicesPicker />
       <Whyus />
       <Scrolltext />
       <Testimonial />
