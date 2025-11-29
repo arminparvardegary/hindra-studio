@@ -4,29 +4,29 @@ import { useEffect, useRef, useState } from "react";
 
 const cardContent = [
   {
+    number: "01",
     title: "Strategy First",
-    description: "Every great design starts with understanding the 'why'",
-    icon: "✦",
+    description: "Every great design starts with understanding the why behind the project",
   },
   {
+    number: "02",
     title: "Pixel Perfect",
-    description: "Obsessive attention to every detail",
-    icon: "◆",
+    description: "Obsessive attention to every detail ensures quality that stands out",
   },
   {
+    number: "03",
     title: "Fast Delivery",
-    description: "Quality work, delivered on time, every time",
-    icon: "●",
+    description: "Quality work, delivered on time, every time without compromise",
   },
   {
+    number: "04",
     title: "Always On",
-    description: "24/7 support for our partners",
-    icon: "★",
+    description: "Dedicated support and communication throughout every project",
   },
   {
+    number: "05",
     title: "Results Driven",
-    description: "Design that moves the needle",
-    icon: "▲",
+    description: "Design that moves the needle and delivers measurable outcomes",
   },
 ];
 
@@ -99,9 +99,10 @@ export default function LongScrollingText() {
   const translateY = progress * sectionHeight;
 
   return (
-    <div
+    <section
       ref={sectionRef}
       className="h-[300vh] bg-gradient-to-b from-[#faf9f5] to-white relative overflow-hidden"
+      aria-label="Our approach section"
     >
       {/* First text line */}
       <div
@@ -111,6 +112,7 @@ export default function LongScrollingText() {
           fontSize: "clamp(6rem, 15vw, 14rem)",
           whiteSpace: "nowrap",
         }}
+        aria-hidden="true"
       >
         craft that converts
       </div>
@@ -123,85 +125,86 @@ export default function LongScrollingText() {
           fontSize: "clamp(6rem, 15vw, 14rem)",
           whiteSpace: "nowrap",
         }}
+        aria-hidden="true"
       >
         craft that converts
       </div>
 
       {/* Floating Cards */}
-      <div className="absolute hidden lg:block" style={{ top: "20%", left: "20%" }}>
+      <article className="absolute hidden lg:block" style={{ top: "20%", left: "20%" }}>
         <div
           className="bg-white p-8 rounded-2xl shadow-2xl w-[320px] border border-gray-100"
           style={{
             transform: `translate(${card1X}px, ${card1Y}px) rotate(${rotate1}deg)`,
           }}
         >
-          <span className="text-3xl mb-4 block">{cardContent[0].icon}</span>
+          <span className="text-sm font-mono text-gray-400 mb-4 block">{cardContent[0].number}</span>
           <p className="text-xl font-semibold text-black mb-2">
             {cardContent[0].title}
           </p>
-          <p className="text-gray-500">{cardContent[0].description}</p>
+          <p className="text-gray-500 text-sm">{cardContent[0].description}</p>
         </div>
-      </div>
+      </article>
 
-      <div className="absolute hidden lg:block" style={{ top: "35%", right: "15%" }}>
+      <article className="absolute hidden lg:block" style={{ top: "35%", right: "15%" }}>
         <div
           className="bg-[#DCDFFF] p-8 rounded-2xl shadow-2xl w-[320px]"
           style={{
             transform: `translate(${card2X}px, ${card2Y}px) rotate(${rotate2}deg)`,
           }}
         >
-          <span className="text-3xl mb-4 block">{cardContent[1].icon}</span>
+          <span className="text-sm font-mono text-black/40 mb-4 block">{cardContent[1].number}</span>
           <p className="text-xl font-semibold text-black mb-2">
             {cardContent[1].title}
           </p>
-          <p className="text-gray-700">{cardContent[1].description}</p>
+          <p className="text-gray-700 text-sm">{cardContent[1].description}</p>
         </div>
-      </div>
+      </article>
 
-      <div className="absolute hidden lg:block" style={{ top: "50%", left: "35%" }}>
+      <article className="absolute hidden lg:block" style={{ top: "50%", left: "35%" }}>
         <div
           className="bg-[#E9DCC8] p-8 rounded-2xl shadow-2xl w-[320px]"
           style={{
             transform: `translate(${card3X}px, ${card3Y}px) rotate(${rotate3}deg)`,
           }}
         >
-          <span className="text-3xl mb-4 block">{cardContent[2].icon}</span>
+          <span className="text-sm font-mono text-black/40 mb-4 block">{cardContent[2].number}</span>
           <p className="text-xl font-semibold text-black mb-2">
             {cardContent[2].title}
           </p>
-          <p className="text-gray-700">{cardContent[2].description}</p>
+          <p className="text-gray-700 text-sm">{cardContent[2].description}</p>
         </div>
-      </div>
+      </article>
 
-      <div className="absolute hidden lg:block" style={{ top: "65%", right: "20%" }}>
+      <article className="absolute hidden lg:block" style={{ top: "65%", right: "20%" }}>
         <div
           className="bg-white p-8 rounded-2xl shadow-2xl w-[320px] border border-gray-100"
           style={{
             transform: `translate(${card2X}px, ${card2Y}px) rotate(${rotate2}deg)`,
           }}
         >
-          <span className="text-3xl mb-4 block">{cardContent[3].icon}</span>
+          <span className="text-sm font-mono text-gray-400 mb-4 block">{cardContent[3].number}</span>
           <p className="text-xl font-semibold text-black mb-2">
             {cardContent[3].title}
           </p>
-          <p className="text-gray-500">{cardContent[3].description}</p>
+          <p className="text-gray-500 text-sm">{cardContent[3].description}</p>
         </div>
-      </div>
+      </article>
 
-      <div className="absolute hidden lg:block" style={{ top: "78%", left: "25%" }}>
+      <article className="absolute hidden lg:block" style={{ top: "78%", left: "25%" }}>
         <div
           className="bg-black p-8 rounded-2xl shadow-2xl w-[320px]"
           style={{
             transform: `translate(${card1X}px, ${card1Y}px) rotate(${rotate1}deg)`,
           }}
         >
-          <span className="text-3xl mb-4 block text-white">{cardContent[4].icon}</span>
+          <span className="text-sm font-mono text-white/40 mb-4 block">{cardContent[4].number}</span>
           <p className="text-xl font-semibold text-white mb-2">
             {cardContent[4].title}
           </p>
-          <p className="text-gray-400">{cardContent[4].description}</p>
+          <p className="text-gray-400 text-sm">{cardContent[4].description}</p>
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

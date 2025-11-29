@@ -54,14 +54,19 @@ const WhyUs = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative min-h-[350vh] bg-white">
+    <section 
+      ref={sectionRef} 
+      className="relative min-h-[350vh] bg-white"
+      aria-label="About Hindra Studio"
+    >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full">
           {/* Background pattern */}
           <img
             src="/Group 1000003103 (1).svg"
             className="absolute inset-0 w-full h-full opacity-10"
-            alt="background pattern"
+            alt=""
+            aria-hidden="true"
           />
 
           {/* Animated pattern */}
@@ -74,14 +79,15 @@ const WhyUs = () => {
               transformOrigin: "center center",
               opacity: 0.3,
             }}
-            alt="animated pattern"
+            alt=""
+            aria-hidden="true"
           />
 
           {/* Content container */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               {content.map((item, index) => (
-                <div
+                <article
                   key={index}
                   className={`absolute left-1/2 -translate-x-1/2 w-full max-w-3xl text-center transition-all duration-700 ${
                     step === index
@@ -92,6 +98,7 @@ const WhyUs = () => {
                     top: index === 2 ? "60%" : "50%",
                     transform: `translateX(-50%) translateY(${step === index ? (index === 2 ? "0" : "-50%") : "20px"})`,
                   }}
+                  aria-hidden={step !== index}
                 >
                   <span className="inline-block px-4 py-1.5 bg-[#DCDFFF] text-black text-sm font-medium rounded-full mb-6">
                     0{index + 1}
@@ -110,22 +117,23 @@ const WhyUs = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
 
           {/* Progress indicator */}
-          <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+          <nav className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-3" aria-label="Section progress">
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   step === i ? "bg-black scale-150" : "bg-gray-300"
                 }`}
+                aria-current={step === i ? "step" : undefined}
               />
             ))}
-          </div>
+          </nav>
         </div>
       </div>
     </section>

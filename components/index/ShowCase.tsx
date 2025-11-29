@@ -32,7 +32,7 @@ const BASE: Slide[] = [
   {
     id: "luxe-motors",
     title: "Luxe Motors",
-    badges: ["AUTOMOTIVE", "BRANDING", "MOTION"],
+    badges: ["Automotive", "Branding", "Motion"],
     kind: "video",
     src: "/videos/motion.mp4",
     poster: "/images/ford.png",
@@ -41,7 +41,7 @@ const BASE: Slide[] = [
   {
     id: "kumu-app",
     title: "Kumu Social",
-    badges: ["TECH", "UI/UX", "MOBILE APP"],
+    badges: ["Tech", "UI/UX", "Mobile App"],
     kind: "image",
     src: "/images/ford.png",
     href: "/works/kumu",
@@ -49,7 +49,7 @@ const BASE: Slide[] = [
   {
     id: "carsome",
     title: "Carsome Platform",
-    badges: ["E-COMMERCE", "WEB DESIGN", "DEVELOPMENT"],
+    badges: ["E-Commerce", "Web Design", "Development"],
     kind: "video",
     src: "/videos/motion.mp4",
     poster: "/images/ford.png",
@@ -58,7 +58,7 @@ const BASE: Slide[] = [
   {
     id: "van-heusen",
     title: "Van Heusen",
-    badges: ["FASHION", "BRAND IDENTITY", "CAMPAIGN"],
+    badges: ["Fashion", "Brand Identity", "Campaign"],
     kind: "image",
     src: "/images/ford.png",
     href: "/works/van-heusen",
@@ -66,7 +66,7 @@ const BASE: Slide[] = [
   {
     id: "fintech-hub",
     title: "FinTech Hub",
-    badges: ["FINANCE", "PRODUCT DESIGN", "STRATEGY"],
+    badges: ["Finance", "Product Design", "Strategy"],
     kind: "video",
     src: "/videos/motion.mp4",
     poster: "/images/ford.png",
@@ -202,16 +202,16 @@ export default function ShowCase() {
   }, [active]);
   
   return (
-    <section className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20">
+    <section className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20" aria-labelledby="showcase-heading">
       {/* Section header */}
-      <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-black">
+      <header className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
+        <h2 id="showcase-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-black">
           Featured Projects
         </h2>
         <p className="text-center text-gray-500 mt-3 text-lg">
           Drag to explore our latest work
         </p>
-      </div>
+      </header>
 
       <div className="w-full">
         <div className="relative rounded-[28px]">
@@ -232,11 +232,13 @@ export default function ShowCase() {
               hide-scrollbar select-none
               ${dragging ? "cursor-grabbing" : "cursor-grab"}
             `}
+            role="list"
+            aria-label="Project showcase carousel"
           >
             <style>{`.hide-scrollbar::-webkit-scrollbar{display:none}`}</style>
 
             {EXT.map((s, i) => (
-              <div
+              <article
                 key={`${s.id}-${i}`}
                 ref={(el) => {
                   if (el) slideRefs.current[i] = el;
@@ -246,8 +248,9 @@ export default function ShowCase() {
                 }`}
                 onMouseEnter={handleVideoPlay}
                 onMouseLeave={handleVideoPause}
+                role="listitem"
               >
-                <Link href={s.href} className="block group">
+                <Link href={s.href} className="block group" aria-label={`View ${s.title} case study`}>
                   <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.08)] ring-1 ring-[#ECE9F5] overflow-hidden bg-white transition-shadow duration-300 group-hover:shadow-[0_12px_40px_rgba(21,16,48,0.12)]">
                     <div className="p-2 sm:p-3">
                       <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[500px] sm:h-[550px] lg:h-[600px] ring-white/10 relative">
@@ -260,11 +263,12 @@ export default function ShowCase() {
                             preload="metadata"
                             poster={s.poster}
                             className="block w-full h-full object-cover"
+                            aria-label={`${s.title} project video`}
                           />
                         ) : (
                           <img
                             src={s.src}
-                            alt={s.title}
+                            alt={`${s.title} project preview`}
                             loading="lazy"
                             className="block w-full h-full object-cover"
                           />
@@ -272,33 +276,39 @@ export default function ShowCase() {
                         {/* Hover overlay */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                           <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-6 py-3 rounded-full font-medium">
-                            View Case Study →
+                            View Case Study
                           </span>
                         </div>
                       </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
-                      <div className="text-[22px] sm:text-[26px] leading-none font-semibold text-[#15131F]">
+                      <h3 className="text-[22px] sm:text-[26px] leading-none font-semibold text-[#15131F]">
                         {s.title}
-                      </div>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.12em] text-[#6F6C85]">
+                      </h3>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                         {s.badges.map((b) => (
-                          <span key={`${s.id}-${b}`} className="bg-[#F5F5F5] px-3 py-1 rounded-full">{b}</span>
+                          <span 
+                            key={`${s.id}-${b}`} 
+                            className="text-xs uppercase tracking-wide text-gray-500 bg-[#F5F5F5] px-3 py-1.5 rounded-full"
+                          >
+                            {b}
+                          </span>
                         ))}
                       </div>
                     </div>
                   </div>
                 </Link>
-              </div>
+              </article>
             ))}
           </div>
 
-          <div className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4">
-            {BASE.map((_, i) => (
+          <nav className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4" aria-label="Carousel navigation">
+            {BASE.map((project, i) => (
               <button
                 key={i}
                 onClick={() => setActive(SECTION_SIZE + i)}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={`Go to ${project.title}`}
+                aria-current={baseActive === i ? "true" : undefined}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   baseActive === i
                     ? "w-10 bg-black"
@@ -306,7 +316,7 @@ export default function ShowCase() {
                 }`}
               />
             ))}
-          </div>
+          </nav>
         </div>
       </div>
     </section>

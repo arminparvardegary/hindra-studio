@@ -19,7 +19,7 @@ type Project = {
 const projects: Project[] = [
   {
     src: "/images/ford.png",
-    alt: "Luxe Motors brand identity",
+    alt: "Luxe Motors brand identity and motion design project",
     href: "/works/ford-mustang",
     title: "Luxe Motors",
     category: "Brand Identity & Motion",
@@ -28,7 +28,7 @@ const projects: Project[] = [
   },
   {
     src: "/images/ford.png",
-    alt: "Kumu social app design",
+    alt: "Kumu social app UI/UX design project",
     href: "/works/kumu",
     title: "Kumu Social",
     category: "UI/UX Design",
@@ -37,7 +37,7 @@ const projects: Project[] = [
   },
   {
     src: "/images/ford.png",
-    alt: "Carsome platform redesign",
+    alt: "Carsome e-commerce platform redesign",
     href: "/works/carsome",
     title: "Carsome",
     category: "Web Development",
@@ -55,13 +55,13 @@ function Card({ src, alt, href, title, category, year, variant = "standard", pri
       : "aspect-[16/9]";
 
   return (
-    <motion.div
+    <motion.article
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
       <Link
         href={href}
-        aria-label={title}
+        aria-label={`View ${title} case study - ${category}`}
         className={`group block relative rounded-[20px] overflow-hidden ${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20`}
       >
         <div className={ratioClass}>
@@ -102,7 +102,7 @@ function Card({ src, alt, href, title, category, year, variant = "standard", pri
           </div>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 }
 
@@ -111,7 +111,7 @@ export default function WorksSection() {
     <section aria-labelledby="works-title" className="w-full py-16 sm:py-20 lg:py-28 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 sm:mb-14 lg:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <header className="mb-10 sm:mb-14 lg:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Portfolio</p>
             <h2 id="works-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black">
@@ -128,7 +128,7 @@ export default function WorksSection() {
               <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-        </div>
+        </header>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">

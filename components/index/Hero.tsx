@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 export default function Hero() {
   const text1 = "Design That Speaks";
@@ -18,12 +19,12 @@ export default function Hero() {
       aria-labelledby="hero-title"
     >
       {/* Background gradients */}
-      <span
-        aria-hidden
+      <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#DCDFFF]/40 to-transparent blur-3xl"
       />
-      <span
-        aria-hidden
+      <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-tl from-[#E9DCC8]/30 to-transparent blur-3xl"
       />
 
@@ -109,34 +110,53 @@ export default function Hero() {
             From strategy to execution, we bring your vision to life.
           </p>
 
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-8 py-4 bg-black text-white font-medium rounded-full hover:bg-gray-900 transition-colors"
+            >
+              Start a Project
+              <svg className="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+            <Link
+              href="/works"
+              className="inline-flex items-center justify-center px-8 py-4 text-black font-medium rounded-full border border-black/20 hover:bg-black/5 transition-colors"
+            >
+              View Our Work
+            </Link>
+          </div>
+
           {/* Social proof */}
-          <div className="flex items-center justify-center gap-4 sm:gap-5">
+          <div className="flex items-center justify-center gap-4 sm:gap-5 mt-4">
             <div className="flex -space-x-3 sm:-space-x-4">
               <Avatar className="h-10 w-10 sm:h-12 sm:w-12 ring-2 ring-white">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Client testimonial"
                 />
                 <AvatarFallback>SA</AvatarFallback>
               </Avatar>
               <Avatar className="h-10 w-10 sm:h-12 sm:w-12 ring-2 ring-white">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Client testimonial"
                 />
                 <AvatarFallback>MK</AvatarFallback>
               </Avatar>
               <Avatar className="h-10 w-10 sm:h-12 sm:w-12 ring-2 ring-white">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Client testimonial"
                 />
                 <AvatarFallback>JL</AvatarFallback>
               </Avatar>
               <Avatar className="h-10 w-10 sm:h-12 sm:w-12 ring-2 ring-white">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Client testimonial"
                 />
                 <AvatarFallback>TR</AvatarFallback>
               </Avatar>
@@ -146,7 +166,7 @@ export default function Hero() {
                 120+ Projects Delivered
               </p>
               <p className="text-xs sm:text-sm text-gray-500">
-                Trusted by startups & enterprises
+                Trusted by startups and enterprises
               </p>
             </div>
           </div>
