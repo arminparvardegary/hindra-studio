@@ -1,17 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/public/icons/Logo.svg";
 
-export default function NavBar() {
+export default function TestMotion() {
   const [showNav, setShowNav] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setShowNav(window.scrollY > 150);
@@ -29,18 +27,6 @@ export default function NavBar() {
 
   if (!showNav) return null;
 
-  const navLinks = [
-    { href: "/works", label: "Portfolio" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-    { href: "/", label: "Home" },
-  ];
-
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname.startsWith(href);
-  };
-
   return (
     <motion.nav
       initial={{ opacity: 0, y: 50 }}
@@ -48,10 +34,10 @@ export default function NavBar() {
       transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: [0.2, 0.8, 0.2, 1] }}
       className="fixed inset-x-0 bottom-4 sm:bottom-6 z-50 pointer-events-none"
     >
-      {/* Mobile full width with padding; desktop compact pill */}
+      {/* Mobile full width with 20px padding; desktop compact pill */}
       <section className="w-full px-5 lg:px-0">
         <div className="relative isolate pointer-events-auto w-full lg:w-fit lg:mx-auto">
-          {/* Mobile dropdown */}
+          {/* Mobile dropdown: zero gap, emerges from navbar bottom, width equals navbar */}
           <AnimatePresence initial={false}>
             {mobileOpen && (
               <div
@@ -63,28 +49,40 @@ export default function NavBar() {
                   animate={{ opacity: 1, scaleY: 1, y: 0 }}
                   exit={{ opacity: 0, scaleY: 0.01, y: 12 }}
                   transition={{
-                    duration: prefersReducedMotion ? 0 : 0.3,
+                    duration: prefersReducedMotion ? 0 : 2.2,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   style={{ transformOrigin: "bottom center", willChange: "transform, opacity" }}
-                  className="w-full overflow-hidden rounded-t-2xl rounded-b-none border border-black/10 border-b-0 bg-white shadow-xl"
+                  className="w-full overflow-hidden rounded-t-2xl rounded-b-none border border-black/10 border-b-0 bg-[#fafafa] shadow-2xl"
                 >
                   <ul className="flex flex-col divide-y divide-black/5">
-                    {navLinks.slice(0, 3).map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          onClick={() => setMobileOpen(false)}
-                          className={`block px-4 py-3 text-center transition-colors ${
-                            isActive(link.href)
-                              ? "bg-black text-white"
-                              : "text-black hover:bg-[#DCDFFF]"
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
+                    <li>
+                      <Link
+                        href="/about"
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-4 py-3 text-center text-black hover:bg-black hover:text-white transition-colors"
+                      >
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/contact"
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-4 py-3 text-center text-black hover:bg-black hover:text-white transition-colors"
+                      >
+                        Contact
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/works"
+                        onClick={() => setMobileOpen(false)}
+                        className="block px-4 py-3 text-center text-white bg-black hover:bg-black/90 transition-colors"
+                      >
+                        Works
+                      </Link>
+                    </li>
                   </ul>
                 </motion.div>
               </div>
@@ -98,10 +96,10 @@ export default function NavBar() {
               className="
                 inline-flex
                 w-full lg:w-fit
-                items-center rounded-full bg-white shadow-lg ring-1 ring-black/10
+                items-center rounded-full bg-[#fafafa] shadow ring-1 ring-black/10
                 justify-between lg:justify-center
-                gap-3 lg:gap-16
-                py-2 sm:py-2.5 lg:py-1.5
+                gap-3 lg:gap-20
+                py-2 sm:py-2.5 lg:py-1
                 px-3 sm:px-4 lg:px-2
               "
             >
@@ -112,27 +110,38 @@ export default function NavBar() {
                   alt="Hindra Logo"
                   width={44}
                   height={44}
-                  className="h-10 w-10 sm:h-11 sm:w-11"
-                  sizes="(min-width: 640px) 44px, 40px"
+                  className="h-11 w-11 sm:h-12 sm:w-12"
+                  sizes="(min-width: 640px) 48px, 44px"
                   priority
                 />
               </Link>
 
-              {/* Desktop links */}
-              <div className="hidden lg:flex items-center bg-white py-1 px-2 gap-1 rounded-full">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`py-2.5 px-4 rounded-full transition-all duration-300 ${
-                      isActive(link.href)
-                        ? "bg-black text-white"
-                        : "text-black hover:bg-[#DCDFFF]"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+              {/* Desktop links: original compact layout on lg+ */}
+              <div className="hidden lg:flex items-center bg-[#fafafa] py-1 px-2 gap-1 rounded-full">
+              <Link
+                  href="/works"
+                  className="text-black py-3 px-3 rounded-full hover:bg-black hover:text-white hover:px-8 transition-all duration-500 ease-in-out"
+                >
+                  Portfolio
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-black py-3 px-3 rounded-full hover:bg-black hover:text-white hover:px-8 transition-all duration-500 ease-in-out"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-black py-3 px-4 rounded-full hover:bg-black hover:text-white hover:px-8 transition-all duration-500 ease-in-out"
+                >
+                  Contact
+                </Link>
+                <Link
+                  href="/"
+                  className="text-white bg-black py-3 px-3 hover:px-9 rounded-full transition-all duration-500 ease-in-out"
+                >
+                  Home
+                </Link>
               </div>
 
               {/* Mobile chevron button */}

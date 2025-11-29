@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
-import LoadingScreen from "@/components/LoadingScreen";
-import ScrollProgress from "@/components/ScrollProgress";
-import FloatingActions from "@/components/FloatingActions";
-import NoiseOverlay from "@/components/NoiseOverlay";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -30,16 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
-        className={`${inter.variable} font-sans antialiased bg-white text-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LoadingScreen />
-        <ScrollProgress />
-        <CustomCursor />
-        <NoiseOverlay />
         {children}
-        <FloatingActions />
       </body>
     </html>
   );

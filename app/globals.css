@@ -2,194 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+
+
 @layer base {
   :root {
-    /* Hindra Brand Colors */
-    --white: #FFFFFF;
-    --black: #000000;
-    --soft-purple: #DCDFFF;
-    --warm-cream: #E9DCC8;
-    
-    /* System colors */
     --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 235 100% 93%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 235 100% 93%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 35 47% 85%;
-    --accent-foreground: 0 0% 0%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 0%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
-  
-  body {
-    @apply bg-white text-black;
-    font-family: var(--font-inter), system-ui, sans-serif;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-@layer components {
-  /* Primary button - black background */
-  .btn {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full 
-           bg-black text-white font-medium
-           px-6 py-3 text-sm
-           transition-all duration-300 ease-out
-           hover:bg-black/90 hover:scale-[1.02]
-           active:scale-[0.98]
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2;
-  }
-  
-  /* Outline button */
-  .btn-outline {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full 
-           bg-transparent text-black font-medium
-           px-6 py-3 text-sm
-           border border-black/20
-           transition-all duration-300 ease-out
-           hover:bg-black hover:text-white
-           active:scale-[0.98]
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2;
-  }
-  
-  /* Ghost button */
-  .btn-ghost {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full 
-           bg-transparent text-black/70 font-medium
-           px-4 py-2 text-sm
-           transition-all duration-300 ease-out
-           active:scale-[0.98]
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2;
-  }
-  
-  /* Soft purple card */
-  .card-soft {
-    @apply bg-[#DCDFFF] rounded-2xl p-6;
-  }
-  
-  /* Warm cream card */
-  .card-warm {
-    @apply bg-[#E9DCC8] rounded-2xl p-6;
-  }
-  
-  .section-padding {
-    @apply py-16 sm:py-20 lg:py-28;
-  }
-  
-  .container-custom {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-  }
-  
-  /* Typography - Inter font */
-  .heading-xl {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
-  }
-  
-  .heading-lg {
-    @apply text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight;
-  }
-  
-  .heading-md {
-    @apply text-2xl sm:text-3xl font-semibold tracking-tight;
-  }
-  
-  .body-text {
-    @apply text-base leading-relaxed;
-  }
-  
-  .caption {
-    @apply text-sm text-black/60;
-  }
-  
-  /* Tag styles */
-  .tag {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#E9DCC8] text-black;
-  }
-  
-  .tag-soft {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#DCDFFF] text-black;
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+.btn{
+  @apply text-white bg-black py-4 px-8 hover:px-10 rounded-full transition-all duration-500 ease-in-out;
 }
 
-/* Custom animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-slide-up {
-  animation: slide-up 0.6s ease-out forwards;
-}
-
-/* Typography defaults */
-h1 {
-  @apply heading-xl;
-}
-
-h2 {
-  @apply heading-lg;
-}
-
-h3 {
-  @apply heading-md;
-}
-
-/* Selection with brand color */
-::selection {
-  background-color: #DCDFFF;
-  color: #000000;
-}
-
-/* Focus visible */
-:focus-visible {
-  outline: 2px solid #000000;
-  outline-offset: 2px;
+h1{
+  @apply text-[40px] md:text-[85px]
 }

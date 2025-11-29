@@ -1,287 +1,293 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 
-const projects = [
+type Slide =
+  | {
+      id: string;
+      title: string;
+      badges: string[];
+      kind: "video";
+      src: string;
+      poster?: string;
+    }
+  | { id: string; title: string; badges: string[]; kind: "image"; src: string };
+
+// The same 5 slides
+const BASE: Slide[] = [
   {
-    id: "ford-mustang",
-    title: "Ford Mustang",
-    subtitle: "THE ICON OF POWER AND DESIGN",
-    description: "A complete digital experience redesign for Ford's legendary muscle car. We created an immersive website that captures the raw power and heritage of the Mustang brand.",
-    tags: ["Automotive", "Web Design", "3D Experience"],
-    image: "/images/ford.png",
-    stats: { views: "2.4M", engagement: "+180%" },
-    year: "2024",
+    id: "marco",
+    title: "Marco",
+    badges: ["SAAS", "PRE–SEED", "UNITED KINGDOM"],
+    kind: "video",
+    src: "/videos/motion.mp4",
+    poster: "/images/marco-poster.jpg",
   },
   {
-    id: "kumu-app",
-    title: "Kumu",
-    subtitle: "SOCIAL LIVE STREAMING PLATFORM",
-    description: "Brand identity and mobile app design for Southeast Asia's fastest-growing live streaming platform. Creating connections through authentic content.",
-    tags: ["Mobile App", "Brand Identity", "UI/UX"],
-    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    stats: { users: "10M+", rating: "4.8★" },
-    year: "2024",
+    id: "exit",
+    title: "Exit",
+    badges: ["SERIES A", "UNITED KINGDOM"],
+    kind: "image",
+    src: "/images/ford.png",
   },
   {
-    id: "carsome",
-    title: "Carsome",
-    subtitle: "REVOLUTIONIZING CAR OWNERSHIP",
-    description: "Complete brand refresh and e-commerce platform for Southeast Asia's largest integrated car marketplace. Simplifying the car buying experience.",
-    tags: ["E-commerce", "Branding", "Web Platform"],
-    image: "/logo-carsome.webp",
-    stats: { transactions: "$1B+", markets: "5 Countries" },
-    year: "2023",
+    id: "marco2",
+    title: "Marco 2",
+    badges: ["SAAS", "PRE–SEED", "UNITED KINGDOM"],
+    kind: "video",
+    src: "/videos/motion.mp4",
+    poster: "/images/marco-poster.jpg",
   },
   {
-    id: "van-heusen",
-    title: "Van Heusen",
-    subtitle: "TIMELESS ELEGANCE REDEFINED",
-    description: "Digital campaign and e-commerce experience for the iconic fashion brand. Blending classic sophistication with modern retail innovation.",
-    tags: ["Fashion", "E-commerce", "Campaign"],
-    image: "/logo-vanheusen.webp",
-    stats: { sales: "+45%", reach: "15M" },
-    year: "2023",
+    id: "marco3",
+    title: "Marco 3",
+    badges: ["SAAS", "PRE–SEED", "UNITED KINGDOM"],
+    kind: "video",
+    src: "/videos/motion.mp4",
+    poster: "/images/marco-poster.jpg",
+  },
+  {
+    id: "honors",
+    title: "Honors",
+    badges: ["AWARDS", "GLOBAL"],
+    kind: "image",
+    src: "/images/ford.png",
   },
 ];
 
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "center center"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 0.95, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [10, 0]);
-
-  const isEven = index % 2 === 0;
-  
-  return (
-    <motion.div
-      ref={cardRef}
-      style={{ opacity, scale, y, rotateX }}
-      className="perspective-1000"
-    >
-      <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
-        isEven ? "" : "lg:flex-row-reverse"
-      }`}>
-        {/* Image Side */}
-        <motion.div
-          className={`relative ${isEven ? "" : "lg:order-2"}`}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl">
-            {/* Mockup Frame */}
-            <div className="absolute inset-4 rounded-2xl overflow-hidden bg-white shadow-inner">
-              <div className="relative w-full h-full">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain p-8"
-                />
-              </div>
-            </div>
-            
-            {/* Floating badge */}
-            <motion.div
-              className="absolute top-6 right-6 px-4 py-2 bg-black text-white text-sm font-medium rounded-full"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-            >
-              {project.year}
-            </motion.div>
-          </div>
-
-          {/* Decorative elements */}
-          <motion.div
-            className="absolute -bottom-4 -left-4 w-24 h-24 rounded-2xl bg-[#DCDFFF] -z-10"
-            animate={{ rotate: [0, 5, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-[#E9DCC8] -z-10"
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-        </motion.div>
-
-        {/* Content Side */}
-        <div className={`space-y-6 ${isEven ? "" : "lg:order-1"}`}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <span className="text-sm font-medium text-black/40 tracking-widest">
-              PROJECT 0{index + 1}
-            </span>
-          </motion.div>
-
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black"
-          >
-            {project.title}
-          </motion.h3>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="text-lg sm:text-xl text-[#DCDFFF] font-semibold tracking-wide"
-            style={{ WebkitTextStroke: "1px #000", color: "transparent" }}
-          >
-            {project.subtitle}
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="text-black/60 text-lg leading-relaxed"
-          >
-            {project.description}
-          </motion.p>
-
-          {/* Tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-wrap gap-2"
-          >
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-4 py-2 bg-black/5 rounded-full text-sm text-black/70 hover:bg-black/10 transition-colors"
-              >
-                {tag}
-              </span>
-            ))}
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.7 }}
-            className="flex gap-8 pt-4"
-          >
-            {Object.entries(project.stats).map(([key, value]) => (
-              <div key={key}>
-                <div className="text-2xl sm:text-3xl font-bold text-black">{value}</div>
-                <div className="text-sm text-black/50 capitalize">{key}</div>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-          >
-            <Link
-              href={`/works/${project.id}`}
-              className="inline-flex items-center gap-3 text-black font-medium group mt-4"
-            >
-              <span className="relative">
-                View Case Study
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300" />
-              </span>
-              <motion.svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                whileHover={{ x: 5 }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </motion.svg>
-            </Link>
-          </motion.div>
-        </div>
-          </div>
-    </motion.div>
-  );
-}
+// Duplicate slides 3 times for seamless looping
+const EXT = [...BASE, ...BASE, ...BASE];
+const SECTION_SIZE = BASE.length;
 
 export default function ShowCase() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<HTMLDivElement[]>([]);
+  const [active, setActive] = useState(SECTION_SIZE);
+  const didInit = useRef(false);
 
+  // Manual dragging (mouse / touch)
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const startScrollLeftRef = useRef(0);
+  const [dragging, setDragging] = useState(false);
+
+  // Center the "Exit" slide by default on first render
+  useLayoutEffect(() => {
+    const vp = viewportRef.current;
+    if (!vp || didInit.current) return;
+    didInit.current = true;
+
+    const slides = vp.querySelectorAll("div.snap-center");
+    const middleIndex = Math.floor(slides.length / 2.5); // find approximately middle
+    const el = slides[middleIndex] as HTMLElement | null;
+
+    if (el) {
+      const left = el.offsetLeft - (vp.clientWidth - el.clientWidth) / 2.5;
+      vp.scrollLeft = left;
+    }
+  }, []);
+
+  // Calculate which slide is centered
+  const computeActive = useCallback(() => {
+    const vp = viewportRef.current;
+    if (!vp) return;
+    const rect = vp.getBoundingClientRect();
+    const mid = rect.left + rect.width / 2;
+
+    let best = 0;
+    let bestDist = Infinity;
+    slideRefs.current.forEach((node, i) => {
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      const c = r.left + r.width / 2;
+      const d = Math.abs(c - mid);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
+    });
+    setActive(best);
+  }, []);
+
+  // Infinite seamless scroll
+  useEffect(() => {
+    const vp = viewportRef.current;
+    if (!vp) return;
+
+    const handleScroll = () => {
+      const sectionWidth = vp.scrollWidth / 3;
+
+      // If user scrolls too far right → jump back to center section
+      if (vp.scrollLeft >= sectionWidth * 2) {
+        vp.scrollLeft -= sectionWidth;
+      }
+      // If user scrolls too far left → jump forward to center section
+      else if (vp.scrollLeft <= 0) {
+        vp.scrollLeft += sectionWidth;
+      }
+
+      computeActive();
+    };
+
+    vp.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", computeActive);
+    computeActive();
+
+    return () => {
+      vp.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", computeActive);
+    };
+  }, [computeActive]);
+
+  // Pointer drag controls
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const vp = viewportRef.current;
+    if (!vp) return;
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+
+    isDraggingRef.current = true;
+    setDragging(true);
+    startXRef.current = e.clientX;
+    startScrollLeftRef.current = vp.scrollLeft;
+    vp.setPointerCapture?.(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const vp = viewportRef.current;
+    if (!vp) return;
+    e.preventDefault();
+    const dx = e.clientX - startXRef.current;
+    vp.scrollLeft = startScrollLeftRef.current - dx;
+  };
+
+  const endDrag = (e?: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    setDragging(false);
+    const vp = viewportRef.current;
+    if (vp && e) vp.releasePointerCapture?.(e.pointerId);
+  };
+
+  // Video hover behavior
+  const handleVideoPlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    const video = e.currentTarget.querySelector("video");
+    if (video) video.play();
+  };
+  const handleVideoPause = (e: React.MouseEvent<HTMLDivElement>) => {
+    const video = e.currentTarget.querySelector("video");
+    if (video) video.pause();
+  };
+
+  const baseActive = active % BASE.length;
+  useEffect(() => {
+    const vp = viewportRef.current;
+    if (!vp) return;
+  
+    const el = slideRefs.current[active];
+    if (!el) return;
+  
+    const left = el.offsetLeft - (vp.clientWidth - el.clientWidth) /1.9;
+    vp.scrollLeft = left;
+  }, [active]);
+  
   return (
-    <section
-      ref={containerRef}
-      className="py-20 sm:py-28 lg:py-32"
-    >
-      <div className="container-custom">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <span className="tag mb-4">Featured Work</span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
-            Selected Projects
-          </h2>
-          <p className="text-lg sm:text-xl text-black/60 max-w-2xl mx-auto">
-            A curated selection of our finest work. Each project represents a unique 
-            challenge and our creative approach to solving it.
-          </p>
-        </motion.div>
-
-        {/* Projects */}
-        <div className="space-y-32 sm:space-y-40 lg:space-y-52">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
-
-        {/* View All CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-20 sm:mt-28"
-        >
-          <Link
-            href="/works"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-black/90 transition-colors group"
+    <section className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20">
+      <div className="w-full">
+        <div className="relative rounded-[28px]">
+          {/* Scrollable viewport */}
+          <div
+            ref={viewportRef}
+            style={{ touchAction: "pan-y" }}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerLeave={endDrag}
+            onPointerCancel={endDrag}
+            className={`
+              relative w-full overflow-x-auto
+              flex items-stretch gap-12 sm:gap-16 lg:gap-20
+              py-20 sm:py-20 lg:py-14
+              px-[6vw] sm:px-[8vw] lg:px-[10vw]
+              [scrollbar-width:none] [-ms-overflow-style:none]
+              hide-scrollbar select-none
+              ${dragging ? "cursor-grabbing" : "cursor-grab"}
+            `}
           >
-            View all projects
-            <motion.svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              whileHover={{ x: 5 }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </motion.svg>
-          </Link>
-        </motion.div>
+            <style>{`.hide-scrollbar::-webkit-scrollbar{display:none}`}</style>
+
+            {EXT.map((s, i) => (
+              <div
+                key={`${s.id}-${i}`}
+                ref={(el) => {
+                  if (el) slideRefs.current[i] = el;
+                }}
+                className={`snap-center shrink-0 w-[88vw] sm:w-[84vw] lg:w-[1180px] xl:w-[1000px] transition-all duration-300 ${
+                  i === active ? "scale-110" : "scale-95"
+                }`}
+                onMouseEnter={handleVideoPlay}
+                onMouseLeave={handleVideoPause}
+              >
+                {/* Card */}
+                <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.06)] ring-1 ring-[#ECE9F5]">
+                  <div className="p-2 sm:p-3">
+                    <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[600px] ring-white/10">
+                      {s.kind === "video" ? (
+                        <video
+                          src={s.src}
+                          playsInline
+                          muted
+                          loop
+                          preload="metadata"
+                          poster={s.poster}
+                          className="block w-full h-full aspect-[21/9] object-cover"
+                        />
+                      ) : (
+                        <img
+                          src={s.src}
+                          alt={s.title}
+                          loading="lazy"
+                          className="block w-full h-full aspect-[21/9] object-cover"
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
+                    <div className="text-[22px] sm:text-[24px] leading-none font-medium text-[#15131F]">
+                      {s.title}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.16em] text-[#6F6C85]">
+                      {s.badges.map((b) => (
+                        <span key={`${s.id}-${b}`}>{b}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation dots */}
+          <div className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4">
+            {BASE.map((_, i) => (
+              <div
+                key={i}
+                onClick={() => setActive(SECTION_SIZE + i)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  baseActive === i
+                    ? "w-10 bg-[#6F6C85]"
+                    : "w-3 bg-[#CFCBDF] hover:bg-[#BFBAD6]"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
