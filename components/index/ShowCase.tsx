@@ -7,6 +7,7 @@ import {
   useCallback,
   useLayoutEffect,
 } from "react";
+import Link from "next/link";
 
 type Slide =
   | {
@@ -16,52 +17,63 @@ type Slide =
       kind: "video";
       src: string;
       poster?: string;
+      href: string;
     }
-  | { id: string; title: string; badges: string[]; kind: "image"; src: string };
+  | { 
+      id: string; 
+      title: string; 
+      badges: string[]; 
+      kind: "image"; 
+      src: string;
+      href: string;
+    };
 
-// The same 5 slides
 const BASE: Slide[] = [
   {
-    id: "marco",
-    title: "Marco",
-    badges: ["SAAS", "PRE–SEED", "UNITED KINGDOM"],
+    id: "luxe-motors",
+    title: "Luxe Motors",
+    badges: ["AUTOMOTIVE", "BRANDING", "MOTION"],
     kind: "video",
     src: "/videos/motion.mp4",
-    poster: "/images/marco-poster.jpg",
+    poster: "/images/ford.png",
+    href: "/works/ford-mustang",
   },
   {
-    id: "exit",
-    title: "Exit",
-    badges: ["SERIES A", "UNITED KINGDOM"],
+    id: "kumu-app",
+    title: "Kumu Social",
+    badges: ["TECH", "UI/UX", "MOBILE APP"],
     kind: "image",
     src: "/images/ford.png",
+    href: "/works/kumu",
   },
   {
-    id: "marco2",
-    title: "Marco 2",
-    badges: ["SAAS", "PRE–SEED", "UNITED KINGDOM"],
+    id: "carsome",
+    title: "Carsome Platform",
+    badges: ["E-COMMERCE", "WEB DESIGN", "DEVELOPMENT"],
     kind: "video",
     src: "/videos/motion.mp4",
-    poster: "/images/marco-poster.jpg",
+    poster: "/images/ford.png",
+    href: "/works/carsome",
   },
   {
-    id: "marco3",
-    title: "Marco 3",
-    badges: ["SAAS", "PRE–SEED", "UNITED KINGDOM"],
-    kind: "video",
-    src: "/videos/motion.mp4",
-    poster: "/images/marco-poster.jpg",
-  },
-  {
-    id: "honors",
-    title: "Honors",
-    badges: ["AWARDS", "GLOBAL"],
+    id: "van-heusen",
+    title: "Van Heusen",
+    badges: ["FASHION", "BRAND IDENTITY", "CAMPAIGN"],
     kind: "image",
     src: "/images/ford.png",
+    href: "/works/van-heusen",
+  },
+  {
+    id: "fintech-hub",
+    title: "FinTech Hub",
+    badges: ["FINANCE", "PRODUCT DESIGN", "STRATEGY"],
+    kind: "video",
+    src: "/videos/motion.mp4",
+    poster: "/images/ford.png",
+    href: "/works/ford-mustang",
   },
 ];
 
-// Duplicate slides 3 times for seamless looping
 const EXT = [...BASE, ...BASE, ...BASE];
 const SECTION_SIZE = BASE.length;
 
@@ -71,20 +83,18 @@ export default function ShowCase() {
   const [active, setActive] = useState(SECTION_SIZE);
   const didInit = useRef(false);
 
-  // Manual dragging (mouse / touch)
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const startScrollLeftRef = useRef(0);
   const [dragging, setDragging] = useState(false);
 
-  // Center the "Exit" slide by default on first render
   useLayoutEffect(() => {
     const vp = viewportRef.current;
     if (!vp || didInit.current) return;
     didInit.current = true;
 
     const slides = vp.querySelectorAll("div.snap-center");
-    const middleIndex = Math.floor(slides.length / 2.5); // find approximately middle
+    const middleIndex = Math.floor(slides.length / 2.5);
     const el = slides[middleIndex] as HTMLElement | null;
 
     if (el) {
@@ -93,7 +103,6 @@ export default function ShowCase() {
     }
   }, []);
 
-  // Calculate which slide is centered
   const computeActive = useCallback(() => {
     const vp = viewportRef.current;
     if (!vp) return;
@@ -115,7 +124,6 @@ export default function ShowCase() {
     setActive(best);
   }, []);
 
-  // Infinite seamless scroll
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
@@ -123,12 +131,9 @@ export default function ShowCase() {
     const handleScroll = () => {
       const sectionWidth = vp.scrollWidth / 3;
 
-      // If user scrolls too far right → jump back to center section
       if (vp.scrollLeft >= sectionWidth * 2) {
         vp.scrollLeft -= sectionWidth;
-      }
-      // If user scrolls too far left → jump forward to center section
-      else if (vp.scrollLeft <= 0) {
+      } else if (vp.scrollLeft <= 0) {
         vp.scrollLeft += sectionWidth;
       }
 
@@ -145,7 +150,6 @@ export default function ShowCase() {
     };
   }, [computeActive]);
 
-  // Pointer drag controls
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const vp = viewportRef.current;
     if (!vp) return;
@@ -175,7 +179,6 @@ export default function ShowCase() {
     if (vp && e) vp.releasePointerCapture?.(e.pointerId);
   };
 
-  // Video hover behavior
   const handleVideoPlay = (e: React.MouseEvent<HTMLDivElement>) => {
     const video = e.currentTarget.querySelector("video");
     if (video) video.play();
@@ -186,6 +189,7 @@ export default function ShowCase() {
   };
 
   const baseActive = active % BASE.length;
+  
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
@@ -193,15 +197,24 @@ export default function ShowCase() {
     const el = slideRefs.current[active];
     if (!el) return;
   
-    const left = el.offsetLeft - (vp.clientWidth - el.clientWidth) /1.9;
+    const left = el.offsetLeft - (vp.clientWidth - el.clientWidth) / 1.9;
     vp.scrollLeft = left;
   }, [active]);
   
   return (
     <section className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20">
+      {/* Section header */}
+      <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-black">
+          Featured Projects
+        </h2>
+        <p className="text-center text-gray-500 mt-3 text-lg">
+          Drag to explore our latest work
+        </p>
+      </div>
+
       <div className="w-full">
         <div className="relative rounded-[28px]">
-          {/* Scrollable viewport */}
           <div
             ref={viewportRef}
             style={{ touchAction: "pan-y" }}
@@ -229,60 +242,67 @@ export default function ShowCase() {
                   if (el) slideRefs.current[i] = el;
                 }}
                 className={`snap-center shrink-0 w-[88vw] sm:w-[84vw] lg:w-[1180px] xl:w-[1000px] transition-all duration-300 ${
-                  i === active ? "scale-110" : "scale-95"
+                  i === active ? "scale-110" : "scale-95 opacity-60"
                 }`}
                 onMouseEnter={handleVideoPlay}
                 onMouseLeave={handleVideoPause}
               >
-                {/* Card */}
-                <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.06)] ring-1 ring-[#ECE9F5]">
-                  <div className="p-2 sm:p-3">
-                    <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[600px] ring-white/10">
-                      {s.kind === "video" ? (
-                        <video
-                          src={s.src}
-                          playsInline
-                          muted
-                          loop
-                          preload="metadata"
-                          poster={s.poster}
-                          className="block w-full h-full aspect-[21/9] object-cover"
-                        />
-                      ) : (
-                        <img
-                          src={s.src}
-                          alt={s.title}
-                          loading="lazy"
-                          className="block w-full h-full aspect-[21/9] object-cover"
-                        />
-                      )}
+                <Link href={s.href} className="block group">
+                  <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.08)] ring-1 ring-[#ECE9F5] overflow-hidden bg-white transition-shadow duration-300 group-hover:shadow-[0_12px_40px_rgba(21,16,48,0.12)]">
+                    <div className="p-2 sm:p-3">
+                      <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[500px] sm:h-[550px] lg:h-[600px] ring-white/10 relative">
+                        {s.kind === "video" ? (
+                          <video
+                            src={s.src}
+                            playsInline
+                            muted
+                            loop
+                            preload="metadata"
+                            poster={s.poster}
+                            className="block w-full h-full object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={s.src}
+                            alt={s.title}
+                            loading="lazy"
+                            className="block w-full h-full object-cover"
+                          />
+                        )}
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-6 py-3 rounded-full font-medium">
+                            View Case Study →
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
+                      <div className="text-[22px] sm:text-[26px] leading-none font-semibold text-[#15131F]">
+                        {s.title}
+                      </div>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.12em] text-[#6F6C85]">
+                        {s.badges.map((b) => (
+                          <span key={`${s.id}-${b}`} className="bg-[#F5F5F5] px-3 py-1 rounded-full">{b}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
-                    <div className="text-[22px] sm:text-[24px] leading-none font-medium text-[#15131F]">
-                      {s.title}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.16em] text-[#6F6C85]">
-                      {s.badges.map((b) => (
-                        <span key={`${s.id}-${b}`}>{b}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>
 
-          {/* Navigation dots */}
           <div className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4">
             {BASE.map((_, i) => (
-              <div
+              <button
                 key={i}
                 onClick={() => setActive(SECTION_SIZE + i)}
+                aria-label={`Go to slide ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   baseActive === i
-                    ? "w-10 bg-[#6F6C85]"
-                    : "w-3 bg-[#CFCBDF] hover:bg-[#BFBAD6]"
+                    ? "w-10 bg-black"
+                    : "w-3 bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}
