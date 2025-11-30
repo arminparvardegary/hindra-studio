@@ -24,26 +24,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hindrastudio.com"),
   title: {
-    default: "Hindra Studio | Brand Design, Web Development & Motion",
-    template: "%s | Hindra Studio",
+    default: "Hindra | AI, Automation, Web & Design Solutions",
+    template: "%s | Hindra",
   },
   description:
-    "Hindra Studio is a full-service creative agency specializing in brand identity, web development, and motion design. We help startups and enterprises build memorable brands that drive results.",
+    "Hindra is a full-service digital agency providing end-to-end solutions. We build AI systems, automation, websites, mobile apps, and stunning designs. From zero to hero - we handle everything.",
   keywords: [
-    "branding agency",
-    "brand identity design",
+    "AI solutions",
+    "artificial intelligence agency",
+    "business automation",
+    "workflow automation",
     "web development agency",
-    "motion design studio",
-    "creative agency",
+    "mobile app development",
+    "custom software development",
+    "digital transformation",
     "UI/UX design",
-    "product design",
-    "brand strategy",
-    "digital agency",
-    "design studio",
-    "logo design",
-    "website development",
+    "brand identity",
+    "video production",
+    "motion design",
+    "chatbot development",
+    "machine learning",
     "React development",
     "Next.js agency",
+    "SaaS development",
+    "enterprise software",
   ],
   authors: [{ name: "Hindra Studio" }],
   creator: "Hindra Studio",
@@ -57,10 +61,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://hindrastudio.com",
-    siteName: "Hindra Studio",
-    title: "Hindra Studio | Brand Design, Web Development & Motion",
+    siteName: "Hindra",
+    title: "Hindra | AI, Automation, Web & Design Solutions",
     description:
-      "Full-service creative agency specializing in brand identity, web development, and motion design. We help brands stand out and succeed.",
+      "Full-service digital agency providing AI solutions, automation, web development, mobile apps, and design. End-to-end solutions for your business.",
     images: [
       {
         url: "/og-image.jpg",
@@ -72,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hindra Studio | Brand Design, Web Development & Motion",
+    title: "Hindra | AI, Automation, Web & Design Solutions",
     description:
-      "Full-service creative agency specializing in brand identity, web development, and motion design.",
+      "Full-service digital agency providing AI solutions, automation, web development, mobile apps, and design.",
     creator: "@hindrastudio",
     images: ["/og-image.jpg"],
   },
@@ -100,9 +104,9 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Hindra Studio",
+  name: "Hindra",
   description:
-    "Full-service creative agency specializing in brand identity, web development, and motion design.",
+    "Full-service digital agency providing AI solutions, automation, web development, mobile apps, and design. End-to-end solutions from zero to hero.",
   url: "https://hindrastudio.com",
   logo: "https://hindrastudio.com/icons/Logo.svg",
   sameAs: [
@@ -119,25 +123,29 @@ const jsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    addressCountry: "US",
+    addressCountry: "AE",
   },
   founder: {
     "@type": "Person",
-    name: "Hindra Studio Team",
+    name: "Hindra Team",
   },
-  foundingDate: "2016",
+  foundingDate: "2017",
   numberOfEmployees: {
     "@type": "QuantitativeValue",
     value: "15+",
   },
   areaServed: "Worldwide",
   serviceType: [
-    "Brand Identity Design",
+    "AI Solutions",
+    "Business Automation",
     "Web Development",
-    "Motion Design",
+    "Mobile App Development",
+    "Custom Software Development",
     "UI/UX Design",
-    "Product Design",
-    "Brand Strategy",
+    "Brand Identity",
+    "Video Production",
+    "Motion Design",
+    "Digital Transformation",
   ],
 };
 

@@ -18,27 +18,32 @@ interface AddonOption {
 }
 
 const SERVICES: ServiceOption[] = [
-  { id: "branding", name: "Brand Identity", basePrice: 5000, description: "Logo, colors, typography, guidelines" },
-  { id: "website", name: "Website Design & Dev", basePrice: 8000, description: "Custom responsive website" },
-  { id: "motion", name: "Motion Design", basePrice: 3000, description: "Animations & video content" },
-  { id: "uiux", name: "UI/UX Design", basePrice: 4000, description: "User interface & experience" },
-  { id: "product", name: "Product Design", basePrice: 6000, description: "Full product design" },
+  { id: "ai", name: "AI Solutions", basePrice: 5000, description: "Chatbots, ML models, AI integration" },
+  { id: "automation", name: "Automation", basePrice: 8000, description: "Business process automation" },
+  { id: "website", name: "Website", basePrice: 3000, description: "Custom responsive website" },
+  { id: "webapp", name: "Web Application", basePrice: 10000, description: "Full-stack web app" },
+  { id: "mobile", name: "Mobile App", basePrice: 15000, description: "iOS & Android app" },
+  { id: "branding", name: "Brand Identity", basePrice: 5000, description: "Logo, colors, guidelines" },
+  { id: "video", name: "Video Production", basePrice: 2000, description: "Editing & motion graphics" },
+  { id: "system", name: "Custom System", basePrice: 20000, description: "End-to-end software solution" },
 ];
 
 const ADDONS: AddonOption[] = [
-  { id: "rush", name: "Rush delivery (2x faster)", price: 2000 },
-  { id: "copywriting", name: "Copywriting", price: 1500 },
-  { id: "seo", name: "SEO Optimization", price: 1000 },
+  { id: "rush", name: "Rush delivery (2x faster)", price: 3000 },
+  { id: "seo", name: "SEO Optimization", price: 1500 },
+  { id: "analytics", name: "Analytics Setup", price: 800 },
   { id: "hosting", name: "1 Year Hosting", price: 500 },
-  { id: "maintenance", name: "Monthly Maintenance", price: 300 },
-  { id: "social", name: "Social Media Kit", price: 800 },
+  { id: "maintenance", name: "Monthly Maintenance", price: 500 },
+  { id: "training", name: "Team Training", price: 1000 },
+  { id: "api", name: "API Integrations", price: 2000 },
+  { id: "security", name: "Security Audit", price: 1500 },
 ];
 
 const COMPLEXITY = [
   { id: "simple", name: "Simple", multiplier: 1, description: "Basic requirements" },
   { id: "standard", name: "Standard", multiplier: 1.5, description: "Average complexity" },
-  { id: "complex", name: "Complex", multiplier: 2, description: "Advanced features" },
-  { id: "enterprise", name: "Enterprise", multiplier: 3, description: "Large scale project" },
+  { id: "complex", name: "Complex", multiplier: 2.5, description: "Advanced features" },
+  { id: "enterprise", name: "Enterprise", multiplier: 4, description: "Large scale project" },
 ];
 
 export default function CostCalculator() {
@@ -153,7 +158,7 @@ export default function CostCalculator() {
                 </div>
                 <div className="flex justify-between mt-2 text-xs text-black/50 dark:text-white/50">
                   <span>Services</span>
-                  <span>Complexity</span>
+                  <span>Scope</span>
                   <span>Extras</span>
                 </div>
               </div>
@@ -165,9 +170,9 @@ export default function CostCalculator() {
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="space-y-4"
+                    className="space-y-3"
                   >
-                    <h3 className="font-semibold text-black dark:text-white">What do you need?</h3>
+                    <h3 className="font-semibold text-black dark:text-white mb-4">What do you need?</h3>
                     {SERVICES.map((service) => (
                       <button
                         key={service.id}
@@ -202,7 +207,7 @@ export default function CostCalculator() {
                     animate={{ opacity: 1, x: 0 }}
                     className="space-y-4"
                   >
-                    <h3 className="font-semibold text-black dark:text-white">Project complexity?</h3>
+                    <h3 className="font-semibold text-black dark:text-white">Project scope?</h3>
                     {COMPLEXITY.map((level) => (
                       <button
                         key={level.id}
@@ -232,9 +237,9 @@ export default function CostCalculator() {
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="space-y-4"
+                    className="space-y-3"
                   >
-                    <h3 className="font-semibold text-black dark:text-white">Need any extras?</h3>
+                    <h3 className="font-semibold text-black dark:text-white mb-4">Need any extras?</h3>
                     {ADDONS.map((addon) => (
                       <button
                         key={addon.id}
@@ -310,4 +315,3 @@ export default function CostCalculator() {
     </>
   );
 }
-

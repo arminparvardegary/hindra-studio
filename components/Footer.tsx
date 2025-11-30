@@ -36,18 +36,19 @@ export default function Footer() {
 
   const footerLinks = {
     services: [
-      { name: "Brand Identity", href: "/services/branding" },
-      { name: "Web Development", href: "/services/web" },
-      { name: "Motion Design", href: "/services/motion" },
-      { name: "Product Design", href: "/services/product" },
-      { name: "Brand Strategy", href: "/services/strategy" },
+      { name: "AI Solutions", href: "/contact?service=ai" },
+      { name: "Automation", href: "/contact?service=automation" },
+      { name: "Web Development", href: "/contact?service=web" },
+      { name: "Mobile Apps", href: "/contact?service=mobile" },
+      { name: "Design & Branding", href: "/contact?service=design" },
+      { name: "Video & Motion", href: "/contact?service=video" },
     ],
     work: [
       { name: "All Projects", href: "/works" },
-      { name: "Ford Mustang", href: "/works/ford-mustang" },
-      { name: "Kumu", href: "/works/kumu-app" },
-      { name: "Carsome", href: "/works/carsome" },
-      { name: "Van Heusen", href: "/works/van-heusen" },
+      { name: "AI Projects", href: "/works?filter=ai" },
+      { name: "Automation", href: "/works?filter=automation" },
+      { name: "Web Apps", href: "/works?filter=web" },
+      { name: "Mobile Apps", href: "/works?filter=mobile" },
     ],
     company: [
       { name: "About Us", href: "/about" },
@@ -139,7 +140,7 @@ export default function Footer() {
                     Stay in the loop
                   </h2>
                   <p className="text-white/60 text-lg max-w-md">
-                    Get the latest design trends, tips, and exclusive insights delivered straight to your inbox.
+                    Get the latest in AI, automation, and digital innovation delivered straight to your inbox.
                   </p>
                 </motion.div>
 
@@ -224,7 +225,7 @@ export default function Footer() {
                   </motion.div>
                 </Link>
                 <p className="text-white/60 mb-6 max-w-xs">
-                  Crafting brands that convert. From strategy to execution, we bring your vision to life.
+                  End-to-end digital solutions. AI, automation, web, mobile, design - we build it all from zero to hero.
                 </p>
                 
                 {/* Status indicator */}

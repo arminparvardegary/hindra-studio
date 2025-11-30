@@ -8,12 +8,12 @@ interface Message {
   content: string;
 }
 
-const WELCOME_MESSAGE = "Hi! 👋 I'm Hindra's AI assistant. How can I help you today? Feel free to ask about our services, pricing, or process!";
+const WELCOME_MESSAGE = "Hi! 👋 I'm Hindra's AI assistant. We build complete digital solutions - from AI & automation to websites, apps, and design. How can I help you today?";
 
 const QUICK_ACTIONS = [
   "What services do you offer?",
-  "How much does a website cost?",
-  "What's your process?",
+  "I need an AI solution",
+  "Tell me about automation",
   "I want to start a project",
 ];
 

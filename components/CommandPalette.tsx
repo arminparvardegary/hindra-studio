@@ -81,41 +81,77 @@ export default function CommandPalette() {
       keywords: ["jobs", "careers", "hiring", "work with us"],
     },
     {
-      id: "branding",
-      title: "Brand Identity Service",
-      subtitle: "Logo, visual identity & guidelines",
+      id: "ai",
+      title: "AI Solutions",
+      subtitle: "Chatbots, ML models & AI integration",
       icon: (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
-      action: () => router.push("/contact?service=branding"),
-      keywords: ["branding", "logo", "identity", "brand"],
+      action: () => router.push("/contact?service=ai"),
+      keywords: ["ai", "artificial intelligence", "chatbot", "machine learning", "ml"],
+    },
+    {
+      id: "automation",
+      title: "Automation",
+      subtitle: "Business process & workflow automation",
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
+      action: () => router.push("/contact?service=automation"),
+      keywords: ["automation", "workflow", "process", "automate"],
     },
     {
       id: "web",
-      title: "Web Development Service",
-      subtitle: "Websites & web applications",
+      title: "Web Development",
+      subtitle: "Websites, web apps & e-commerce",
       icon: (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
         </svg>
       ),
       action: () => router.push("/contact?service=web"),
-      keywords: ["website", "development", "web", "app"],
+      keywords: ["website", "development", "web", "app", "ecommerce"],
     },
     {
-      id: "motion",
-      title: "Motion Design Service",
-      subtitle: "Animation & video content",
+      id: "design",
+      title: "Design & Branding",
+      subtitle: "UI/UX, brand identity & design systems",
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+      ),
+      action: () => router.push("/contact?service=design"),
+      keywords: ["design", "branding", "logo", "ui", "ux"],
+    },
+    {
+      id: "video",
+      title: "Video & Motion",
+      subtitle: "Video editing, motion graphics & 3D",
       icon: (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      action: () => router.push("/contact?service=motion"),
-      keywords: ["motion", "animation", "video", "3d"],
+      action: () => router.push("/contact?service=video"),
+      keywords: ["video", "motion", "animation", "editing", "3d"],
+    },
+    {
+      id: "mobile",
+      title: "Mobile Apps",
+      subtitle: "iOS, Android & cross-platform apps",
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+      ),
+      action: () => router.push("/contact?service=mobile"),
+      keywords: ["mobile", "app", "ios", "android", "react native"],
     },
     {
       id: "email",
