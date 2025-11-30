@@ -154,7 +154,7 @@ export default function ChatBot() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white dark:bg-[#1a1a1a]">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
@@ -166,7 +166,7 @@ export default function ChatBot() {
                     className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                       message.role === "user"
                         ? "bg-black text-white rounded-br-md"
-                        : "bg-[#F5F5F5] text-black rounded-bl-md"
+                        : "bg-[#F5F5F5] dark:bg-white/10 text-black dark:text-white rounded-bl-md"
                     }`}
                   >
                     <p className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -183,11 +183,11 @@ export default function ChatBot() {
                   animate={{ opacity: 1 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-[#F5F5F5] rounded-2xl rounded-bl-md px-4 py-3">
+                  <div className="bg-[#F5F5F5] dark:bg-white/10 rounded-2xl rounded-bl-md px-4 py-3">
                     <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 bg-black/40 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-2 h-2 bg-black/40 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-2 h-2 bg-black/40 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span className="w-2 h-2 bg-black/40 dark:bg-white/40 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-2 h-2 bg-black/40 dark:bg-white/40 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-2 h-2 bg-black/40 dark:bg-white/40 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
                 </motion.div>
@@ -205,7 +205,7 @@ export default function ChatBot() {
                     <button
                       key={action}
                       onClick={() => handleQuickAction(action)}
-                      className="px-3 py-2 text-xs font-medium bg-[#DCDFFF]/50 hover:bg-[#DCDFFF] text-black rounded-full transition-colors"
+                      className="px-3 py-2 text-xs font-medium bg-[#DCDFFF]/50 hover:bg-[#DCDFFF] dark:bg-[#DCDFFF]/20 dark:hover:bg-[#DCDFFF]/40 text-black dark:text-white rounded-full transition-colors"
                     >
                       {action}
                     </button>
@@ -217,7 +217,7 @@ export default function ChatBot() {
             </div>
 
             {/* Input */}
-            <form onSubmit={handleSubmit} className="p-4 border-t border-black/10 shrink-0">
+            <form onSubmit={handleSubmit} className="p-4 border-t border-black/10 dark:border-white/10 shrink-0 bg-white dark:bg-[#1a1a1a]">
               <div className="flex items-center gap-2">
                 <input
                   ref={inputRef}
@@ -226,7 +226,7 @@ export default function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type your message..."
                   disabled={isLoading}
-                  className="flex-1 px-4 py-3 bg-[#F5F5F5] rounded-full text-sm outline-none focus:ring-2 focus:ring-black/10 disabled:opacity-50"
+                  className="flex-1 px-4 py-3 bg-[#F5F5F5] dark:bg-white/10 rounded-full text-sm text-black dark:text-white outline-none focus:ring-2 focus:ring-black/10 dark:focus:ring-white/20 disabled:opacity-50 placeholder:text-black/40 dark:placeholder:text-white/40"
                 />
                 <button
                   type="submit"
@@ -239,7 +239,7 @@ export default function ChatBot() {
                   </svg>
                 </button>
               </div>
-              <p className="text-[10px] text-black/40 text-center mt-2">
+              <p className="text-[10px] text-black/40 dark:text-white/40 text-center mt-2">
                 Powered by AI • Responses may vary
               </p>
             </form>
