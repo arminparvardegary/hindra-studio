@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import Logo from "@/public/icons/Logo.svg";
 
-export default function TestMotion() {
+export default function NavBar() {
   const [showNav, setShowNav] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setShowNav(window.scrollY > 150);
@@ -24,6 +26,12 @@ export default function TestMotion() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  const isActive = (path: string) => {
+    if (path === "/" && pathname === "/") return true;
+    if (path !== "/" && pathname.startsWith(path)) return true;
+    return false;
+  };
 
   if (!showNav) return null;
 
@@ -49,7 +57,7 @@ export default function TestMotion() {
                   animate={{ opacity: 1, scaleY: 1, y: 0 }}
                   exit={{ opacity: 0, scaleY: 0.01, y: 12 }}
                   transition={{
-                    duration: prefersReducedMotion ? 0 : 2.2,
+                    duration: prefersReducedMotion ? 0 : 0.22,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   style={{ transformOrigin: "bottom center", willChange: "transform, opacity" }}
@@ -58,9 +66,33 @@ export default function TestMotion() {
                   <ul className="flex flex-col divide-y divide-black/5">
                     <li>
                       <Link
+                        href="/"
+                        onClick={() => setMobileOpen(false)}
+                        className={`block px-4 py-3 text-center transition-colors ${
+                          isActive("/") ? "bg-black text-white" : "text-black hover:bg-black hover:text-white"
+                        }`}
+                      >
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/works"
+                        onClick={() => setMobileOpen(false)}
+                        className={`block px-4 py-3 text-center transition-colors ${
+                          isActive("/works") ? "bg-black text-white" : "text-black hover:bg-black hover:text-white"
+                        }`}
+                      >
+                        Portfolio
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
                         href="/about"
                         onClick={() => setMobileOpen(false)}
-                        className="block px-4 py-3 text-center text-black hover:bg-black hover:text-white transition-colors"
+                        className={`block px-4 py-3 text-center transition-colors ${
+                          isActive("/about") ? "bg-black text-white" : "text-black hover:bg-black hover:text-white"
+                        }`}
                       >
                         About
                       </Link>
@@ -69,18 +101,11 @@ export default function TestMotion() {
                       <Link
                         href="/contact"
                         onClick={() => setMobileOpen(false)}
-                        className="block px-4 py-3 text-center text-black hover:bg-black hover:text-white transition-colors"
+                        className={`block px-4 py-3 text-center transition-colors ${
+                          isActive("/contact") ? "bg-black text-white" : "text-black hover:bg-black hover:text-white"
+                        }`}
                       >
                         Contact
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/works"
-                        onClick={() => setMobileOpen(false)}
-                        className="block px-4 py-3 text-center text-white bg-black hover:bg-black/90 transition-colors"
-                      >
-                        Works
                       </Link>
                     </li>
                   </ul>
@@ -118,27 +143,43 @@ export default function TestMotion() {
 
               {/* Desktop links: original compact layout on lg+ */}
               <div className="hidden lg:flex items-center bg-[#fafafa] py-1 px-2 gap-1 rounded-full">
-              <Link
+                <Link
                   href="/works"
-                  className="text-black py-3 px-3 rounded-full hover:bg-black hover:text-white hover:px-8 transition-all duration-500 ease-in-out"
+                  className={`py-3 px-3 rounded-full transition-all duration-500 ease-in-out ${
+                    isActive("/works")
+                      ? "text-white bg-black px-6"
+                      : "text-black hover:bg-black hover:text-white hover:px-8"
+                  }`}
                 >
                   Portfolio
                 </Link>
                 <Link
                   href="/about"
-                  className="text-black py-3 px-3 rounded-full hover:bg-black hover:text-white hover:px-8 transition-all duration-500 ease-in-out"
+                  className={`py-3 px-3 rounded-full transition-all duration-500 ease-in-out ${
+                    isActive("/about")
+                      ? "text-white bg-black px-6"
+                      : "text-black hover:bg-black hover:text-white hover:px-8"
+                  }`}
                 >
                   About
                 </Link>
                 <Link
                   href="/contact"
-                  className="text-black py-3 px-4 rounded-full hover:bg-black hover:text-white hover:px-8 transition-all duration-500 ease-in-out"
+                  className={`py-3 px-4 rounded-full transition-all duration-500 ease-in-out ${
+                    isActive("/contact")
+                      ? "text-white bg-black px-6"
+                      : "text-black hover:bg-black hover:text-white hover:px-8"
+                  }`}
                 >
                   Contact
                 </Link>
                 <Link
                   href="/"
-                  className="text-white bg-black py-3 px-3 hover:px-9 rounded-full transition-all duration-500 ease-in-out"
+                  className={`py-3 px-3 rounded-full transition-all duration-500 ease-in-out ${
+                    isActive("/") && pathname === "/"
+                      ? "text-white bg-black px-6"
+                      : "text-black hover:bg-black hover:text-white hover:px-9"
+                  }`}
                 >
                   Home
                 </Link>
