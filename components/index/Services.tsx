@@ -1,6 +1,6 @@
 "use client";
 
-import { Bot, Workflow, Globe, Palette, Video, Smartphone, Database, Sparkles } from "lucide-react";
+import { Palette, Instagram, Globe, Video, Bot, Rocket, Users, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 type Service = {
@@ -12,51 +12,51 @@ type Service = {
 
 const SERVICES: Service[] = [
   { 
-    title: "AI Solutions", 
-    description: "Custom AI, chatbots, and machine learning",
-    Icon: Bot,
+    title: "Brand Identity", 
+    description: "Logo, visual identity & brand guidelines",
+    Icon: Palette,
     color: "bg-purple-100"
   },
   { 
-    title: "Automation", 
-    description: "Business process & workflow automation",
-    Icon: Workflow,
-    color: "bg-blue-100"
-  },
-  { 
-    title: "Web Development", 
-    description: "Websites, web apps & e-commerce",
-    Icon: Globe,
-    color: "bg-green-100"
-  },
-  { 
-    title: "Design & Branding", 
-    description: "UI/UX, brand identity & design systems",
-    Icon: Palette,
+    title: "Social Media", 
+    description: "Page setup, content & daily management",
+    Icon: Instagram,
     color: "bg-pink-100"
   },
   { 
-    title: "Video & Motion", 
-    description: "Video editing, motion graphics & 3D",
+    title: "Website & Deploy", 
+    description: "Custom website with full deployment",
+    Icon: Globe,
+    color: "bg-blue-100"
+  },
+  { 
+    title: "Content Creation", 
+    description: "Photos, videos, reels & graphics",
     Icon: Video,
     color: "bg-orange-100"
   },
   { 
-    title: "Mobile Apps", 
-    description: "iOS, Android & cross-platform apps",
-    Icon: Smartphone,
-    color: "bg-cyan-100"
+    title: "AI & Automation", 
+    description: "Chatbots & marketing automation",
+    Icon: Bot,
+    color: "bg-green-100"
   },
   { 
-    title: "Custom Systems", 
-    description: "End-to-end software solutions",
-    Icon: Database,
+    title: "Launch & Growth", 
+    description: "Go-to-market strategy & analytics",
+    Icon: Rocket,
     color: "bg-amber-100"
   },
   { 
-    title: "Digital Transformation", 
-    description: "Complete business digitalization",
-    Icon: Sparkles,
+    title: "Community Management", 
+    description: "Engagement & audience growth",
+    Icon: Users,
+    color: "bg-cyan-100"
+  },
+  { 
+    title: "Complete Package", 
+    description: "Everything your brand needs",
+    Icon: TrendingUp,
     color: "bg-[#DCDFFF]"
   },
 ];
@@ -65,23 +65,24 @@ export default function ServicesSection() {
   return (
     <section
       aria-labelledby="services-title"
-      className="w-full py-20 lg:py-32"
+      className="w-full py-20 lg:py-32 bg-[#FAFAFA]"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-12 sm:gap-16">
           {/* Header */}
           <div className="text-center max-w-3xl">
             <p className="text-sm font-medium uppercase tracking-widest text-black/50 mb-4">
-              What We Do
+              Complete Brand Solution
             </p>
             <h2
               id="services-title"
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6"
             >
-              End-to-End Solutions
+              From Zero to Hero
             </h2>
             <p className="text-lg text-black/60">
-              From idea to launch and beyond. We handle everything so you can focus on growing your business.
+              We handle everything. Brand identity, social media, website, content - all under one roof. 
+              One team. One vision. Complete package.
             </p>
           </div>
 
@@ -113,23 +114,31 @@ export default function ServicesSection() {
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <Link
-              href="/contact"
-              className="px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-black/90 transition-colors"
-            >
-              Start Your Project
-            </Link>
-            <Link
-              href="/works"
-              className="px-8 py-4 text-black font-medium hover:text-black/70 transition-colors flex items-center gap-2"
-            >
-              See Our Work
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+          {/* Package Highlight */}
+          <div className="w-full max-w-4xl bg-black rounded-3xl p-8 sm:p-12 text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              One Team. One Package. Everything You Need.
+            </h3>
+            <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+              Stop juggling multiple vendors. We handle your entire brand journey - from the first logo sketch to daily social media posts. Your brand deserves a dedicated team.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors"
+              >
+                Get Your Brand Package
+              </Link>
+              <Link
+                href="/works"
+                className="px-8 py-4 text-white font-medium hover:text-white/70 transition-colors flex items-center gap-2"
+              >
+                See Success Stories
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

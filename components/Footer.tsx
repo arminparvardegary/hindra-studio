@@ -36,19 +36,19 @@ export default function Footer() {
 
   const footerLinks = {
     services: [
-      { name: "AI Solutions", href: "/contact?service=ai" },
-      { name: "Automation", href: "/contact?service=automation" },
-      { name: "Web Development", href: "/contact?service=web" },
-      { name: "Mobile Apps", href: "/contact?service=mobile" },
-      { name: "Design & Branding", href: "/contact?service=design" },
-      { name: "Video & Motion", href: "/contact?service=video" },
+      { name: "Brand Identity", href: "/contact?service=branding" },
+      { name: "Social Media", href: "/contact?service=social" },
+      { name: "Website Development", href: "/contact?service=web" },
+      { name: "Content Creation", href: "/contact?service=content" },
+      { name: "AI & Automation", href: "/contact?service=ai" },
+      { name: "Complete Package", href: "/contact?package=complete" },
     ],
-    work: [
-      { name: "All Projects", href: "/works" },
-      { name: "AI Projects", href: "/works?filter=ai" },
-      { name: "Automation", href: "/works?filter=automation" },
-      { name: "Web Apps", href: "/works?filter=web" },
-      { name: "Mobile Apps", href: "/works?filter=mobile" },
+    packages: [
+      { name: "Starter Package", href: "/contact?package=starter" },
+      { name: "Growth Package", href: "/contact?package=growth" },
+      { name: "Complete Package", href: "/contact?package=complete" },
+      { name: "Monthly Retainer", href: "/contact?service=retainer" },
+      { name: "Custom Build", href: "/contact" },
     ],
     company: [
       { name: "About Us", href: "/about" },
@@ -258,11 +258,11 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* Work */}
+              {/* Packages */}
               <div>
-                <h3 className="font-semibold mb-6 text-white">Work</h3>
+                <h3 className="font-semibold mb-6 text-white">Packages</h3>
                 <ul className="space-y-3">
-                  {footerLinks.work.map((link) => (
+                  {footerLinks.packages.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}

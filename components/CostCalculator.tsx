@@ -15,42 +15,60 @@ interface AddonOption {
   id: string;
   name: string;
   price: number;
+  monthly?: boolean;
 }
 
 const SERVICES: ServiceOption[] = [
-  { id: "ai", name: "AI Solutions", basePrice: 5000, description: "Chatbots, ML models, AI integration" },
-  { id: "automation", name: "Automation", basePrice: 8000, description: "Business process automation" },
+  { id: "branding", name: "Brand Identity", basePrice: 2000, description: "Logo, colors, typography, guidelines" },
+  { id: "social-setup", name: "Social Media Setup", basePrice: 500, description: "All platforms setup & optimization" },
   { id: "website", name: "Website", basePrice: 3000, description: "Custom responsive website" },
-  { id: "webapp", name: "Web Application", basePrice: 10000, description: "Full-stack web app" },
-  { id: "mobile", name: "Mobile App", basePrice: 15000, description: "iOS & Android app" },
-  { id: "branding", name: "Brand Identity", basePrice: 5000, description: "Logo, colors, guidelines" },
-  { id: "video", name: "Video Production", basePrice: 2000, description: "Editing & motion graphics" },
-  { id: "system", name: "Custom System", basePrice: 20000, description: "End-to-end software solution" },
+  { id: "ecommerce", name: "E-commerce Store", basePrice: 5000, description: "Online store with payments" },
+  { id: "content", name: "Content Package", basePrice: 1500, description: "30 posts + graphics + reels" },
+  { id: "video", name: "Video Production", basePrice: 2000, description: "Promo video + editing" },
+  { id: "chatbot", name: "AI Chatbot", basePrice: 3000, description: "Custom chatbot for your site" },
 ];
 
 const ADDONS: AddonOption[] = [
-  { id: "rush", name: "Rush delivery (2x faster)", price: 3000 },
-  { id: "seo", name: "SEO Optimization", price: 1500 },
-  { id: "analytics", name: "Analytics Setup", price: 800 },
-  { id: "hosting", name: "1 Year Hosting", price: 500 },
-  { id: "maintenance", name: "Monthly Maintenance", price: 500 },
-  { id: "training", name: "Team Training", price: 1000 },
-  { id: "api", name: "API Integrations", price: 2000 },
-  { id: "security", name: "Security Audit", price: 1500 },
+  { id: "social-mgmt", name: "Social Media Management", price: 800, monthly: true },
+  { id: "content-monthly", name: "Monthly Content Creation", price: 600, monthly: true },
+  { id: "community", name: "Community Management", price: 400, monthly: true },
+  { id: "seo", name: "SEO Optimization", price: 1000 },
+  { id: "hosting", name: "1 Year Hosting + Domain", price: 300 },
+  { id: "rush", name: "Rush Delivery (2x faster)", price: 1500 },
+  { id: "analytics", name: "Analytics & Reporting", price: 500 },
 ];
 
-const COMPLEXITY = [
-  { id: "simple", name: "Simple", multiplier: 1, description: "Basic requirements" },
-  { id: "standard", name: "Standard", multiplier: 1.5, description: "Average complexity" },
-  { id: "complex", name: "Complex", multiplier: 2.5, description: "Advanced features" },
-  { id: "enterprise", name: "Enterprise", multiplier: 4, description: "Large scale project" },
+const PACKAGES = [
+  { 
+    id: "starter", 
+    name: "Starter", 
+    price: 3500, 
+    includes: ["Brand Identity", "Social Setup", "Basic Website"],
+    description: "Perfect for new brands"
+  },
+  { 
+    id: "growth", 
+    name: "Growth", 
+    price: 6000, 
+    includes: ["Full Branding", "Website", "Social Setup", "Content Pack"],
+    description: "Ready to launch & grow",
+    popular: true
+  },
+  { 
+    id: "complete", 
+    name: "Complete", 
+    price: 10000, 
+    includes: ["Everything", "AI Chatbot", "3 Months Management"],
+    description: "Full brand transformation"
+  },
 ];
 
 export default function CostCalculator() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState<"custom" | "package">("package");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
-  const [complexity, setComplexity] = useState("standard");
+  const [selectedPackage, setSelectedPackage] = useState<string>("growth");
   const [step, setStep] = useState(1);
 
   const toggleService = (id: string) => {
@@ -66,6 +84,15 @@ export default function CostCalculator() {
   };
 
   const calculateTotal = () => {
+    if (mode === "package") {
+      const pkg = PACKAGES.find(p => p.id === selectedPackage);
+      const addonsTotal = selectedAddons.reduce((sum, id) => {
+        const addon = ADDONS.find((a) => a.id === id);
+        return sum + (addon?.price || 0);
+      }, 0);
+      return (pkg?.price || 0) + addonsTotal;
+    }
+
     const servicesTotal = selectedServices.reduce((sum, id) => {
       const service = SERVICES.find((s) => s.id === id);
       return sum + (service?.basePrice || 0);
@@ -76,9 +103,14 @@ export default function CostCalculator() {
       return sum + (addon?.price || 0);
     }, 0);
 
-    const multiplier = COMPLEXITY.find((c) => c.id === complexity)?.multiplier || 1;
+    return servicesTotal + addonsTotal;
+  };
 
-    return Math.round((servicesTotal * multiplier) + addonsTotal);
+  const getMonthlyTotal = () => {
+    return selectedAddons.reduce((sum, id) => {
+      const addon = ADDONS.find((a) => a.id === id);
+      return sum + (addon?.monthly ? addon.price : 0);
+    }, 0);
   };
 
   const formatPrice = (price: number) => {
@@ -130,8 +162,8 @@ export default function CostCalculator() {
               {/* Header */}
               <div className="sticky top-0 bg-white dark:bg-[#1a1a1a] border-b border-black/10 dark:border-white/10 px-6 py-4 flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-bold text-black dark:text-white">Project Calculator</h2>
-                  <p className="text-sm text-black/50 dark:text-white/50">Get an instant estimate</p>
+                  <h2 className="text-xl font-bold text-black dark:text-white">Brand Package Calculator</h2>
+                  <p className="text-sm text-black/50 dark:text-white/50">Get your instant estimate</p>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -143,122 +175,180 @@ export default function CostCalculator() {
                 </button>
               </div>
 
-              {/* Progress */}
+              {/* Mode Toggle */}
               <div className="px-6 py-4 border-b border-black/10 dark:border-white/10">
-                <div className="flex items-center gap-2">
-                  {[1, 2, 3].map((s) => (
-                    <div key={s} className="flex-1">
-                      <div
-                        className={`h-1 rounded-full transition-colors ${
-                          s <= step ? "bg-black dark:bg-white" : "bg-black/10 dark:bg-white/10"
-                        }`}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="flex justify-between mt-2 text-xs text-black/50 dark:text-white/50">
-                  <span>Services</span>
-                  <span>Scope</span>
-                  <span>Extras</span>
+                <div className="flex rounded-xl bg-black/5 dark:bg-white/5 p-1">
+                  <button
+                    onClick={() => { setMode("package"); setStep(1); }}
+                    className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                      mode === "package" ? "bg-white dark:bg-[#2a2a2a] shadow-sm text-black dark:text-white" : "text-black/60 dark:text-white/60"
+                    }`}
+                  >
+                    Packages
+                  </button>
+                  <button
+                    onClick={() => { setMode("custom"); setStep(1); }}
+                    className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                      mode === "custom" ? "bg-white dark:bg-[#2a2a2a] shadow-sm text-black dark:text-white" : "text-black/60 dark:text-white/60"
+                    }`}
+                  >
+                    Custom Build
+                  </button>
                 </div>
               </div>
 
               {/* Content */}
               <div className="px-6 py-6">
-                {/* Step 1: Services */}
-                {step === 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-3"
-                  >
-                    <h3 className="font-semibold text-black dark:text-white mb-4">What do you need?</h3>
-                    {SERVICES.map((service) => (
-                      <button
-                        key={service.id}
-                        onClick={() => toggleService(service.id)}
-                        className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                          selectedServices.includes(service.id)
-                            ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                            : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
-                        }`}
+                {mode === "package" ? (
+                  <>
+                    {step === 1 && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="space-y-4"
                       >
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <div className="font-medium text-black dark:text-white">{service.name}</div>
-                            <div className="text-sm text-black/50 dark:text-white/50">{service.description}</div>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-semibold text-black dark:text-white">
-                              {formatPrice(service.basePrice)}
+                        <h3 className="font-semibold text-black dark:text-white mb-4">Choose your package</h3>
+                        {PACKAGES.map((pkg) => (
+                          <button
+                            key={pkg.id}
+                            onClick={() => setSelectedPackage(pkg.id)}
+                            className={`w-full p-4 rounded-xl border-2 text-left transition-all relative ${
+                              selectedPackage === pkg.id
+                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
+                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                            }`}
+                          >
+                            {pkg.popular && (
+                              <span className="absolute -top-2 right-4 px-2 py-0.5 text-[10px] font-bold bg-black dark:bg-white text-white dark:text-black rounded-full">
+                                POPULAR
+                              </span>
+                            )}
+                            <div className="flex items-start justify-between mb-2">
+                              <div>
+                                <div className="font-semibold text-black dark:text-white">{pkg.name}</div>
+                                <div className="text-sm text-black/50 dark:text-white/50">{pkg.description}</div>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-xl font-bold text-black dark:text-white">
+                                  {formatPrice(pkg.price)}
+                                </div>
+                              </div>
                             </div>
-                            <div className="text-xs text-black/40 dark:text-white/40">starting</div>
-                          </div>
-                        </div>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
+                            <div className="flex flex-wrap gap-1 mt-3">
+                              {pkg.includes.map((item) => (
+                                <span key={item} className="px-2 py-1 text-xs bg-black/5 dark:bg-white/10 rounded-full text-black/70 dark:text-white/70">
+                                  {item}
+                                </span>
+                              ))}
+                            </div>
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
 
-                {/* Step 2: Complexity */}
-                {step === 2 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-4"
-                  >
-                    <h3 className="font-semibold text-black dark:text-white">Project scope?</h3>
-                    {COMPLEXITY.map((level) => (
-                      <button
-                        key={level.id}
-                        onClick={() => setComplexity(level.id)}
-                        className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                          complexity === level.id
-                            ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                            : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
-                        }`}
+                    {step === 2 && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="space-y-3"
                       >
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <div className="font-medium text-black dark:text-white">{level.name}</div>
-                            <div className="text-sm text-black/50 dark:text-white/50">{level.description}</div>
-                          </div>
-                          <div className="text-sm font-medium text-black/60 dark:text-white/60">
-                            {level.multiplier}x
-                          </div>
-                        </div>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
+                        <h3 className="font-semibold text-black dark:text-white mb-4">Add extras?</h3>
+                        {ADDONS.map((addon) => (
+                          <button
+                            key={addon.id}
+                            onClick={() => toggleAddon(addon.id)}
+                            className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
+                              selectedAddons.includes(addon.id)
+                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
+                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <span className="font-medium text-black dark:text-white">{addon.name}</span>
+                                {addon.monthly && (
+                                  <span className="ml-2 px-2 py-0.5 text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+                                    Monthly
+                                  </span>
+                                )}
+                              </div>
+                              <div className="font-semibold text-black dark:text-white">
+                                +{formatPrice(addon.price)}{addon.monthly && "/mo"}
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {step === 1 && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="space-y-3"
+                      >
+                        <h3 className="font-semibold text-black dark:text-white mb-4">What do you need?</h3>
+                        {SERVICES.map((service) => (
+                          <button
+                            key={service.id}
+                            onClick={() => toggleService(service.id)}
+                            className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
+                              selectedServices.includes(service.id)
+                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
+                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div>
+                                <div className="font-medium text-black dark:text-white">{service.name}</div>
+                                <div className="text-sm text-black/50 dark:text-white/50">{service.description}</div>
+                              </div>
+                              <div className="font-semibold text-black dark:text-white">
+                                {formatPrice(service.basePrice)}
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
 
-                {/* Step 3: Addons */}
-                {step === 3 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-3"
-                  >
-                    <h3 className="font-semibold text-black dark:text-white mb-4">Need any extras?</h3>
-                    {ADDONS.map((addon) => (
-                      <button
-                        key={addon.id}
-                        onClick={() => toggleAddon(addon.id)}
-                        className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                          selectedAddons.includes(addon.id)
-                            ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                            : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
-                        }`}
+                    {step === 2 && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="space-y-3"
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="font-medium text-black dark:text-white">{addon.name}</div>
-                          <div className="font-semibold text-black dark:text-white">
-                            +{formatPrice(addon.price)}
-                          </div>
-                        </div>
-                      </button>
-                    ))}
-                  </motion.div>
+                        <h3 className="font-semibold text-black dark:text-white mb-4">Add extras?</h3>
+                        {ADDONS.map((addon) => (
+                          <button
+                            key={addon.id}
+                            onClick={() => toggleAddon(addon.id)}
+                            className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
+                              selectedAddons.includes(addon.id)
+                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
+                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <span className="font-medium text-black dark:text-white">{addon.name}</span>
+                                {addon.monthly && (
+                                  <span className="ml-2 px-2 py-0.5 text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+                                    Monthly
+                                  </span>
+                                )}
+                              </div>
+                              <div className="font-semibold text-black dark:text-white">
+                                +{formatPrice(addon.price)}{addon.monthly && "/mo"}
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </>
                 )}
               </div>
 
@@ -266,7 +356,14 @@ export default function CostCalculator() {
               <div className="sticky bottom-0 bg-white dark:bg-[#1a1a1a] border-t border-black/10 dark:border-white/10 px-6 py-4">
                 {/* Total */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-black/60 dark:text-white/60">Estimated Total</span>
+                  <div>
+                    <span className="text-black/60 dark:text-white/60">One-time</span>
+                    {getMonthlyTotal() > 0 && (
+                      <span className="block text-sm text-black/40 dark:text-white/40">
+                        + {formatPrice(getMonthlyTotal())}/mo
+                      </span>
+                    )}
+                  </div>
                   <div className="text-right">
                     <div className="text-2xl font-bold text-black dark:text-white">
                       {formatPrice(calculateTotal())}
@@ -285,17 +382,17 @@ export default function CostCalculator() {
                       Back
                     </button>
                   )}
-                  {step < 3 ? (
+                  {step < 2 ? (
                     <button
                       onClick={() => setStep(step + 1)}
-                      disabled={step === 1 && selectedServices.length === 0}
+                      disabled={mode === "custom" && step === 1 && selectedServices.length === 0}
                       className="flex-1 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Continue
                     </button>
                   ) : (
                     <Link
-                      href={`/contact?estimate=${calculateTotal()}&services=${selectedServices.join(",")}`}
+                      href={`/contact?estimate=${calculateTotal()}&package=${mode === "package" ? selectedPackage : "custom"}`}
                       onClick={() => setIsOpen(false)}
                       className="flex-1 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium hover:opacity-90 transition-opacity text-center"
                     >
@@ -305,7 +402,7 @@ export default function CostCalculator() {
                 </div>
 
                 <p className="text-xs text-center text-black/40 dark:text-white/40 mt-3">
-                  Final pricing may vary based on specific requirements
+                  Final pricing based on your specific needs
                 </p>
               </div>
             </motion.div>
