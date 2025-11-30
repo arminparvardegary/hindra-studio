@@ -76,7 +76,7 @@
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased bg-white dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300;
   }
 
   ::selection {
