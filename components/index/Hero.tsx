@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Hero() {
-  const text1 = "Design That Converts";
+  const text1 = "Your Brand, Our Mission";
   const text2 = "HINDRA";
   const prefersReducedMotion = useReducedMotion();
 

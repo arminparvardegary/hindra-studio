@@ -72,7 +72,8 @@ const WhyUs = () => {
             >
               <h2 className="text-5xl font-bold text-black">Why Hindra</h2>
               <p className="text-gray-800 mt-2">
-              We solve problems through design. Every project starts with deep understanding<br/> of your goals, audience, and what makes you unique.              </p>
+              One team for everything. We take your brand from zero to hero -<br/> branding, social media, website, content. All under one roof.
+              </p>
             </div>
 
             <div
@@ -84,7 +85,8 @@ const WhyUs = () => {
             >
               <h2 className="text-5xl font-bold text-black">What We Do</h2>
               <p className="text-gray-800 mt-2">
-              From brand strategy to web development, from motion design to product launches.<br/> Everything in-house. No outsourcing, no communication gaps.              </p>
+              Complete brand packages. From identity design to social media management,<br/> from website development to daily content creation. Everything handled.
+              </p>
             </div>
 
             <div
@@ -96,7 +98,7 @@ const WhyUs = () => {
             >
               <h2 className="text-5xl font-bold text-black">Who We Are</h2>
               <p className="text-gray-800 mt-2">
-              Strategists, designers, and developers who believe great design is invisible.<br/> Obsessed with craft, driven by curiosity, committed to results.
+              Your dedicated brand team. Designers, developers, content creators,<br/> and social media managers working together to grow your brand.
               </p>
             </div>
           </div>

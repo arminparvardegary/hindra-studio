@@ -80,9 +80,9 @@ export default function Testimonial() {
       bg: "bg-[#DCDFFF]",
       content: (
         <div className="p-6">
-          <p className="text-lg text-black/80 mb-4">&ldquo;Hindra transformed our brand completely. The attention to detail was exceptional.&rdquo;</p>
+          <p className="text-lg text-black/80 mb-4">&ldquo;Hindra handled everything - our brand, website, and social media. One team made it so easy.&rdquo;</p>
           <p className="text-sm font-medium text-black">Sarah Chen</p>
-          <p className="text-xs text-black/60">CEO, TechFlow</p>
+          <p className="text-xs text-black/60">Founder, TechFlow</p>
         </div>
       )
     },
@@ -90,9 +90,9 @@ export default function Testimonial() {
       bg: "bg-[#E9DCC8]",
       content: (
         <div className="p-6">
-          <p className="text-lg text-black/80 mb-4">&ldquo;Our conversion rate increased by 150% after the redesign. Highly recommended.&rdquo;</p>
+          <p className="text-lg text-black/80 mb-4">&ldquo;From zero followers to 50K in 6 months. Their content strategy is incredible.&rdquo;</p>
           <p className="text-sm font-medium text-black">Michael Torres</p>
-          <p className="text-xs text-black/60">Founder, Startup Labs</p>
+          <p className="text-xs text-black/60">CEO, Startup Labs</p>
         </div>
       )
     },
@@ -100,9 +100,9 @@ export default function Testimonial() {
       bg: "bg-white",
       content: (
         <div className="p-6">
-          <p className="text-lg text-black/80 mb-4">&ldquo;From concept to execution, they exceeded every expectation. True partners.&rdquo;</p>
+          <p className="text-lg text-black/80 mb-4">&ldquo;We launched in 3 weeks with a complete brand package. Best decision we made.&rdquo;</p>
           <p className="text-sm font-medium text-black">Emma Williams</p>
-          <p className="text-xs text-black/60">Marketing Director, Scale Inc</p>
+          <p className="text-xs text-black/60">Co-founder, Scale Inc</p>
         </div>
       )
     },
@@ -110,9 +110,9 @@ export default function Testimonial() {
       bg: "bg-black",
       content: (
         <div className="p-6">
-          <p className="text-lg text-white/80 mb-4">&ldquo;The motion design work was incredible. Our videos now outperform benchmarks by 3x.&rdquo;</p>
+          <p className="text-lg text-white/80 mb-4">&ldquo;They manage our social daily. Our engagement is up 300%. True partners.&rdquo;</p>
           <p className="text-sm font-medium text-white">David Kim</p>
-          <p className="text-xs text-white/60">CTO, Innovate Co</p>
+          <p className="text-xs text-white/60">CMO, Innovate Co</p>
         </div>
       )
     },
@@ -120,9 +120,9 @@ export default function Testimonial() {
       bg: "bg-[#DCDFFF]",
       content: (
         <div className="p-6">
-          <p className="text-lg text-black/80 mb-4">&ldquo;Working with Hindra was a game-changer. On time, within budget, beyond expectations.&rdquo;</p>
+          <p className="text-lg text-black/80 mb-4">&ldquo;No more juggling vendors. One team, one vision, perfect execution every time.&rdquo;</p>
           <p className="text-sm font-medium text-black">Lisa Park</p>
-          <p className="text-xs text-black/60">Product Lead, Motion AI</p>
+          <p className="text-xs text-black/60">Marketing Director, Motion AI</p>
         </div>
       )
     },

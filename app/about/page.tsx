@@ -11,40 +11,40 @@ import NavBar from "@/components/NavBar";
 const team = [
   {
     name: "Alex Rivera",
-    role: "Founder & Creative Director",
+    role: "Founder & Strategy Lead",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
   },
   {
     name: "Sarah Chen",
-    role: "Lead Designer",
+    role: "Creative Director",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
   },
   {
     name: "Marcus Johnson",
-    role: "Head of Development",
+    role: "Lead Developer",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
   },
   {
     name: "Emily Watson",
-    role: "Motion Designer",
+    role: "Content & Social Lead",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
   },
   {
     name: "David Park",
-    role: "UX Researcher",
+    role: "Video & Motion Lead",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
   },
   {
     name: "Lisa Thompson",
-    role: "Project Manager",
+    role: "Client Success Manager",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
   },
 ];
 
 const values = [
   {
-    title: "Quality First",
-    description: "We never compromise on quality. Every pixel, every line of code matters.",
+    title: "All-In-One Solution",
+    description: "One team handles everything - no more juggling multiple vendors and agencies.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -52,8 +52,8 @@ const values = [
     ),
   },
   {
-    title: "Collaboration",
-    description: "We work closely with our clients, treating every project as a partnership.",
+    title: "Your Dedicated Team",
+    description: "We become an extension of your team, fully invested in your brand success.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -61,21 +61,20 @@ const values = [
     ),
   },
   {
-    title: "Innovation",
-    description: "We stay ahead of trends while creating timeless designs that last.",
+    title: "Fast Execution",
+    description: "Launch your complete brand in weeks, not months. We move fast without sacrificing quality.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
   },
   {
-    title: "Transparency",
-    description: "Clear communication and honest feedback throughout the process.",
+    title: "Ongoing Growth",
+    description: "We do not just launch and leave. We manage and grow your brand continuously.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
       </svg>
     ),
   },
@@ -83,9 +82,9 @@ const values = [
 
 const stats = [
   { value: "8+", label: "Years of Experience" },
-  { value: "120+", label: "Projects Delivered" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "98%", label: "Client Satisfaction" },
+  { value: "120+", label: "Brands Launched" },
+  { value: "50+", label: "Active Clients" },
+  { value: "98%", label: "Retention Rate" },
 ];
 
 export default function AboutPage() {
