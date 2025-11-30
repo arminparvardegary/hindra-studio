@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingContact from "@/components/FloatingContact";
+import CookieConsent from "@/components/CookieConsent";
+import SocialProof from "@/components/SocialProof";
+import CursorFollower from "@/components/CursorFollower";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -154,9 +157,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
+        <CursorFollower />
         <ScrollProgress />
         {children}
         <FloatingContact />
+        <SocialProof />
+        <CookieConsent />
       </body>
     </html>
   );
