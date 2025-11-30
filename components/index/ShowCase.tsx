@@ -7,7 +7,7 @@ import {
   useCallback,
   useLayoutEffect,
 } from "react";
-import Link from "next/link";
+import Image from "next/image";
 
 type Slide =
   | {
@@ -17,60 +17,47 @@ type Slide =
       kind: "video";
       src: string;
       poster?: string;
-      href: string;
     }
-  | { 
-      id: string; 
-      title: string; 
-      badges: string[]; 
-      kind: "image"; 
-      src: string;
-      href: string;
-    };
+  | { id: string; title: string; badges: string[]; kind: "image"; src: string };
 
 const BASE: Slide[] = [
   {
     id: "luxe-motors",
     title: "Luxe Motors",
-    badges: ["Automotive", "Branding", "Motion"],
+    badges: ["AUTOMOTIVE", "BRANDING", "MOTION"],
     kind: "video",
     src: "/videos/motion.mp4",
     poster: "/images/ford.png",
-    href: "/works/ford-mustang",
   },
   {
-    id: "kumu-app",
-    title: "Kumu Social",
-    badges: ["Tech", "UI/UX", "Mobile App"],
+    id: "techflow",
+    title: "TechFlow",
+    badges: ["SAAS", "SERIES A", "USA"],
     kind: "image",
     src: "/images/ford.png",
-    href: "/works/kumu",
+  },
+  {
+    id: "kumu",
+    title: "Kumu Social",
+    badges: ["MOBILE APP", "UI/UX", "PHILIPPINES"],
+    kind: "video",
+    src: "/videos/motion.mp4",
+    poster: "/images/ford.png",
   },
   {
     id: "carsome",
-    title: "Carsome Platform",
-    badges: ["E-Commerce", "Web Design", "Development"],
+    title: "Carsome",
+    badges: ["E-COMMERCE", "WEB", "MALAYSIA"],
     kind: "video",
     src: "/videos/motion.mp4",
     poster: "/images/ford.png",
-    href: "/works/carsome",
   },
   {
-    id: "van-heusen",
+    id: "vanheusen",
     title: "Van Heusen",
-    badges: ["Fashion", "Brand Identity", "Campaign"],
+    badges: ["FASHION", "CAMPAIGN", "GLOBAL"],
     kind: "image",
     src: "/images/ford.png",
-    href: "/works/van-heusen",
-  },
-  {
-    id: "fintech-hub",
-    title: "FinTech Hub",
-    badges: ["Finance", "Product Design", "Strategy"],
-    kind: "video",
-    src: "/videos/motion.mp4",
-    poster: "/images/ford.png",
-    href: "/works/ford-mustang",
   },
 ];
 
@@ -133,7 +120,8 @@ export default function ShowCase() {
 
       if (vp.scrollLeft >= sectionWidth * 2) {
         vp.scrollLeft -= sectionWidth;
-      } else if (vp.scrollLeft <= 0) {
+      }
+      else if (vp.scrollLeft <= 0) {
         vp.scrollLeft += sectionWidth;
       }
 
@@ -189,7 +177,6 @@ export default function ShowCase() {
   };
 
   const baseActive = active % BASE.length;
-  
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
@@ -197,24 +184,15 @@ export default function ShowCase() {
     const el = slideRefs.current[active];
     if (!el) return;
   
-    const left = el.offsetLeft - (vp.clientWidth - el.clientWidth) / 1.9;
+    const left = el.offsetLeft - (vp.clientWidth - el.clientWidth) /1.9;
     vp.scrollLeft = left;
   }, [active]);
   
   return (
-    <section className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20" aria-labelledby="showcase-heading">
-      {/* Section header */}
-      <header className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
-        <h2 id="showcase-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-black">
-          Featured Projects
-        </h2>
-        <p className="text-center text-gray-500 mt-3 text-lg">
-          Drag to explore our latest work
-        </p>
-      </header>
-
+    <section className="flex flex-col items-center justify-center py-12 sm:py-16 lg:py-20">
       <div className="w-full">
         <div className="relative rounded-[28px]">
+          {/* Scrollable viewport */}
           <div
             ref={viewportRef}
             style={{ touchAction: "pan-y" }}
@@ -232,91 +210,75 @@ export default function ShowCase() {
               hide-scrollbar select-none
               ${dragging ? "cursor-grabbing" : "cursor-grab"}
             `}
-            role="list"
-            aria-label="Project showcase carousel"
           >
             <style>{`.hide-scrollbar::-webkit-scrollbar{display:none}`}</style>
 
             {EXT.map((s, i) => (
-              <article
+              <div
                 key={`${s.id}-${i}`}
                 ref={(el) => {
                   if (el) slideRefs.current[i] = el;
                 }}
                 className={`snap-center shrink-0 w-[88vw] sm:w-[84vw] lg:w-[1180px] xl:w-[1000px] transition-all duration-300 ${
-                  i === active ? "scale-110" : "scale-95 opacity-60"
+                  i === active ? "scale-110" : "scale-95"
                 }`}
                 onMouseEnter={handleVideoPlay}
                 onMouseLeave={handleVideoPause}
-                role="listitem"
               >
-                <Link href={s.href} className="block group" aria-label={`View ${s.title} case study`}>
-                  <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.08)] ring-1 ring-[#ECE9F5] overflow-hidden bg-white transition-shadow duration-300 group-hover:shadow-[0_12px_40px_rgba(21,16,48,0.12)]">
-                    <div className="p-2 sm:p-3">
-                      <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[500px] sm:h-[550px] lg:h-[600px] ring-white/10 relative">
-                        {s.kind === "video" ? (
-                          <video
-                            src={s.src}
-                            playsInline
-                            muted
-                            loop
-                            preload="metadata"
-                            poster={s.poster}
-                            className="block w-full h-full object-cover"
-                            aria-label={`${s.title} project video`}
-                          />
-                        ) : (
-                          <img
-                            src={s.src}
-                            alt={`${s.title} project preview`}
-                            loading="lazy"
-                            className="block w-full h-full object-cover"
-                          />
-                        )}
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-6 py-3 rounded-full font-medium">
-                            View Case Study
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
-                      <h3 className="text-[22px] sm:text-[26px] leading-none font-semibold text-[#15131F]">
-                        {s.title}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                        {s.badges.map((b) => (
-                          <span 
-                            key={`${s.id}-${b}`} 
-                            className="text-xs uppercase tracking-wide text-gray-500 bg-[#F5F5F5] px-3 py-1.5 rounded-full"
-                          >
-                            {b}
-                          </span>
-                        ))}
-                      </div>
+                {/* Card */}
+                <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.06)] ring-1 ring-[#ECE9F5]">
+                  <div className="p-2 sm:p-3">
+                    <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[600px] ring-white/10 relative">
+                      {s.kind === "video" ? (
+                        <video
+                          src={s.src}
+                          playsInline
+                          muted
+                          loop
+                          preload="metadata"
+                          poster={s.poster}
+                          className="block w-full h-full aspect-[21/9] object-cover"
+                        />
+                      ) : (
+                        <Image
+                          src={s.src}
+                          alt={s.title}
+                          fill
+                          sizes="(max-width: 640px) 88vw, (max-width: 1024px) 84vw, 1180px"
+                          className="object-cover"
+                        />
+                      )}
                     </div>
                   </div>
-                </Link>
-              </article>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
+                    <div className="text-[22px] sm:text-[24px] leading-none font-medium text-[#15131F]">
+                      {s.title}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.16em] text-[#6F6C85]">
+                      {s.badges.map((b) => (
+                        <span key={`${s.id}-${b}`}>{b}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
-          <nav className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4" aria-label="Carousel navigation">
-            {BASE.map((project, i) => (
-              <button
+          {/* Navigation dots */}
+          <div className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4">
+            {BASE.map((_, i) => (
+              <div
                 key={i}
                 onClick={() => setActive(SECTION_SIZE + i)}
-                aria-label={`Go to ${project.title}`}
-                aria-current={baseActive === i ? "true" : undefined}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   baseActive === i
-                    ? "w-10 bg-black"
-                    : "w-3 bg-gray-300 hover:bg-gray-400"
+                    ? "w-10 bg-[#6F6C85]"
+                    : "w-3 bg-[#CFCBDF] hover:bg-[#BFBAD6]"
                 }`}
               />
             ))}
-          </nav>
+          </div>
         </div>
       </div>
     </section>

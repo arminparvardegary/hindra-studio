@@ -30,7 +30,7 @@ export default function Header() {
             >
               {/* If you do not use a global .btn class, uncomment the utilities below */}
               {/* className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-white text-black px-5 py-2.5 text-sm font-medium shadow-sm ring-1 ring-black/10 hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/40 sm:px-6 sm:py-3 md:text-base md:px-7 md:py-3.5" */}
-              Let's make it together
+              Let&apos;s make it together
             </Link>
           </motion.div>
         </div>
