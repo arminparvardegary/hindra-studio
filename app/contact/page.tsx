@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import Greeting from "@/components/Greeting";
 
 const services = [
   "Brand Identity",
@@ -85,14 +86,17 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="tag-soft mb-6 inline-block"
-            >
-              Get in Touch
-            </motion.span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <Greeting />
+              <motion.span
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="tag-soft inline-block"
+              >
+                Get in Touch
+              </motion.span>
+            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
               Let&apos;s create something{" "}
               <span className="text-gradient">amazing</span>
