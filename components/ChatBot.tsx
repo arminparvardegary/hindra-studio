@@ -106,7 +106,7 @@ export default function ChatBot() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-[70] w-14 h-14 bg-gradient-to-br from-[#DCDFFF] to-[#E9DCC8] rounded-full shadow-2xl flex items-center justify-center text-black hover:shadow-3xl transition-shadow"
+            className="fixed bottom-24 right-6 z-[70] w-14 h-14 bg-gradient-to-br from-[#DCDFFF] to-[#E9DCC8] rounded-full shadow-2xl flex items-center justify-center text-black hover:shadow-3xl transition-shadow"
             aria-label="Open chat"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -126,7 +126,7 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-[70] w-[380px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-black/10"
+            className="fixed bottom-24 right-6 z-[70] w-[380px] max-w-[calc(100vw-48px)] h-[500px] max-h-[calc(100vh-150px)] bg-white dark:bg-[#1a1a1a] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-black/10 dark:border-white/10"
           >
             {/* Header */}
             <div className="bg-black text-white p-4 flex items-center justify-between shrink-0">

@@ -38,7 +38,7 @@ export default function ThemeToggle() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       onClick={toggleTheme}
-      className="fixed top-6 right-6 z-50 w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+      className="fixed top-6 left-6 z-50 w-10 h-10 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm text-black dark:text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform border border-black/10 dark:border-white/10"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       <motion.div

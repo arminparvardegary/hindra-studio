@@ -108,7 +108,7 @@ export default function Footer() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={scrollToTop}
-            className="fixed bottom-24 right-6 z-40 w-12 h-12 bg-black text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+            className="fixed bottom-44 right-6 z-40 w-10 h-10 bg-black text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
             aria-label="Back to top"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
