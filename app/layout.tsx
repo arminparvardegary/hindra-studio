@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
-import FloatingContact from "@/components/FloatingContact";
+import ChatBot from "@/components/ChatBot";
 import CookieConsent from "@/components/CookieConsent";
 import SocialProof from "@/components/SocialProof";
 import CursorFollower from "@/components/CursorFollower";
@@ -160,7 +160,7 @@ export default function RootLayout({
         <CursorFollower />
         <ScrollProgress />
         {children}
-        <FloatingContact />
+        <ChatBot />
         <SocialProof />
         <CookieConsent />
       </body>
