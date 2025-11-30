@@ -8,7 +8,65 @@ interface Message {
   content: string;
 }
 
-const WELCOME_MESSAGE = "Hi! 👋 I'm Hindra's AI assistant. We're a complete brand solution - we handle everything from branding to social media to websites. One team, one package. How can I help?";
+// Format message content with better styling
+function formatMessage(content: string) {
+  // Split into lines
+  const lines = content.split('\n');
+  
+  return lines.map((line, lineIndex) => {
+    // Handle bullet points
+    if (line.trim().startsWith('- ')) {
+      const bulletContent = line.trim().substring(2);
+      return (
+        <div key={lineIndex} className="flex items-start gap-2 my-1">
+          <span className="text-[#DCDFFF] mt-0.5">●</span>
+          <span>{formatInlineStyles(bulletContent)}</span>
+        </div>
+      );
+    }
+    
+    // Handle numbered lists
+    const numberedMatch = line.trim().match(/^(\d+)\.\s+(.+)/);
+    if (numberedMatch) {
+      return (
+        <div key={lineIndex} className="flex items-start gap-2 my-1">
+          <span className="text-[#DCDFFF] font-medium min-w-[20px]">{numberedMatch[1]}.</span>
+          <span>{formatInlineStyles(numberedMatch[2])}</span>
+        </div>
+      );
+    }
+    
+    // Regular line
+    if (line.trim()) {
+      return (
+        <p key={lineIndex} className="my-1">
+          {formatInlineStyles(line)}
+        </p>
+      );
+    }
+    
+    // Empty line for spacing
+    return <div key={lineIndex} className="h-2" />;
+  });
+}
+
+// Format inline styles like **bold**
+function formatInlineStyles(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} className="font-semibold text-black dark:text-white">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
+const WELCOME_MESSAGE = "Hi! 👋 I'm Hindra's AI assistant.\n\nWe're a complete brand solution - we handle everything from branding to social media to websites.\n\nOne team, one package. How can I help?";
 
 const QUICK_ACTIONS = [
   "What's included in your packages?",
@@ -169,9 +227,12 @@ export default function ChatBot() {
                         : "bg-[#F5F5F5] dark:bg-white/10 text-black dark:text-white rounded-bl-md"
                     }`}
                   >
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                      {message.content}
-                    </p>
+                    <div className="text-sm leading-relaxed">
+                      {message.role === "assistant" 
+                        ? formatMessage(message.content)
+                        : message.content
+                      }
+                    </div>
                   </div>
                 </motion.div>
               ))}
