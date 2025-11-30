@@ -1,28 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, useSpring } from "framer-motion";
 
 export default function CursorFollower() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
+  const hasMovedRef = useRef(false);
 
   const springConfig = { damping: 25, stiffness: 300 };
-  const x = useSpring(mousePosition.x, springConfig);
-  const y = useSpring(mousePosition.y, springConfig);
+  const x = useSpring(0, springConfig);
+  const y = useSpring(0, springConfig);
 
   useEffect(() => {
     // Check if it's a touch device
-    if ("ontouchstart" in window) return;
+    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    setIsTouchDevice(isTouch);
+    
+    if (isTouch) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      x.set(e.clientX);
+      y.set(e.clientY);
+      
+      if (!hasMovedRef.current) {
+        hasMovedRef.current = true;
+        // Small delay to prevent flash at initial position
+        setTimeout(() => setIsVisible(true), 100);
+      }
     };
 
-    const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => {
+      if (hasMovedRef.current) {
+        setIsVisible(true);
+      }
+    };
 
     // Check for hoverable elements
     const handleElementHover = (e: MouseEvent) => {
@@ -48,10 +62,10 @@ export default function CursorFollower() {
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isVisible]);
+  }, [x, y]);
 
   // Don't render on touch devices
-  if (typeof window !== "undefined" && "ontouchstart" in window) {
+  if (isTouchDevice) {
     return null;
   }
 
@@ -73,19 +87,15 @@ export default function CursorFollower() {
         }}
         transition={{ duration: 0.2 }}
       >
-        <div
-          className={`w-full h-full rounded-full border-2 border-white transition-all duration-200 ${
-            isHovering ? "scale-100" : "scale-100"
-          }`}
-        />
+        <div className="w-full h-full rounded-full border-2 border-white" />
       </motion.div>
 
       {/* Inner dot */}
       <motion.div
         className="fixed pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          x: mousePosition.x,
-          y: mousePosition.y,
+          x,
+          y,
           translateX: "-50%",
           translateY: "-50%",
         }}
@@ -101,4 +111,3 @@ export default function CursorFollower() {
     </>
   );
 }
-
