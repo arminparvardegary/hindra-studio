@@ -165,22 +165,6 @@ export default function CommandPalette() {
       action: () => window.open("mailto:hello@hindra.studio"),
       keywords: ["email", "mail"],
     },
-    {
-      id: "theme",
-      title: "Toggle Dark Mode",
-      subtitle: "Switch between light & dark theme",
-      icon: (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      ),
-      action: () => {
-        document.documentElement.classList.toggle("dark");
-        const isDark = document.documentElement.classList.contains("dark");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-      },
-      keywords: ["theme", "dark", "light", "mode"],
-    },
   ];
 
   const filteredCommands = search
@@ -244,8 +228,8 @@ export default function CommandPalette() {
   return (
     <>
       {/* Keyboard hint */}
-      <div className="fixed bottom-6 left-6 z-50 hidden lg:flex items-center gap-2 text-xs text-black/50 dark:text-white/50">
-        <kbd className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded border border-black/10 dark:border-white/20 font-mono">
+      <div className="fixed bottom-6 left-6 z-50 hidden lg:flex items-center gap-2 text-xs text-black/50">
+        <kbd className="px-2 py-1 bg-black/5 rounded border border-black/10 font-mono">
           ⌘K
         </kbd>
         <span>Quick search</span>
@@ -273,10 +257,10 @@ export default function CommandPalette() {
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               className="fixed top-[20%] left-1/2 -translate-x-1/2 z-[101] w-full max-w-lg"
             >
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-2xl border border-black/10 dark:border-white/10 overflow-hidden">
+              <div className="bg-white rounded-2xl shadow-2xl border border-black/10 overflow-hidden">
                 {/* Search input */}
-                <div className="flex items-center gap-3 px-4 py-4 border-b border-black/10 dark:border-white/10">
-                  <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="flex items-center gap-3 px-4 py-4 border-b border-black/10">
+                  <svg className="w-5 h-5 text-black/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                   <input
@@ -284,10 +268,10 @@ export default function CommandPalette() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search pages, services..."
-                    className="flex-1 bg-transparent outline-none text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/40"
+                    className="flex-1 bg-transparent outline-none text-black placeholder:text-black/40"
                     autoFocus
                   />
-                  <kbd className="px-2 py-0.5 text-xs bg-black/5 dark:bg-white/10 rounded text-black/50 dark:text-white/50">
+                  <kbd className="px-2 py-0.5 text-xs bg-black/5 rounded text-black/50">
                     ESC
                   </kbd>
                 </div>
@@ -295,7 +279,7 @@ export default function CommandPalette() {
                 {/* Commands list */}
                 <div className="max-h-[400px] overflow-y-auto py-2">
                   {filteredCommands.length === 0 ? (
-                    <div className="px-4 py-8 text-center text-black/50 dark:text-white/50">
+                    <div className="px-4 py-8 text-center text-black/50">
                       No results found
                     </div>
                   ) : (
@@ -310,21 +294,21 @@ export default function CommandPalette() {
                         onMouseEnter={() => setSelectedIndex(index)}
                         className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
                           index === selectedIndex
-                            ? "bg-black/5 dark:bg-white/10"
-                            : "hover:bg-black/5 dark:hover:bg-white/5"
+                            ? "bg-black/5"
+                            : "hover:bg-black/5"
                         }`}
                       >
-                        <div className="w-10 h-10 rounded-lg bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white">
+                        <div className="w-10 h-10 rounded-lg bg-black/5 flex items-center justify-center text-black">
                           {cmd.icon}
                         </div>
                         <div className="flex-1">
-                          <div className="font-medium text-black dark:text-white">{cmd.title}</div>
+                          <div className="font-medium text-black">{cmd.title}</div>
                           {cmd.subtitle && (
-                            <div className="text-sm text-black/50 dark:text-white/50">{cmd.subtitle}</div>
+                            <div className="text-sm text-black/50">{cmd.subtitle}</div>
                           )}
                         </div>
                         {index === selectedIndex && (
-                          <kbd className="px-2 py-0.5 text-xs bg-black/5 dark:bg-white/10 rounded text-black/50 dark:text-white/50">
+                          <kbd className="px-2 py-0.5 text-xs bg-black/5 rounded text-black/50">
                             ↵
                           </kbd>
                         )}
@@ -334,15 +318,15 @@ export default function CommandPalette() {
                 </div>
 
                 {/* Footer hints */}
-                <div className="px-4 py-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs text-black/40 dark:text-white/40">
+                <div className="px-4 py-3 border-t border-black/10 flex items-center justify-between text-xs text-black/40">
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
-                      <kbd className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded">↑</kbd>
-                      <kbd className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded">↓</kbd>
+                      <kbd className="px-1.5 py-0.5 bg-black/5 rounded">↑</kbd>
+                      <kbd className="px-1.5 py-0.5 bg-black/5 rounded">↓</kbd>
                       Navigate
                     </span>
                     <span className="flex items-center gap-1">
-                      <kbd className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded">↵</kbd>
+                      <kbd className="px-1.5 py-0.5 bg-black/5 rounded">↵</kbd>
                       Select
                     </span>
                   </div>
@@ -356,4 +340,3 @@ export default function CommandPalette() {
     </>
   );
 }
-

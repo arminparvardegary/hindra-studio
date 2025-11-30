@@ -157,31 +157,31 @@ export default function CostCalculator() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25 }}
-              className="fixed right-0 top-0 bottom-0 z-[101] w-full max-w-md bg-white dark:bg-[#1a1a1a] shadow-2xl overflow-y-auto"
+              className="fixed right-0 top-0 bottom-0 z-[101] w-full max-w-md bg-white shadow-2xl overflow-y-auto"
             >
               {/* Header */}
-              <div className="sticky top-0 bg-white dark:bg-[#1a1a1a] border-b border-black/10 dark:border-white/10 px-6 py-4 flex items-center justify-between">
+              <div className="sticky top-0 bg-white border-b border-black/10 px-6 py-4 flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-bold text-black dark:text-white">Brand Package Calculator</h2>
-                  <p className="text-sm text-black/50 dark:text-white/50">Get your instant estimate</p>
+                  <h2 className="text-xl font-bold text-black">Brand Package Calculator</h2>
+                  <p className="text-sm text-black/50">Get your instant estimate</p>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
+                  className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-black/10 transition-colors"
                 >
-                  <svg className="w-5 h-5 text-black dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               {/* Mode Toggle */}
-              <div className="px-6 py-4 border-b border-black/10 dark:border-white/10">
-                <div className="flex rounded-xl bg-black/5 dark:bg-white/5 p-1">
+              <div className="px-6 py-4 border-b border-black/10">
+                <div className="flex rounded-xl bg-black/5 p-1">
                   <button
                     onClick={() => { setMode("package"); setStep(1); }}
                     className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
-                      mode === "package" ? "bg-white dark:bg-[#2a2a2a] shadow-sm text-black dark:text-white" : "text-black/60 dark:text-white/60"
+                      mode === "package" ? "bg-white shadow-sm text-black" : "text-black/60"
                     }`}
                   >
                     Packages
@@ -189,7 +189,7 @@ export default function CostCalculator() {
                   <button
                     onClick={() => { setMode("custom"); setStep(1); }}
                     className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
-                      mode === "custom" ? "bg-white dark:bg-[#2a2a2a] shadow-sm text-black dark:text-white" : "text-black/60 dark:text-white/60"
+                      mode === "custom" ? "bg-white shadow-sm text-black" : "text-black/60"
                     }`}
                   >
                     Custom Build
@@ -207,36 +207,36 @@ export default function CostCalculator() {
                         animate={{ opacity: 1, x: 0 }}
                         className="space-y-4"
                       >
-                        <h3 className="font-semibold text-black dark:text-white mb-4">Choose your package</h3>
+                        <h3 className="font-semibold text-black mb-4">Choose your package</h3>
                         {PACKAGES.map((pkg) => (
                           <button
                             key={pkg.id}
                             onClick={() => setSelectedPackage(pkg.id)}
                             className={`w-full p-4 rounded-xl border-2 text-left transition-all relative ${
                               selectedPackage === pkg.id
-                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                                ? "border-black bg-black/5"
+                                : "border-black/10 hover:border-black/30"
                             }`}
                           >
                             {pkg.popular && (
-                              <span className="absolute -top-2 right-4 px-2 py-0.5 text-[10px] font-bold bg-black dark:bg-white text-white dark:text-black rounded-full">
+                              <span className="absolute -top-2 right-4 px-2 py-0.5 text-[10px] font-bold bg-black text-white rounded-full">
                                 POPULAR
                               </span>
                             )}
                             <div className="flex items-start justify-between mb-2">
                               <div>
-                                <div className="font-semibold text-black dark:text-white">{pkg.name}</div>
-                                <div className="text-sm text-black/50 dark:text-white/50">{pkg.description}</div>
+                                <div className="font-semibold text-black">{pkg.name}</div>
+                                <div className="text-sm text-black/50">{pkg.description}</div>
                               </div>
                               <div className="text-right">
-                                <div className="text-xl font-bold text-black dark:text-white">
+                                <div className="text-xl font-bold text-black">
                                   {formatPrice(pkg.price)}
                                 </div>
                               </div>
                             </div>
                             <div className="flex flex-wrap gap-1 mt-3">
                               {pkg.includes.map((item) => (
-                                <span key={item} className="px-2 py-1 text-xs bg-black/5 dark:bg-white/10 rounded-full text-black/70 dark:text-white/70">
+                                <span key={item} className="px-2 py-1 text-xs bg-black/5 rounded-full text-black/70">
                                   {item}
                                 </span>
                               ))}
@@ -252,27 +252,27 @@ export default function CostCalculator() {
                         animate={{ opacity: 1, x: 0 }}
                         className="space-y-3"
                       >
-                        <h3 className="font-semibold text-black dark:text-white mb-4">Add extras?</h3>
+                        <h3 className="font-semibold text-black mb-4">Add extras?</h3>
                         {ADDONS.map((addon) => (
                           <button
                             key={addon.id}
                             onClick={() => toggleAddon(addon.id)}
                             className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
                               selectedAddons.includes(addon.id)
-                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                                ? "border-black bg-black/5"
+                                : "border-black/10 hover:border-black/30"
                             }`}
                           >
                             <div className="flex items-center justify-between">
                               <div>
-                                <span className="font-medium text-black dark:text-white">{addon.name}</span>
+                                <span className="font-medium text-black">{addon.name}</span>
                                 {addon.monthly && (
-                                  <span className="ml-2 px-2 py-0.5 text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+                                  <span className="ml-2 px-2 py-0.5 text-[10px] bg-blue-100 text-blue-700 rounded-full">
                                     Monthly
                                   </span>
                                 )}
                               </div>
-                              <div className="font-semibold text-black dark:text-white">
+                              <div className="font-semibold text-black">
                                 +{formatPrice(addon.price)}{addon.monthly && "/mo"}
                               </div>
                             </div>
@@ -289,23 +289,23 @@ export default function CostCalculator() {
                         animate={{ opacity: 1, x: 0 }}
                         className="space-y-3"
                       >
-                        <h3 className="font-semibold text-black dark:text-white mb-4">What do you need?</h3>
+                        <h3 className="font-semibold text-black mb-4">What do you need?</h3>
                         {SERVICES.map((service) => (
                           <button
                             key={service.id}
                             onClick={() => toggleService(service.id)}
                             className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
                               selectedServices.includes(service.id)
-                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                                ? "border-black bg-black/5"
+                                : "border-black/10 hover:border-black/30"
                             }`}
                           >
                             <div className="flex items-start justify-between">
                               <div>
-                                <div className="font-medium text-black dark:text-white">{service.name}</div>
-                                <div className="text-sm text-black/50 dark:text-white/50">{service.description}</div>
+                                <div className="font-medium text-black">{service.name}</div>
+                                <div className="text-sm text-black/50">{service.description}</div>
                               </div>
-                              <div className="font-semibold text-black dark:text-white">
+                              <div className="font-semibold text-black">
                                 {formatPrice(service.basePrice)}
                               </div>
                             </div>
@@ -320,27 +320,27 @@ export default function CostCalculator() {
                         animate={{ opacity: 1, x: 0 }}
                         className="space-y-3"
                       >
-                        <h3 className="font-semibold text-black dark:text-white mb-4">Add extras?</h3>
+                        <h3 className="font-semibold text-black mb-4">Add extras?</h3>
                         {ADDONS.map((addon) => (
                           <button
                             key={addon.id}
                             onClick={() => toggleAddon(addon.id)}
                             className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
                               selectedAddons.includes(addon.id)
-                                ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                                : "border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30"
+                                ? "border-black bg-black/5"
+                                : "border-black/10 hover:border-black/30"
                             }`}
                           >
                             <div className="flex items-center justify-between">
                               <div>
-                                <span className="font-medium text-black dark:text-white">{addon.name}</span>
+                                <span className="font-medium text-black">{addon.name}</span>
                                 {addon.monthly && (
-                                  <span className="ml-2 px-2 py-0.5 text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+                                  <span className="ml-2 px-2 py-0.5 text-[10px] bg-blue-100 text-blue-700 rounded-full">
                                     Monthly
                                   </span>
                                 )}
                               </div>
-                              <div className="font-semibold text-black dark:text-white">
+                              <div className="font-semibold text-black">
                                 +{formatPrice(addon.price)}{addon.monthly && "/mo"}
                               </div>
                             </div>
@@ -353,22 +353,22 @@ export default function CostCalculator() {
               </div>
 
               {/* Footer */}
-              <div className="sticky bottom-0 bg-white dark:bg-[#1a1a1a] border-t border-black/10 dark:border-white/10 px-6 py-4">
+              <div className="sticky bottom-0 bg-white border-t border-black/10 px-6 py-4">
                 {/* Total */}
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <span className="text-black/60 dark:text-white/60">One-time</span>
+                    <span className="text-black/60">One-time</span>
                     {getMonthlyTotal() > 0 && (
-                      <span className="block text-sm text-black/40 dark:text-white/40">
+                      <span className="block text-sm text-black/40">
                         + {formatPrice(getMonthlyTotal())}/mo
                       </span>
                     )}
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-black dark:text-white">
+                    <div className="text-2xl font-bold text-black">
                       {formatPrice(calculateTotal())}
                     </div>
-                    <div className="text-xs text-black/40 dark:text-white/40">USD (approx.)</div>
+                    <div className="text-xs text-black/40">USD (approx.)</div>
                   </div>
                 </div>
 
@@ -377,7 +377,7 @@ export default function CostCalculator() {
                   {step > 1 && (
                     <button
                       onClick={() => setStep(step - 1)}
-                      className="px-6 py-3 rounded-full border border-black/20 dark:border-white/20 text-black dark:text-white font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                      className="px-6 py-3 rounded-full border border-black/20 text-black font-medium hover:bg-black/5 transition-colors"
                     >
                       Back
                     </button>
@@ -386,7 +386,7 @@ export default function CostCalculator() {
                     <button
                       onClick={() => setStep(step + 1)}
                       disabled={mode === "custom" && step === 1 && selectedServices.length === 0}
-                      className="flex-1 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 px-6 py-3 rounded-full bg-black text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Continue
                     </button>
@@ -394,14 +394,14 @@ export default function CostCalculator() {
                     <Link
                       href={`/contact?estimate=${calculateTotal()}&package=${mode === "package" ? selectedPackage : "custom"}`}
                       onClick={() => setIsOpen(false)}
-                      className="flex-1 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium hover:opacity-90 transition-opacity text-center"
+                      className="flex-1 px-6 py-3 rounded-full bg-black text-white font-medium hover:opacity-90 transition-opacity text-center"
                     >
                       Get Detailed Quote
                     </Link>
                   )}
                 </div>
 
-                <p className="text-xs text-center text-black/40 dark:text-white/40 mt-3">
+                <p className="text-xs text-center text-black/40 mt-3">
                   Final pricing based on your specific needs
                 </p>
               </div>

@@ -6,7 +6,6 @@ import ChatBot from "@/components/ChatBot";
 import CookieConsent from "@/components/CookieConsent";
 import SocialProof from "@/components/SocialProof";
 import CursorFollower from "@/components/CursorFollower";
-// Theme toggle removed - use Command Palette (Cmd+K) to toggle theme
 import CommandPalette from "@/components/CommandPalette";
 import CostCalculator from "@/components/CostCalculator";
 import ExitIntent from "@/components/ExitIntent";

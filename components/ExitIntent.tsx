@@ -58,13 +58,13 @@ export default function ExitIntent() {
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[201] w-full max-w-md"
           >
-            <div className="bg-white dark:bg-[#1a1a1a] rounded-3xl shadow-2xl overflow-hidden">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
               {/* Close button */}
               <button
                 onClick={() => setIsVisible(false)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/20 transition-colors z-10"
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 flex items-center justify-center hover:bg-black/10 transition-colors z-10"
               >
-                <svg className="w-4 h-4 text-black dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -91,7 +91,7 @@ export default function ExitIntent() {
               <div className="px-8 py-8">
                 {!submitted ? (
                   <>
-                    <p className="text-black/60 dark:text-white/60 text-center mb-6">
+                    <p className="text-black/60 text-center mb-6">
                       Join 2,000+ founders who receive our weekly design tips and exclusive offers.
                     </p>
 
@@ -102,17 +102,17 @@ export default function ExitIntent() {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/40 outline-none focus:border-black dark:focus:border-white transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border border-black/10 bg-black/5 text-black placeholder:text-black/40 outline-none focus:border-black transition-colors"
                       />
                       <button
                         type="submit"
-                        className="w-full px-6 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold hover:opacity-90 transition-opacity"
+                        className="w-full px-6 py-3 rounded-xl bg-black text-white font-semibold hover:opacity-90 transition-opacity"
                       >
                         Get Free Brand Audit
                       </button>
                     </form>
 
-                    <p className="text-xs text-center text-black/40 dark:text-white/40 mt-4">
+                    <p className="text-xs text-center text-black/40 mt-4">
                       No spam, unsubscribe anytime. We respect your privacy.
                     </p>
                   </>
@@ -122,19 +122,19 @@ export default function ExitIntent() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center py-4"
                   >
-                    <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h4 className="text-xl font-semibold text-black dark:text-white">You&apos;re in!</h4>
-                    <p className="text-black/60 dark:text-white/60 mt-2">Check your inbox for the brand audit.</p>
+                    <h4 className="text-xl font-semibold text-black">You&apos;re in!</h4>
+                    <p className="text-black/60 mt-2">Check your inbox for the brand audit.</p>
                   </motion.div>
                 )}
               </div>
 
               {/* Trust indicators */}
-              <div className="px-8 py-4 bg-black/5 dark:bg-white/5 flex items-center justify-center gap-6 text-xs text-black/50 dark:text-white/50">
+              <div className="px-8 py-4 bg-black/5 flex items-center justify-center gap-6 text-xs text-black/50">
                 <span className="flex items-center gap-1">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -161,4 +161,3 @@ export default function ExitIntent() {
     </AnimatePresence>
   );
 }
-
