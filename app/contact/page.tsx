@@ -17,7 +17,7 @@ const services = [
 ];
 
 const budgetRanges = [
-  "< $5,000",
+  "Under $5,000",
   "$5,000 - $15,000",
   "$15,000 - $50,000",
   "$50,000+",
@@ -95,9 +95,7 @@ export default function ContactPage() {
             </motion.span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
               Let&apos;s create something{" "}
-              <span className="bg-gradient-to-r from-[#DCDFFF] to-[#E9DCC8] bg-clip-text text-transparent">
-                amazing
-              </span>
+              <span className="text-gradient">amazing</span>
             </h1>
             <p className="text-xl text-black/60 leading-relaxed">
               Have a project in mind? We&apos;d love to hear about it. Send us a message
