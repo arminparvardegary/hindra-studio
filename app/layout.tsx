@@ -9,6 +9,7 @@ import CursorFollower from "@/components/CursorFollower";
 import CommandPalette from "@/components/CommandPalette";
 import CostCalculator from "@/components/CostCalculator";
 import ExitIntent from "@/components/ExitIntent";
+import GSAPProvider from "@/components/GSAPProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -168,7 +169,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
-        <CursorFollower />
+                <GSAPProvider>
+          <CursorFollower />
         <ScrollProgress />
         <CommandPalette />
         {children}
@@ -177,6 +179,7 @@ export default function RootLayout({
         <SocialProof />
         <ExitIntent />
         <CookieConsent />
+        </GSAPProvider>
       </body>
     </html>
   );

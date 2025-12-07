@@ -78,12 +78,12 @@ export default function LongScrollingText() {
   return (
     <div
       ref={sectionRef}
-      className="h-[300vh] bg-[#faf9f5] relative overflow-hidden"
+      className="h-[150vh] bg-[#faf9f5] relative overflow-hidden"
     >
       <div
         className="absolute font-bold text-[#111] origin-left"
         style={{
-          transform: `translate(${translateX}%, ${translateY}px) scaleX(${scaleX})`,
+          transform: `translate(${translateX}%, ${translateY - 250}px) scaleX(${scaleX})`,
           fontSize: "14rem",
           whiteSpace: "nowrap",
         }}
@@ -94,7 +94,7 @@ export default function LongScrollingText() {
       <div
   className="absolute font-bold text-[#111] origin-left"
   style={{
-    transform: `translate(${translateX + 190}%, ${translateY}px) scaleX(${scaleX})`,
+    transform: `translate(${translateX + 190}%, ${translateY - 200}px) scaleX(${scaleX})`,
     fontSize: "14rem",
     whiteSpace: "nowrap",
   }}
@@ -102,50 +102,81 @@ export default function LongScrollingText() {
   craft that converts
 </div>
 
-      <div className="absolute" style={{ top: "20%", left: "28%" }}>
+      <div className="absolute" style={{ top: "10%", left: "28%" }}>
         <div
           className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
           style={{
             transform: `translate(${card1X}px, ${card1Y}px) rotate(${rotate1}deg)`
           }}
         >
-          <p className="text-[1.2rem] text-[#202020] leading-tight">
-            Strategy first,<br /> design second
-          </p>
-          <div className="text-[2rem] font-light mt-2">01</div>
+      <h3 className="text-2xl font-bold text-black mt-4 mb-5">
+    Brand Identity & Positioning
+  </h3>
+
+
+  <p className="text-sm text-black mb-10 leading-relaxed">
+    We shape a clear, consistent brand that actually supports your sales and growth.
+  </p>
+
+
+  <ul className="list-disc list-inside  text-sm text-gray-800 space-y-2 mt-2">
+    <li>Visual identity, logo, and brand kit</li>
+    <li>Messaging and positioning for your ideal clients</li>
+    <li>Guidelines your team can actually use</li>
+  </ul>
         </div>
       </div>
 
      
-      <div className="absolute" style={{ top: "33%", right: "18%" }}>
+      <div className="absolute" style={{ top: "35%", right: "18%" }}>
         <div
           className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
           style={{
             transform: `translate(${card2X}px, ${card2Y}px) rotate(${rotate2}deg)`
           }}
         >
-          <p className="text-[1.2rem] text-[#202020] leading-tight">
-            Pixel perfect<br /> execution
-          </p>
-          <div className="text-[2rem] font-light mt-2">02</div>
+          <h3 className="text-2xl font-bold text-black mt-4 mb-5">
+          Conversion-Focused Websites  </h3>
+
+  
+  <p className="text-sm text-black mb-10 leading-relaxed">
+  We design and build fast, modern websites that turn visitors into leads and clients.  </p>
+
+  
+  <ul className="list-disc pl-4 list-outside text-sm text-gray-800 space-y-2 mt-2">
+    <li>UX/UI design for desktop and mobile</li>
+    <li>Landing pages, service pages, and funnels</li>
+    <li>Built on modern, maintainable stacks (Webflow / Next.js)</li>
+  </ul>
         </div>
       </div>
 
 
-      <div className="absolute" style={{ top: "48%", left: "42%" }}>
+      <div className="absolute" style={{ top: "60%", left: "30%" }}>
         <div
           className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
           style={{
             transform: `translate(${card3X}px, ${card3Y}px) rotate(${rotate3}deg)`
           }}
         >
-          <p className="text-[1.2rem] text-[#202020] leading-tight">
-            Results that<br /> move the<br /> needle
-          </p>
-          <div className="text-[2rem] font-light mt-2">03</div>
+          <h3 className="text-2xl font-bold text-black mt-4 mb-5">
+          Automation & Systems
+  </h3>
+
+ 
+  <p className="text-sm text-black mb-10 leading-relaxed">
+  We connect your tools and automate repetitive work so your team can focus on real work.
+  </p>
+
+ 
+  <ul className="list-disc list-inside  text-sm text-gray-800 space-y-2 mt-2">
+    <li>CRM, email, and form integrations</li>
+    <li>Automated lead capture and follow-ups</li>
+    <li>Internal workflows with tools like n8n, Zapier, Make</li>
+  </ul>
         </div>
       </div>
-      
+      {/* 
       <div className="absolute" style={{ top: "65%", right: "18%" }}>
         <div
           className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
@@ -153,10 +184,21 @@ export default function LongScrollingText() {
             transform: `translate(${card2X}px, ${card2Y}px) rotate(${rotate2}deg)`
           }}
         >
-          <p className="text-[1.2rem] text-[#202020] leading-tight">
-            On time,<br /> every time
-          </p>
-          <div className="text-[2rem] font-light mt-2">04</div>
+                 <h3 className="text-2xl font-bold text-black mt-4 mb-5">
+          Automation & Systems
+  </h3>
+
+ 
+  <p className="text-sm text-black mb-10 leading-relaxed">
+  We connect your tools and automate repetitive work so your team can focus on real work.
+  </p>
+
+
+  <ul className="list-disc list-inside  text-sm text-gray-800 space-y-2 mt-2">
+    <li>CRM, email, and form integrations</li>
+    <li>Automated lead capture and follow-ups</li>
+    <li>Internal workflows with tools like n8n, Zapier, Make</li>
+  </ul>
         </div>
       </div>
 
@@ -167,12 +209,23 @@ export default function LongScrollingText() {
             transform: `translate(${card1X}px, ${card1Y}px) rotate(${rotate1}deg)`
           }}
         >
-          <p className="text-[1.2rem] text-[#202020] leading-tight">
-            Dedicated<br /> partnership
-          </p>
-          <div className="text-[2rem] font-light mt-2">05</div>
+          <h3 className="text-2xl font-bold text-black mt-4 mb-5">
+          Automation & Systems
+  </h3>
+
+
+  <p className="text-sm text-black mb-10 leading-relaxed">
+  We connect your tools and automate repetitive work so your team can focus on real work.
+  </p>
+
+ 
+  <ul className="list-disc list-inside  text-sm text-gray-800 space-y-2 mt-2">
+    <li>CRM, email, and form integrations</li>
+    <li>Automated lead capture and follow-ups</li>
+    <li>Internal workflows with tools like n8n, Zapier, Make</li>
+  </ul>
         </div>
-      </div>
+      </div>*/}
 
  
     </div>
