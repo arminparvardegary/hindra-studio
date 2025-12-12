@@ -320,3 +320,124 @@ h3 {
   @apply text-xl sm:text-2xl font-semibold;
 }
 
+/* Print Styles for Invoice */
+@media print {
+  /* Reset everything */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Hide floating widgets by ID */
+  #floating-widgets,
+  #floating-widgets * {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* HIDE EVERYTHING WE DON'T WANT */
+  .print\:hidden,
+  aside,
+  header,
+  nav,
+  footer,
+  [role="banner"],
+  [role="navigation"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+  
+  /* Hide all fixed/absolute positioned elements */
+  body > div[style*="fixed"],
+  body > div[style*="absolute"],
+  [style*="position: fixed"],
+  [style*="position:fixed"] {
+    display: none !important;
+  }
+
+  /* Reset layout containers */
+  .lg\:pl-64,
+  .print\:pl-0 {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  main,
+  .print\:p-0 {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Invoice container */
+  .max-w-3xl {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+  }
+
+  #invoice-print {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .print\:shadow-none,
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-md {
+    box-shadow: none !important;
+  }
+
+  .print\:max-w-none {
+    max-width: 100% !important;
+  }
+
+  .print\:rounded-none,
+  .rounded-xl,
+  .rounded-2xl,
+  .rounded-3xl {
+    border-radius: 0 !important;
+  }
+
+  /* Fix backgrounds for print */
+  .bg-gray-50 {
+    background-color: #f5f5f5 !important;
+  }
+
+  .bg-white {
+    background-color: white !important;
+  }
+
+  /* Table styles */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    padding: 8px !important;
+  }
+
+  /* Page settings */
+  @page {
+    margin: 12mm;
+    size: A4;
+  }
+}

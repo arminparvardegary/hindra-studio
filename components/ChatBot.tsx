@@ -153,7 +153,7 @@ export default function ChatBot() {
   };
 
   return (
-    <>
+    <div className="print:hidden">
       {/* Chat Button */}
       <AnimatePresence>
         {!isOpen && (
@@ -164,7 +164,7 @@ export default function ChatBot() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-24 right-6 z-[70] w-14 h-14 bg-gradient-to-br from-[#DCDFFF] to-[#E9DCC8] rounded-full shadow-2xl flex items-center justify-center text-black hover:shadow-3xl transition-shadow"
+            className="fixed bottom-24 right-6 z-[70] w-14 h-14 bg-gradient-to-br from-[#DCDFFF] to-[#E9DCC8] rounded-full shadow-2xl flex items-center justify-center text-black hover:shadow-3xl transition-shadow print:hidden"
             aria-label="Open chat"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -307,6 +307,6 @@ export default function ChatBot() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

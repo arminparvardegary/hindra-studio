@@ -5,11 +5,9 @@ import ScrollProgress from "@/components/ScrollProgress";
 import ChatBot from "@/components/ChatBot";
 import CookieConsent from "@/components/CookieConsent";
 import SocialProof from "@/components/SocialProof";
-import CursorFollower from "@/components/CursorFollower";
 import CommandPalette from "@/components/CommandPalette";
 import CostCalculator from "@/components/CostCalculator";
 import ExitIntent from "@/components/ExitIntent";
-import GSAPProvider from "@/components/GSAPProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -169,17 +167,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
-                <GSAPProvider>
-          <CursorFollower />
-        <ScrollProgress />
-        <CommandPalette />
+        <div className="print:hidden">
+          <ScrollProgress />
+          <CommandPalette />
+        </div>
         {children}
-        <CostCalculator />
-        <ChatBot />
-        <SocialProof />
-        <ExitIntent />
-        <CookieConsent />
-        </GSAPProvider>
+        <div id="floating-widgets" className="print:hidden" style={{ display: 'var(--widgets-display, block)' }}>
+          <CostCalculator />
+          <ChatBot />
+          <SocialProof />
+          <ExitIntent />
+          <CookieConsent />
+        </div>
       </body>
     </html>
   );

@@ -83,14 +83,15 @@ export default function SocialProof() {
   const notification = notifications[currentIndex];
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -100, opacity: 0 }}
-          className="fixed bottom-24 left-4 sm:left-6 z-40"
-        >
+    <div className="print:hidden">
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -100, opacity: 0 }}
+            className="fixed bottom-24 left-4 sm:left-6 z-40 print:hidden"
+          >
           <div className="bg-white rounded-2xl shadow-xl border border-black/10 p-4 pr-10 max-w-xs relative">
             <button
               onClick={dismiss}
@@ -118,9 +119,10 @@ export default function SocialProof() {
               </div>
             </div>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 

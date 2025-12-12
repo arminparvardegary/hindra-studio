@@ -26,14 +26,15 @@ export default function CookieConsent() {
   };
 
   return (
-    <AnimatePresence>
-      {showConsent && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-50"
-        >
+    <div className="print:hidden">
+      <AnimatePresence>
+        {showConsent && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-50 print:hidden"
+          >
           <div className="bg-white rounded-2xl shadow-2xl border border-black/10 p-6">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-[#DCDFFF] flex items-center justify-center shrink-0">
@@ -67,9 +68,10 @@ export default function CookieConsent() {
               </div>
             </div>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 

@@ -122,14 +122,14 @@ export default function CostCalculator() {
   };
 
   return (
-    <>
+    <div className="print:hidden">
       {/* Floating Calculator Button */}
       <motion.button
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1 }}
         onClick={() => setIsOpen(true)}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-gradient-to-b from-[#DCDFFF] to-[#E9DCC8] text-black px-3 py-6 rounded-l-xl shadow-lg hover:px-4 transition-all group"
+        className="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-gradient-to-b from-[#DCDFFF] to-[#E9DCC8] text-black px-3 py-6 rounded-l-xl shadow-lg hover:px-4 transition-all group print:hidden"
         style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
       >
         <span className="text-sm font-medium flex items-center gap-2">
@@ -409,6 +409,6 @@ export default function CostCalculator() {
           </>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
