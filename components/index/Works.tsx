@@ -54,7 +54,9 @@ function Card({ src, alt, href, title, variant = "standard", priority }: CardPro
 }
 
 export default function WorksSection() {
-  const IMG = "/images/ford.png";
+  const RUSH_PHOTOS_IMG = "/images/rush-photos-hero.jpg";
+  const RUSH_VIDEO_IMG = "/images/rush-video-hero.jpg";
+  const FORD_IMG = "/images/ford.png";
 
   return (
     <section aria-labelledby="works-title" className="w-full py-10 sm:py-12 lg:py-16">
@@ -79,24 +81,24 @@ export default function WorksSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <Card
-            src={IMG}
-            alt="Luxe Motors brand identity project"
-            href="/works/ford-mustang"
-            title="Luxe Motors — Brand Identity"
+            src={RUSH_PHOTOS_IMG}
+            alt="Rush Photos — professional product photography"
+            href="/works/rush-photos"
+            title="Rush Photos — Product Photography (from $25/angle)"
           />
           <Card
-            src={IMG}
-            alt="TechFlow SaaS platform design"
-            href="/works/kumu"
-            title="TechFlow — Product Design"
+            src={RUSH_VIDEO_IMG}
+            alt="Rush Video — AI-powered product videos"
+            href="/works/rush-video"
+            title="Rush Video — Product Videos (2–5 day delivery)"
           />
 
           <div className="md:col-span-2">
             <Card
-              src={IMG}
-              alt="Carsome e-commerce platform"
-              href="/works/carsome"
-              title="Carsome — E-Commerce Platform"
+              src={FORD_IMG}
+              alt="Ford Mustang digital experience"
+              href="/works/ford-mustang"
+              title="Ford Mustang — Digital Experience"
               variant="wide"
               priority
             />

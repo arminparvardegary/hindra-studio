@@ -22,6 +22,20 @@ type Slide =
 
 const BASE: Slide[] = [
   {
+    id: "rush-photos",
+    title: "Rush Photos",
+    badges: ["PRODUCT PHOTO", "E-COMMERCE", "FROM $25/ANGLE"],
+    kind: "image",
+    src: "/images/rush-photos-hero.jpg",
+  },
+  {
+    id: "rush-video",
+    title: "Rush Video",
+    badges: ["PRODUCT VIDEO", "AI-POWERED", "2–5 DAY DELIVERY"],
+    kind: "image",
+    src: "/images/rush-video-hero.jpg",
+  },
+  {
     id: "luxe-motors",
     title: "Luxe Motors",
     badges: ["AUTOMOTIVE", "BRANDING", "MOTION"],

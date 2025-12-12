@@ -95,6 +95,28 @@ const projects = [
     year: "2023",
     color: "#E9DCC8",
   },
+  {
+    id: "rush-photos",
+    title: "Rush Photos",
+    category: "Web Design",
+    description: "Professional product photography — from $25/angle • 3–5 day delivery • unlimited revisions on select packages",
+    image: "/images/rush-photos-hero.jpg",
+    tags: ["Product Photography", "E-commerce", "From $25/angle", "3–5 days"],
+    year: "2024",
+    featured: true,
+    color: "#DCDFFF",
+  },
+  {
+    id: "rush-video",
+    title: "Rush Video",
+    category: "Motion",
+    description: "AI-powered product videos that sell • 2–5 day delivery • unlimited revisions",
+    image: "/images/rush-video-hero.jpg",
+    tags: ["AI Video", "Product Videos", "2–5 days", "Commercial rights"],
+    year: "2024",
+    featured: true,
+    color: "#E9DCC8",
+  },
 ];
 
 export default function WorksPage() {

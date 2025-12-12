@@ -16,6 +16,7 @@ interface Project {
   fullDescription: string;
   tags: string[];
   image: string;
+  website?: string;
   stats: Record<string, string>;
   year: string;
   client: string;
@@ -271,8 +272,84 @@ We developed a comprehensive brand strategy that positions GreenLeaf as the frie
       role: "CMO, GreenLeaf",
     },
     gallery: ["/logo-carsome.webp", "/logo-carsome.webp", "/logo-carsome.webp"],
-    nextProject: { slug: "ford-mustang", title: "Ford Mustang" },
+    nextProject: { slug: "rush-photos", title: "Rush Photos" },
     prevProject: { slug: "artisan", title: "Artisan" },
+  },
+  "rush-photos": {
+    title: "Rush Photos",
+    subtitle: "PROFESSIONAL PRODUCT PHOTOGRAPHY SERVICE",
+    description: "AI-powered professional product photography service delivering stunning e-commerce and lifestyle shots from $25/angle.",
+    fullDescription: `Rush Photos is revolutionizing product photography with their innovative platform that combines professional photography expertise with cutting-edge technology. They needed a website that could showcase their various photography styles while making the ordering process incredibly simple.
+
+We created a sleek, conversion-focused website featuring interactive before/after sliders, dynamic portfolio galleries, and a streamlined ordering system. The platform clearly communicates their four distinct photography styles: E-commerce, Lifestyle, Ghost Mannequin, and 360° Spin, making it easy for clients to choose and order the perfect shots for their products.`,
+    tags: ["Product Photography", "E-commerce", "Web Design", "UX/UI", "Portfolio"],
+    image: "/images/rush-photos-hero.jpg",
+    website: "https://rush.photos",
+    stats: { styles: "4 Styles", pricing: "From $25", delivery: "3-5 Days" },
+    year: "2024",
+    client: "Rush Photos",
+    services: ["Web Design", "UX/UI Design", "Interactive Elements", "E-commerce Integration", "Portfolio System"],
+    challenge: "Design a professional photography service website that clearly communicates four different photography styles while maintaining a simple, friction-free ordering experience for e-commerce businesses.",
+    solution: "We built an elegant, interactive website with engaging before/after comparison sliders, clear service packages, transparent pricing from $25/angle, and a streamlined project initiation flow that gets clients from browsing to ordering in minutes.",
+    results: [
+      { metric: "4", label: "Photo Styles" },
+      { metric: "$25", label: "Starting Price" },
+      { metric: "3-5", label: "Days Delivery" },
+      { metric: "100+", label: "Happy Clients" },
+    ],
+    testimonial: {
+      quote: "Hindra transformed our vision into a stunning website that perfectly showcases our photography services. The interactive elements and clean design have significantly increased our conversion rates.",
+      author: "Rush Photos Team",
+      role: "Professional Photography Service",
+    },
+    gallery: [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=1200&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1200&h=1200&fit=crop&q=80",
+    ],
+    nextProject: { slug: "rush-video", title: "Rush Video" },
+    prevProject: { slug: "greenleaf", title: "GreenLeaf" },
+  },
+  "rush-video": {
+    title: "Rush Video",
+    subtitle: "AI-POWERED PRODUCT VIDEOS THAT SELL",
+    description: "Professional AI-powered product video service creating cinematic videos that convert browsers into buyers.",
+    fullDescription: `Rush Video is pioneering the future of product video creation with AI-powered cinematography. They approached us with an ambitious goal: build a platform that makes professional product videos accessible to every brand, regardless of size or budget.
+
+We designed and developed a modern, conversion-optimized website that clearly demonstrates their AI-powered video creation process. The site features stunning video examples, transparent pricing packages, and a simple "ship your product, choose a style, get videos" workflow that removes all complexity from professional video creation.`,
+    tags: ["AI Video", "Product Videos", "Web Platform", "SaaS", "E-commerce"],
+    image: "/images/rush-video-hero.jpg",
+    website: "https://rush.video",
+    stats: { styles: "4 Camera Styles", delivery: "2-5 Days", formats: "Multiple" },
+    year: "2024",
+    client: "Rush Videos",
+    services: ["Web Design", "UI/UX Design", "Brand Strategy", "Video Integration", "Conversion Optimization"],
+    challenge: "Create a website for an innovative AI-powered video service that clearly communicates the value proposition while building trust in a new technology and streamlining the customer journey from discovery to purchase.",
+    solution: "We built a clean, modern website with prominent video examples, clear package options (Product Video Package & Complete Video Package), professional color grading showcases, and a straightforward onboarding process that emphasizes speed, quality, and unlimited revisions.",
+    results: [
+      { metric: "4", label: "Camera Styles" },
+      { metric: "2-5", label: "Days Delivery" },
+      { metric: "100%", label: "Satisfaction" },
+      { metric: "∞", label: "Revisions" },
+    ],
+    testimonial: {
+      quote: "Hindra perfectly captured our vision of making professional product videos accessible to everyone. The website is sleek, intuitive, and converts visitors into customers effortlessly.",
+      author: "Rush Video Team",
+      role: "AI-Powered Video Platform",
+    },
+    gallery: [
+      "https://rush.video/videos/dolly-in-large-box.mp4",
+      "https://rush.video/videos/orbit-large-box.mp4",
+      "https://rush.video/videos/top-down-large-box.mp4",
+      "https://rush.video/videos/spinning-large-box.mp4",
+      "/images/rush-video-hero.jpg",
+      "/images/rush-photos-hero.jpg",
+    ],
+    nextProject: { slug: "ford-mustang", title: "Ford Mustang" },
+    prevProject: { slug: "rush-photos", title: "Rush Photos" },
   },
 };
 
@@ -332,6 +409,24 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 {project.year}
               </span>
               <span className="text-black/50">{project.client}</span>
+              {project.website && (
+                <a
+                  href={project.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black text-sm rounded-full transition-colors"
+                >
+                  Visit website
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7h6m0 0v6m0-6L11 19a4 4 0 01-6-6l12-12"
+                    />
+                  </svg>
+                </a>
+              )}
             </motion.div>
 
             <motion.h1
@@ -557,12 +652,25 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               transition={{ delay: index * 0.1 }}
               className="relative aspect-square rounded-2xl overflow-hidden bg-[#F8F8F8]"
             >
-              <Image
-                src={img}
-                alt={`${project.title} gallery ${index + 1}`}
-                fill
-                className="object-contain p-8"
-              />
+              {img.endsWith(".mp4") ? (
+                <video
+                  src={img}
+                  playsInline
+                  muted
+                  loop
+                  autoPlay
+                  preload="metadata"
+                  poster={project.image}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={img}
+                  alt={`${project.title} gallery ${index + 1}`}
+                  fill
+                  className="object-contain p-8"
+                />
+              )}
             </motion.div>
           ))}
         </div>
