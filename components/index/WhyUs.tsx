@@ -47,11 +47,10 @@ const WhyUs = () => {
           style={{ transform: "none" }}
         />
 
-        <div className="absolute inset-0 flex items-center justify-center text-center">
+        <div className="absolute inset-0 flex items-center justify-center text-center px-4 sm:px-6">
 
-   
           <div
-            className="absolute transition-all duration-700"
+            className="absolute transition-all duration-700 w-full max-w-2xl"
             style={{
               opacity: step === 0 ? 1 : 0,
               transform:
@@ -60,14 +59,14 @@ const WhyUs = () => {
                   : `translateY(-${slide(1)}px)` 
             }}
           >
-            <h2 className="text-5xl font-bold text-black">Why Hindra</h2>
-            <p className="text-gray-800 mt-2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Why Hindra</h2>
+            <p className="text-gray-800 mt-2 text-sm sm:text-base">
               One team for everything. Branding, websites, content.
             </p>
           </div>
 
           <div
-            className="absolute transition-all duration-700"
+            className="absolute transition-all duration-700 w-full max-w-2xl"
             style={{
               opacity: step === 1 ? 1 : 0,
               transform:
@@ -78,15 +77,14 @@ const WhyUs = () => {
                   : `translateY(${slide(1)}px)`     
             }}
           >
-            <h2 className="text-5xl font-bold text-black">What We Do</h2>
-            <p className="text-gray-800 mt-2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">What We Do</h2>
+            <p className="text-gray-800 mt-2 text-sm sm:text-base">
               Complete brand packages: identity, social media, sites.
             </p>
           </div>
 
-      
           <div
-            className="absolute transition-all duration-700"
+            className="absolute transition-all duration-700 w-full max-w-2xl"
             style={{
               opacity: step === 2 ? 1 : 0,
               transform:
@@ -95,8 +93,8 @@ const WhyUs = () => {
                   : "translateY(0px)"
             }}
           >
-            <h2 className="text-5xl font-bold text-black">Who We Are</h2>
-            <p className="text-gray-800 mt-2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Who We Are</h2>
+            <p className="text-gray-800 mt-2 text-sm sm:text-base">
               Designers, developers, content creators working as one team.
             </p>
           </div>

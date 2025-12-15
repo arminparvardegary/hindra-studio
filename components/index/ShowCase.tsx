@@ -233,16 +233,16 @@ export default function ShowCase() {
                 ref={(el) => {
                   if (el) slideRefs.current[i] = el;
                 }}
-                className={`snap-center shrink-0 w-[88vw] sm:w-[84vw] lg:w-[1180px] xl:w-[1000px] transition-all duration-300 ${
-                  i === active ? "scale-110" : "scale-95"
+                className={`snap-center shrink-0 w-[85vw] sm:w-[80vw] md:w-[75vw] lg:w-[900px] xl:w-[1000px] transition-all duration-300 ${
+                  i === active ? "scale-105 sm:scale-110" : "scale-95"
                 }`}
                 onMouseEnter={handleVideoPlay}
                 onMouseLeave={handleVideoPause}
               >
                 {/* Card */}
-                <div className="rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.06)] ring-1 ring-[#ECE9F5]">
-                  <div className="p-2 sm:p-3">
-                    <div className="rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[600px] ring-white/10 relative">
+                <div className="rounded-[18px] sm:rounded-[22px] lg:rounded-[26px] shadow-[0_8px_30px_rgba(21,16,48,0.06)] ring-1 ring-[#ECE9F5]">
+                  <div className="p-1.5 sm:p-2 lg:p-3">
+                    <div className="rounded-[14px] sm:rounded-[18px] lg:rounded-[22px] overflow-hidden bg-neutral-950 ring-1 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] ring-white/10 relative">
                       {s.kind === "video" ? (
                         <video
                           src={s.src}
@@ -258,17 +258,17 @@ export default function ShowCase() {
                           src={s.src}
                           alt={s.title}
                           fill
-                          sizes="(max-width: 640px) 88vw, (max-width: 1024px) 84vw, 1180px"
+                          sizes="(max-width: 640px) 85vw, (max-width: 768px) 80vw, (max-width: 1024px) 75vw, 1000px"
                           className="object-cover"
                         />
                       )}
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 sm:px-6 pb-4 sm:pb-6">
-                    <div className="text-[22px] sm:text-[24px] leading-none font-medium text-[#15131F]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 px-3 sm:px-4 lg:px-6 pb-3 sm:pb-4 lg:pb-6">
+                    <div className="text-lg sm:text-xl lg:text-[24px] leading-none font-medium text-[#15131F]">
                       {s.title}
                     </div>
-                    <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.16em] text-[#6F6C85]">
+                    <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 lg:gap-x-6 gap-y-1 text-[10px] sm:text-[11px] lg:text-xs uppercase tracking-[0.12em] sm:tracking-[0.16em] text-[#6F6C85]">
                       {s.badges.map((b) => (
                         <span key={`${s.id}-${b}`}>{b}</span>
                       ))}
@@ -280,15 +280,15 @@ export default function ShowCase() {
           </div>
 
           {/* Navigation dots */}
-          <div className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-3 sm:gap-4">
+          <div className="mt-3 sm:mt-4 lg:mt-5 flex items-center justify-center gap-2 sm:gap-3 lg:gap-4">
             {BASE.map((_, i) => (
               <div
                 key={i}
                 onClick={() => setActive(SECTION_SIZE + i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   baseActive === i
-                    ? "w-10 bg-[#6F6C85]"
-                    : "w-3 bg-[#CFCBDF] hover:bg-[#BFBAD6]"
+                    ? "w-6 sm:w-8 lg:w-10 bg-[#6F6C85]"
+                    : "w-2 sm:w-2.5 lg:w-3 bg-[#CFCBDF] hover:bg-[#BFBAD6]"
                 }`}
               />
             ))}

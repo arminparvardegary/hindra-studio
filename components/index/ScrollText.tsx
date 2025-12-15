@@ -78,13 +78,14 @@ export default function LongScrollingText() {
   return (
     <div
       ref={sectionRef}
-      className="h-[150vh] bg-[#faf9f5] relative overflow-hidden"
+      className="min-h-[120vh] sm:min-h-[150vh] bg-[#faf9f5] relative overflow-hidden"
     >
+      {/* Scrolling text - hidden on mobile for cleaner experience */}
       <div
-        className="absolute font-bold text-[#111] origin-left"
+        className="absolute font-bold text-[#111] origin-left hidden md:block"
         style={{
           transform: `translate(${translateX}%, ${translateY - 250}px) scaleX(${scaleX})`,
-          fontSize: "14rem",
+          fontSize: "clamp(4rem, 12vw, 14rem)",
           whiteSpace: "nowrap",
         }}
       >
@@ -92,88 +93,127 @@ export default function LongScrollingText() {
       </div>
 
       <div
-  className="absolute font-bold text-[#111] origin-left"
-  style={{
-    transform: `translate(${translateX + 190}%, ${translateY - 200}px) scaleX(${scaleX})`,
-    fontSize: "14rem",
-    whiteSpace: "nowrap",
-  }}
->
-  craft that converts
-</div>
+        className="absolute font-bold text-[#111] origin-left hidden md:block"
+        style={{
+          transform: `translate(${translateX + 190}%, ${translateY - 200}px) scaleX(${scaleX})`,
+          fontSize: "clamp(4rem, 12vw, 14rem)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        craft that converts
+      </div>
 
-      <div className="absolute" style={{ top: "10%", left: "28%" }}>
+      {/* Mobile heading */}
+      <div className="md:hidden pt-12 pb-8 px-4 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-[#111]">Craft that converts</h2>
+      </div>
+
+      {/* Cards container - stacked on mobile, absolute on desktop */}
+      <div className="md:hidden flex flex-col gap-6 px-4 pb-12">
+        <div className="bg-[#f3f2ec] p-5 sm:p-6 rounded-xl shadow-2xl">
+          <h3 className="text-xl sm:text-2xl font-bold text-black mb-3 sm:mb-5">
+            Brand Identity & Positioning
+          </h3>
+          <p className="text-sm text-black mb-4 sm:mb-6 leading-relaxed">
+            We shape a clear, consistent brand that actually supports your sales and growth.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-800 space-y-2">
+            <li>Visual identity, logo, and brand kit</li>
+            <li>Messaging and positioning for your ideal clients</li>
+            <li>Guidelines your team can actually use</li>
+          </ul>
+        </div>
+
+        <div className="bg-[#f3f2ec] p-5 sm:p-6 rounded-xl shadow-2xl">
+          <h3 className="text-xl sm:text-2xl font-bold text-black mb-3 sm:mb-5">
+            Conversion-Focused Websites
+          </h3>
+          <p className="text-sm text-black mb-4 sm:mb-6 leading-relaxed">
+            We design and build fast, modern websites that turn visitors into leads and clients.
+          </p>
+          <ul className="list-disc pl-4 list-outside text-sm text-gray-800 space-y-2">
+            <li>UX/UI design for desktop and mobile</li>
+            <li>Landing pages, service pages, and funnels</li>
+            <li>Built on modern, maintainable stacks (Webflow / Next.js)</li>
+          </ul>
+        </div>
+
+        <div className="bg-[#f3f2ec] p-5 sm:p-6 rounded-xl shadow-2xl">
+          <h3 className="text-xl sm:text-2xl font-bold text-black mb-3 sm:mb-5">
+            Automation & Systems
+          </h3>
+          <p className="text-sm text-black mb-4 sm:mb-6 leading-relaxed">
+            We connect your tools and automate repetitive work so your team can focus on real work.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-800 space-y-2">
+            <li>CRM, email, and form integrations</li>
+            <li>Automated lead capture and follow-ups</li>
+            <li>Internal workflows with tools like n8n, Zapier, Make</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Desktop floating cards */}
+      <div className="hidden md:block absolute" style={{ top: "10%", left: "28%" }}>
         <div
-          className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
+          className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[320px] lg:w-[400px] h-auto lg:h-[300px]"
           style={{
             transform: `translate(${card1X}px, ${card1Y}px) rotate(${rotate1}deg)`
           }}
         >
-      <h3 className="text-2xl font-bold text-black mt-4 mb-5">
-    Brand Identity & Positioning
-  </h3>
-
-
-  <p className="text-sm text-black mb-10 leading-relaxed">
-    We shape a clear, consistent brand that actually supports your sales and growth.
-  </p>
-
-
-  <ul className="list-disc list-inside  text-sm text-gray-800 space-y-2 mt-2">
-    <li>Visual identity, logo, and brand kit</li>
-    <li>Messaging and positioning for your ideal clients</li>
-    <li>Guidelines your team can actually use</li>
-  </ul>
+          <h3 className="text-xl lg:text-2xl font-bold text-black mt-4 mb-5">
+            Brand Identity & Positioning
+          </h3>
+          <p className="text-sm text-black mb-6 lg:mb-10 leading-relaxed">
+            We shape a clear, consistent brand that actually supports your sales and growth.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-800 space-y-2 mt-2">
+            <li>Visual identity, logo, and brand kit</li>
+            <li>Messaging and positioning for your ideal clients</li>
+            <li>Guidelines your team can actually use</li>
+          </ul>
         </div>
       </div>
 
-     
-      <div className="absolute" style={{ top: "35%", right: "18%" }}>
+      <div className="hidden md:block absolute" style={{ top: "35%", right: "18%" }}>
         <div
-          className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
+          className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[320px] lg:w-[400px] h-auto lg:h-[300px]"
           style={{
             transform: `translate(${card2X}px, ${card2Y}px) rotate(${rotate2}deg)`
           }}
         >
-          <h3 className="text-2xl font-bold text-black mt-4 mb-5">
-          Conversion-Focused Websites  </h3>
-
-  
-  <p className="text-sm text-black mb-10 leading-relaxed">
-  We design and build fast, modern websites that turn visitors into leads and clients.  </p>
-
-  
-  <ul className="list-disc pl-4 list-outside text-sm text-gray-800 space-y-2 mt-2">
-    <li>UX/UI design for desktop and mobile</li>
-    <li>Landing pages, service pages, and funnels</li>
-    <li>Built on modern, maintainable stacks (Webflow / Next.js)</li>
-  </ul>
+          <h3 className="text-xl lg:text-2xl font-bold text-black mt-4 mb-5">
+            Conversion-Focused Websites
+          </h3>
+          <p className="text-sm text-black mb-6 lg:mb-10 leading-relaxed">
+            We design and build fast, modern websites that turn visitors into leads and clients.
+          </p>
+          <ul className="list-disc pl-4 list-outside text-sm text-gray-800 space-y-2 mt-2">
+            <li>UX/UI design for desktop and mobile</li>
+            <li>Landing pages, service pages, and funnels</li>
+            <li>Built on modern, maintainable stacks (Webflow / Next.js)</li>
+          </ul>
         </div>
       </div>
 
-
-      <div className="absolute" style={{ top: "60%", left: "30%" }}>
+      <div className="hidden md:block absolute" style={{ top: "60%", left: "30%" }}>
         <div
-          className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[400px] h-[300px]"
+          className="bg-[#f3f2ec] p-6 rounded-xl shadow-2xl w-[320px] lg:w-[400px] h-auto lg:h-[300px]"
           style={{
             transform: `translate(${card3X}px, ${card3Y}px) rotate(${rotate3}deg)`
           }}
         >
-          <h3 className="text-2xl font-bold text-black mt-4 mb-5">
-          Automation & Systems
-  </h3>
-
- 
-  <p className="text-sm text-black mb-10 leading-relaxed">
-  We connect your tools and automate repetitive work so your team can focus on real work.
-  </p>
-
- 
-  <ul className="list-disc list-inside  text-sm text-gray-800 space-y-2 mt-2">
-    <li>CRM, email, and form integrations</li>
-    <li>Automated lead capture and follow-ups</li>
-    <li>Internal workflows with tools like n8n, Zapier, Make</li>
-  </ul>
+          <h3 className="text-xl lg:text-2xl font-bold text-black mt-4 mb-5">
+            Automation & Systems
+          </h3>
+          <p className="text-sm text-black mb-6 lg:mb-10 leading-relaxed">
+            We connect your tools and automate repetitive work so your team can focus on real work.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-800 space-y-2 mt-2">
+            <li>CRM, email, and form integrations</li>
+            <li>Automated lead capture and follow-ups</li>
+            <li>Internal workflows with tools like n8n, Zapier, Make</li>
+          </ul>
         </div>
       </div>
       {/* 
