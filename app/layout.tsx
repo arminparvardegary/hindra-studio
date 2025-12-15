@@ -97,6 +97,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://hindrastudio.com",
   },
+  icons: {
+    icon: '/icons/Logo.svg',
+    shortcut: '/icons/Logo.svg',
+    apple: '/icons/Logo.svg',
+  },
 };
 
 const jsonLd = {
@@ -155,8 +160,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
         <script
