@@ -2,22 +2,27 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-
 # Install dependencies
+COPY package*.json ./
 RUN npm ci
 
-# Copy source code
+# Copy source
 COPY . .
 
-# Build the app
+# Build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 RUN npm run build
 
-# Expose port
+# Copy static files for standalone
+RUN cp -r public .next/standalone/ || true
+RUN cp -r .next/static .next/standalone/.next/ || true
+
+WORKDIR /app/.next/standalone
+
 EXPOSE 3000
 
-# Start the app
-CMD ["node", ".next/standalone/server.js"]
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]
