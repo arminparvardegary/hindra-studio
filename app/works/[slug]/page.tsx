@@ -16,7 +16,7 @@ interface Project {
   fullDescription: string;
   tags: string[];
   image: string;
-  website?: string;
+  website: string;
   stats: Record<string, string>;
   year: string;
   client: string;
@@ -35,300 +35,128 @@ interface Project {
 }
 
 const projects: Record<string, Project> = {
-  "ford-mustang": {
-    title: "Ford Mustang",
-    subtitle: "THE ICON OF POWER AND DESIGN",
-    description: "A complete digital experience redesign for Ford's legendary muscle car. We created an immersive website that captures the raw power and heritage of the Mustang brand.",
-    fullDescription: `Ford approached us with a challenge: create a digital experience that matches the visceral feeling of driving a Mustang. We delivered an immersive website that combines cutting-edge 3D technology with storytelling that honors the Mustang's legendary heritage.
+  "scriptra": {
+    title: "Scriptra",
+    subtitle: "AI-POWERED CONTENT CREATION PLATFORM",
+    description: "The ultimate AI tool for creators, marketers, and brands to generate high-converting hooks, captions, and viral content.",
+    fullDescription: `Scriptra is our flagship SaaS product - an AI-powered content creation platform designed for modern creators and marketers.
 
-Our team worked closely with Ford's design team to ensure every pixel reflected the brand's commitment to performance and style. The result is a website that doesn't just showcase cars—it makes you feel the rumble of the engine.`,
-    tags: ["Automotive", "Web Design", "3D Experience", "Brand Strategy"],
-    image: "/images/ford.png",
-    stats: { views: "2.4M", engagement: "+180%", duration: "4 months" },
+The platform leverages advanced AI models to help users generate viral hooks, engaging captions, and high-converting content for social media platforms including TikTok, Instagram, YouTube, and Twitter.
+
+Key features include:
+• AI Hook Generator - Create attention-grabbing opening lines
+• Caption Generator - Write engaging posts in seconds
+• Viral Research - Analyze trending content patterns
+• Multi-platform Support - Optimized for all major platforms
+• Content Calendar - Plan and schedule your content
+• Analytics Dashboard - Track performance metrics`,
+    tags: ["AI Platform", "SaaS", "Next.js", "TypeScript", "OpenAI"],
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&h=900&fit=crop",
+    website: "https://scriptra.space",
+    stats: { users: "Growing", platform: "Web App", ai: "GPT-4" },
     year: "2024",
-    client: "Ford Motor Company",
-    services: ["Web Design", "3D Development", "UX Strategy", "Motion Design"],
-    challenge: "Create a digital experience that captures the raw emotion and power of the Mustang brand while driving engagement and conversions.",
-    solution: "We developed an immersive 3D configurator with cinematic animations, allowing users to explore every detail of the Mustang lineup in an engaging, interactive environment.",
+    client: "Hindra Studio Product",
+    services: ["Product Design", "Full-Stack Development", "AI Integration", "UX/UI Design"],
+    challenge: "Create an intuitive AI-powered platform that helps creators generate viral content without requiring technical expertise or writing skills.",
+    solution: "We built Scriptra with a focus on simplicity and power. The platform uses advanced AI to analyze successful content patterns and generate optimized hooks and captions tailored to each user's niche and platform.",
     results: [
-      { metric: "2.4M", label: "Page Views" },
-      { metric: "+180%", label: "Engagement Rate" },
-      { metric: "+45%", label: "Lead Generation" },
-      { metric: "4.2min", label: "Avg. Session" },
+      { metric: "10x", label: "Faster Content" },
+      { metric: "AI", label: "Powered" },
+      { metric: "24/7", label: "Available" },
+      { metric: "∞", label: "Generations" },
     ],
     testimonial: {
-      quote: "Hindra Studio exceeded our expectations. They truly understood the Mustang brand and delivered an experience that our customers love.",
-      author: "James Morrison",
-      role: "Digital Marketing Director, Ford",
+      quote: "Scriptra has completely transformed how we create content. What used to take hours now takes minutes.",
+      author: "Content Creator",
+      role: "Scriptra User",
     },
-    gallery: ["/images/ford.png", "/images/ford.png", "/images/ford.png"],
-    nextProject: { slug: "kumu-app", title: "Kumu" },
-    prevProject: { slug: "van-heusen", title: "Van Heusen" },
-  },
-  "kumu-app": {
-    title: "Kumu",
-    subtitle: "SOCIAL LIVE STREAMING PLATFORM",
-    description: "Brand identity and mobile app design for Southeast Asia's fastest-growing live streaming platform. Creating connections through authentic content.",
-    fullDescription: `Kumu is revolutionizing social entertainment in Southeast Asia. They came to us needing a complete brand refresh and app redesign that would appeal to Gen Z while maintaining their core community values.
-
-We created a vibrant, energetic brand identity that reflects the platform's dynamic nature. The app redesign focused on reducing friction in the streaming experience while adding features that encourage community building and creator monetization.`,
-    tags: ["Mobile App", "Brand Identity", "UI/UX", "Product Design"],
-    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    stats: { users: "10M+", rating: "4.8★", duration: "6 months" },
-    year: "2024",
-    client: "Kumu Philippines",
-    services: ["Brand Identity", "App Design", "UI/UX", "Design System"],
-    challenge: "Redesign the app experience to increase user retention and creator engagement while establishing a stronger brand presence in a competitive market.",
-    solution: "We created an intuitive, visually striking interface with gamification elements and a comprehensive design system that scales across all touchpoints.",
-    results: [
-      { metric: "10M+", label: "Active Users" },
-      { metric: "4.8★", label: "App Store Rating" },
-      { metric: "+67%", label: "Creator Retention" },
-      { metric: "+120%", label: "Daily Sessions" },
+    gallery: [
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1684163760006-2f24e5e2d5d1?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1686191128892-3b37add4c844?w=800&h=800&fit=crop",
     ],
-    testimonial: {
-      quote: "The new design has transformed how our community interacts. User feedback has been overwhelmingly positive.",
-      author: "Roland Ros",
-      role: "CEO, Kumu",
-    },
-    gallery: ["/logo-kumu_2025-04-02-191834_xdcl.webp", "/logo-kumu_2025-04-02-191834_xdcl.webp", "/logo-kumu_2025-04-02-191834_xdcl.webp"],
-    nextProject: { slug: "carsome", title: "Carsome" },
-    prevProject: { slug: "ford-mustang", title: "Ford Mustang" },
-  },
-  "carsome": {
-    title: "Carsome",
-    subtitle: "REVOLUTIONIZING CAR OWNERSHIP",
-    description: "Complete brand refresh and e-commerce platform for Southeast Asia's largest integrated car marketplace. Simplifying the car buying experience.",
-    fullDescription: `Carsome is transforming how Southeast Asia buys and sells cars. As they expanded across the region, they needed a brand that could unify their diverse markets while building trust with consumers.
-
-We developed a comprehensive brand system and e-commerce platform that makes buying a used car as simple and trustworthy as buying new. The design emphasizes transparency, quality assurance, and customer confidence.`,
-    tags: ["E-commerce", "Branding", "Web Platform", "UX Research"],
-    image: "/logo-carsome.webp",
-    stats: { transactions: "$1B+", markets: "5 Countries", duration: "8 months" },
-    year: "2023",
-    client: "Carsome Group",
-    services: ["Brand Strategy", "Web Development", "UX Design", "E-commerce"],
-    challenge: "Create a unified brand and digital platform that builds trust in the used car market while scaling across multiple Southeast Asian countries.",
-    solution: "We built a transparent, user-friendly e-commerce experience with robust inspection reports, 360° car views, and a seamless purchasing journey.",
-    results: [
-      { metric: "$1B+", label: "Transaction Value" },
-      { metric: "5", label: "Countries" },
-      { metric: "+89%", label: "Conversion Rate" },
-      { metric: "250K+", label: "Cars Sold" },
-    ],
-    testimonial: {
-      quote: "Hindra helped us build a brand that customers trust. Our platform conversion rates have never been higher.",
-      author: "Eric Cheng",
-      role: "Co-founder, Carsome",
-    },
-    gallery: ["/logo-carsome.webp", "/logo-carsome.webp", "/logo-carsome.webp"],
-    nextProject: { slug: "van-heusen", title: "Van Heusen" },
-    prevProject: { slug: "kumu-app", title: "Kumu" },
-  },
-  "van-heusen": {
-    title: "Van Heusen",
-    subtitle: "TIMELESS ELEGANCE REDEFINED",
-    description: "Digital campaign and e-commerce experience for the iconic fashion brand. Blending classic sophistication with modern retail innovation.",
-    fullDescription: `Van Heusen, a heritage brand with over 100 years of history, needed to connect with a new generation of professionals. We were tasked with creating a digital presence that honors their legacy while appealing to modern sensibilities.
-
-Our campaign focused on the concept of "Modern Classics" - professionals who respect tradition but aren't bound by it. The e-commerce experience we created makes premium fashion accessible and shopping effortless.`,
-    tags: ["Fashion", "E-commerce", "Campaign", "Digital Marketing"],
-    image: "/logo-vanheusen.webp",
-    stats: { sales: "+45%", reach: "15M", duration: "5 months" },
-    year: "2023",
-    client: "PVH Corp (Van Heusen)",
-    services: ["Campaign Design", "E-commerce", "Content Strategy", "Social Media"],
-    challenge: "Rejuvenate a heritage brand for younger audiences while maintaining the sophistication and quality that defines Van Heusen.",
-    solution: "We created the 'Modern Classics' campaign with a refreshed e-commerce experience that combines editorial content with seamless shopping.",
-    results: [
-      { metric: "+45%", label: "Online Sales" },
-      { metric: "15M", label: "Campaign Reach" },
-      { metric: "+200%", label: "Social Engagement" },
-      { metric: "32%", label: "New Customers" },
-    ],
-    testimonial: {
-      quote: "The campaign perfectly captured our brand evolution. We've seen remarkable growth in our target demographic.",
-      author: "Sarah Chen",
-      role: "Brand Director, Van Heusen",
-    },
-    gallery: ["/logo-vanheusen.webp", "/logo-vanheusen.webp", "/logo-vanheusen.webp"],
-    nextProject: { slug: "techflow", title: "TechFlow" },
-    prevProject: { slug: "carsome", title: "Carsome" },
-  },
-  "techflow": {
-    title: "TechFlow",
-    subtitle: "B2B SAAS BRAND IDENTITY",
-    description: "Complete brand identity for a B2B SaaS startup revolutionizing workflow automation.",
-    fullDescription: `TechFlow approached us as a fast-growing SaaS startup needing a brand that could compete with enterprise players while maintaining startup agility. We developed a comprehensive brand identity that communicates innovation, reliability, and scalability.
-
-The brand system we created includes a flexible logo, comprehensive guidelines, and a design system that scales across all touchpoints from website to product UI.`,
-    tags: ["Branding", "Logo Design", "Brand Guidelines", "Visual Identity"],
-    image: "/images/ford.png",
-    stats: { funding: "$12M", growth: "+300%", duration: "3 months" },
-    year: "2024",
-    client: "TechFlow Inc.",
-    services: ["Brand Strategy", "Logo Design", "Brand Guidelines", "Design System"],
-    challenge: "Create a brand identity that positions a startup as an enterprise-ready solution while maintaining approachability.",
-    solution: "We developed a modern, scalable brand system with a distinctive logomark and flexible visual language.",
-    results: [
-      { metric: "$12M", label: "Series A Raised" },
-      { metric: "+300%", label: "User Growth" },
-      { metric: "85%", label: "Brand Recognition" },
-      { metric: "4.9★", label: "G2 Rating" },
-    ],
-    testimonial: {
-      quote: "Our new brand gave us the credibility we needed to close enterprise deals. Hindra understood exactly what we needed.",
-      author: "Alex Rivera",
-      role: "CEO, TechFlow",
-    },
-    gallery: ["/images/ford.png", "/images/ford.png", "/images/ford.png"],
-    nextProject: { slug: "bloom", title: "Bloom" },
-    prevProject: { slug: "van-heusen", title: "Van Heusen" },
-  },
-  "bloom": {
-    title: "Bloom",
-    subtitle: "SUSTAINABLE FASHION E-COMMERCE",
-    description: "E-commerce website for a sustainable fashion brand committed to ethical production.",
-    fullDescription: `Bloom is a fashion brand with sustainability at its core. They needed an e-commerce experience that communicates their values while providing a seamless shopping journey.
-
-We designed and developed a website that tells the story of each product's sustainable journey while making the path to purchase intuitive and enjoyable.`,
-    tags: ["E-commerce", "Web Design", "UI/UX", "Development"],
-    image: "/logo-vanheusen.webp",
-    stats: { conversion: "+65%", traffic: "2x", duration: "4 months" },
-    year: "2024",
-    client: "Bloom Fashion",
-    services: ["Web Design", "E-commerce Development", "UI/UX", "Content Strategy"],
-    challenge: "Create an e-commerce experience that tells the sustainability story without compromising on conversion.",
-    solution: "We built an immersive shopping experience with integrated storytelling and frictionless checkout.",
-    results: [
-      { metric: "+65%", label: "Conversion Rate" },
-      { metric: "2x", label: "Traffic Growth" },
-      { metric: "45s", label: "Avg. Time on Site" },
-      { metric: "+120%", label: "Revenue" },
-    ],
-    testimonial: {
-      quote: "The new website perfectly captures our brand values. Our customers love the experience.",
-      author: "Emma Johnson",
-      role: "Founder, Bloom",
-    },
-    gallery: ["/logo-vanheusen.webp", "/logo-vanheusen.webp", "/logo-vanheusen.webp"],
-    nextProject: { slug: "artisan", title: "Artisan" },
-    prevProject: { slug: "techflow", title: "TechFlow" },
-  },
-  "artisan": {
-    title: "Artisan",
-    subtitle: "ANIMATED BRAND IDENTITY",
-    description: "Animated brand identity for a creative agency that specializes in motion design.",
-    fullDescription: `Artisan is a creative agency that lives and breathes motion. Their brand needed to reflect their expertise in animation while standing out in a crowded market.
-
-We created a dynamic brand identity with a logo that transforms, color schemes that shift, and a visual language that's always in motion.`,
-    tags: ["Motion Design", "Animation", "Brand Identity", "Video"],
-    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    stats: { views: "5M+", engagement: "+250%", duration: "4 months" },
-    year: "2023",
-    client: "Artisan Creative",
-    services: ["Motion Design", "Brand Identity", "Animation", "Video Production"],
-    challenge: "Create a brand identity that showcases motion expertise while remaining functional in static applications.",
-    solution: "We developed an animated logo system with flexible static variations and a motion-first design language.",
-    results: [
-      { metric: "5M+", label: "Video Views" },
-      { metric: "+250%", label: "Engagement" },
-      { metric: "3x", label: "Client Inquiries" },
-      { metric: "15+", label: "Awards Won" },
-    ],
-    testimonial: {
-      quote: "Hindra created something truly unique. Our brand now moves as beautifully as the work we create.",
-      author: "Marcus Chen",
-      role: "Creative Director, Artisan",
-    },
-    gallery: ["/logo-kumu_2025-04-02-191834_xdcl.webp", "/logo-kumu_2025-04-02-191834_xdcl.webp", "/logo-kumu_2025-04-02-191834_xdcl.webp"],
-    nextProject: { slug: "greenleaf", title: "GreenLeaf" },
-    prevProject: { slug: "bloom", title: "Bloom" },
-  },
-  "greenleaf": {
-    title: "GreenLeaf",
-    subtitle: "ECO-FRIENDLY BRAND STRATEGY",
-    description: "Brand strategy for an eco-friendly product line focused on sustainable living.",
-    fullDescription: `GreenLeaf is on a mission to make sustainable living accessible to everyone. They needed a brand strategy that would resonate with eco-conscious consumers while appealing to mainstream audiences.
-
-We developed a comprehensive brand strategy that positions GreenLeaf as the friendly face of sustainability, making green choices feel natural rather than sacrificial.`,
-    tags: ["Brand Strategy", "Research", "Positioning", "Marketing"],
-    image: "/logo-carsome.webp",
-    stats: { awareness: "+180%", sales: "+95%", duration: "3 months" },
-    year: "2023",
-    client: "GreenLeaf Products",
-    services: ["Brand Strategy", "Market Research", "Positioning", "Launch Strategy"],
-    challenge: "Position an eco-friendly brand to appeal to mainstream consumers without alienating the core sustainability audience.",
-    solution: "We created a brand strategy focused on 'effortless sustainability' that makes green choices feel natural and aspirational.",
-    results: [
-      { metric: "+180%", label: "Brand Awareness" },
-      { metric: "+95%", label: "Sales Growth" },
-      { metric: "72%", label: "Market Penetration" },
-      { metric: "#1", label: "Category Leader" },
-    ],
-    testimonial: {
-      quote: "The strategy transformed how we connect with customers. We're now the go-to brand for sustainable living.",
-      author: "Lisa Park",
-      role: "CMO, GreenLeaf",
-    },
-    gallery: ["/logo-carsome.webp", "/logo-carsome.webp", "/logo-carsome.webp"],
     nextProject: { slug: "rush-photos", title: "Rush Photos" },
-    prevProject: { slug: "artisan", title: "Artisan" },
+    prevProject: { slug: "rush-boxes", title: "Rush Boxes" },
   },
   "rush-photos": {
     title: "Rush Photos",
     subtitle: "PROFESSIONAL PRODUCT PHOTOGRAPHY SERVICE",
-    description: "AI-powered professional product photography service delivering stunning e-commerce and lifestyle shots from $25/angle.",
-    fullDescription: `Rush Photos is revolutionizing product photography with their innovative platform that combines professional photography expertise with cutting-edge technology. They needed a website that could showcase their various photography styles while making the ordering process incredibly simple.
+    description: "Professional product photography from $25/angle with 3-5 day delivery and unlimited revisions.",
+    fullDescription: `Rush Photos is revolutionizing product photography with an innovative platform that combines professional photography expertise with cutting-edge technology.
 
-We created a sleek, conversion-focused website featuring interactive before/after sliders, dynamic portfolio galleries, and a streamlined ordering system. The platform clearly communicates their four distinct photography styles: E-commerce, Lifestyle, Ghost Mannequin, and 360° Spin, making it easy for clients to choose and order the perfect shots for their products.`,
-    tags: ["Product Photography", "E-commerce", "Web Design", "UX/UI", "Portfolio"],
-    image: "/images/rush-photos-hero.jpg",
+We built a sleek, conversion-focused website featuring:
+• Interactive before/after sliders
+• Dynamic portfolio galleries
+• Streamlined ordering system
+• Four distinct photography styles
+
+Photography Styles:
+• E-commerce - Clean white background shots
+• Lifestyle - Styled scenes with props
+• Ghost Mannequin - Clothing photography
+• 360° Spin - Interactive product views
+
+Pricing starts at just $25/angle with 3-5 day delivery and unlimited revisions on select packages.`,
+    tags: ["Product Photography", "E-commerce", "Web Design", "Portfolio"],
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&h=900&fit=crop",
     website: "https://rush.photos",
     stats: { styles: "4 Styles", pricing: "From $25", delivery: "3-5 Days" },
     year: "2024",
     client: "Rush Photos",
-    services: ["Web Design", "UX/UI Design", "Interactive Elements", "E-commerce Integration", "Portfolio System"],
-    challenge: "Design a professional photography service website that clearly communicates four different photography styles while maintaining a simple, friction-free ordering experience for e-commerce businesses.",
-    solution: "We built an elegant, interactive website with engaging before/after comparison sliders, clear service packages, transparent pricing from $25/angle, and a streamlined project initiation flow that gets clients from browsing to ordering in minutes.",
+    services: ["Web Design", "UX/UI Design", "Interactive Elements", "E-commerce Integration"],
+    challenge: "Design a professional photography service website that clearly communicates four different photography styles while maintaining a simple, friction-free ordering experience.",
+    solution: "We built an elegant, interactive website with engaging before/after comparison sliders, clear service packages, transparent pricing, and a streamlined project initiation flow.",
     results: [
       { metric: "4", label: "Photo Styles" },
       { metric: "$25", label: "Starting Price" },
       { metric: "3-5", label: "Days Delivery" },
-      { metric: "100+", label: "Happy Clients" },
+      { metric: "100%", label: "Satisfaction" },
     ],
     testimonial: {
-      quote: "Hindra transformed our vision into a stunning website that perfectly showcases our photography services. The interactive elements and clean design have significantly increased our conversion rates.",
+      quote: "The interactive sliders and clean design have significantly increased our conversion rates. Exactly what we needed.",
       author: "Rush Photos Team",
       role: "Professional Photography Service",
     },
     gallery: [
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=1200&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=1200&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=1200&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200&h=1200&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=1200&h=1200&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1200&h=1200&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=800&fit=crop",
     ],
     nextProject: { slug: "rush-video", title: "Rush Video" },
-    prevProject: { slug: "greenleaf", title: "GreenLeaf" },
+    prevProject: { slug: "scriptra", title: "Scriptra" },
   },
   "rush-video": {
     title: "Rush Video",
     subtitle: "AI-POWERED PRODUCT VIDEOS THAT SELL",
     description: "Professional AI-powered product video service creating cinematic videos that convert browsers into buyers.",
-    fullDescription: `Rush Video is pioneering the future of product video creation with AI-powered cinematography. They approached us with an ambitious goal: build a platform that makes professional product videos accessible to every brand, regardless of size or budget.
+    fullDescription: `Rush Video is pioneering the future of product video creation with AI-powered cinematography.
 
-We designed and developed a modern, conversion-optimized website that clearly demonstrates their AI-powered video creation process. The site features stunning video examples, transparent pricing packages, and a simple "ship your product, choose a style, get videos" workflow that removes all complexity from professional video creation.`,
-    tags: ["AI Video", "Product Videos", "Web Platform", "SaaS", "E-commerce"],
-    image: "/images/rush-video-hero.jpg",
+We designed and developed a modern, conversion-optimized website that clearly demonstrates the AI-powered video creation process:
+
+Video Packages:
+• Product Video Package - Essential product videos
+• Complete Video Package - Full video suite with multiple angles
+
+Camera Styles:
+• Dolly In - Cinematic approach shots
+• Orbit - 360° rotating views
+• Top Down - Flat lay presentations
+• Spinning - Product rotation videos
+
+Features:
+• 2-5 day delivery
+• Unlimited revisions
+• Commercial rights included
+• Multiple format exports`,
+    tags: ["AI Video", "Product Videos", "Web Platform", "SaaS"],
+    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&h=900&fit=crop",
     website: "https://rush.video",
     stats: { styles: "4 Camera Styles", delivery: "2-5 Days", formats: "Multiple" },
     year: "2024",
     client: "Rush Videos",
-    services: ["Web Design", "UI/UX Design", "Brand Strategy", "Video Integration", "Conversion Optimization"],
-    challenge: "Create a website for an innovative AI-powered video service that clearly communicates the value proposition while building trust in a new technology and streamlining the customer journey from discovery to purchase.",
-    solution: "We built a clean, modern website with prominent video examples, clear package options (Product Video Package & Complete Video Package), professional color grading showcases, and a straightforward onboarding process that emphasizes speed, quality, and unlimited revisions.",
+    services: ["Web Design", "UI/UX Design", "Brand Strategy", "Video Integration"],
+    challenge: "Create a website for an innovative AI-powered video service that clearly communicates the value proposition while building trust in a new technology.",
+    solution: "We built a clean, modern website with prominent video examples, clear package options, professional color grading showcases, and a straightforward onboarding process.",
     results: [
       { metric: "4", label: "Camera Styles" },
       { metric: "2-5", label: "Days Delivery" },
@@ -336,20 +164,72 @@ We designed and developed a modern, conversion-optimized website that clearly de
       { metric: "∞", label: "Revisions" },
     ],
     testimonial: {
-      quote: "Hindra perfectly captured our vision of making professional product videos accessible to everyone. The website is sleek, intuitive, and converts visitors into customers effortlessly.",
+      quote: "The website perfectly captures our vision of making professional product videos accessible to everyone.",
       author: "Rush Video Team",
       role: "AI-Powered Video Platform",
     },
     gallery: [
-      "https://rush.video/videos/dolly-in-large-box.mp4",
-      "https://rush.video/videos/orbit-large-box.mp4",
-      "https://rush.video/videos/top-down-large-box.mp4",
-      "https://rush.video/videos/spinning-large-box.mp4",
-      "/images/rush-video-hero.jpg",
-      "/images/rush-photos-hero.jpg",
+      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=800&h=800&fit=crop",
     ],
-    nextProject: { slug: "ford-mustang", title: "Ford Mustang" },
+    nextProject: { slug: "rush-boxes", title: "Rush Boxes" },
     prevProject: { slug: "rush-photos", title: "Rush Photos" },
+  },
+  "rush-boxes": {
+    title: "Rush Boxes",
+    subtitle: "CUSTOM PACKAGING SOLUTIONS",
+    description: "Custom packaging solutions for brands — Mailer boxes, gift boxes, product boxes with instant quotes and fast delivery.",
+    fullDescription: `Rush Boxes is a custom packaging solution serving brands and businesses with high-quality, customizable boxes.
+
+The platform offers a wide range of packaging options:
+
+Box Types:
+• Mailer Boxes - Sturdy, self-locking packaging
+• Shipper Boxes - Durable shipping solutions
+• Folded Boxes - Easy assembly, maximum protection
+• Corrugated Boxes - Heavy-duty protection
+• Cardboard Boxes - Versatile packaging solution
+• Gift Boxes - Perfect for special occasions
+• Custom Boxes - Tailored to your needs
+• Setup Boxes - Ready-to-use packaging
+
+Features:
+• Instant online quotes
+• Custom sizes available
+• Full-color printing
+• Design templates provided
+• Fast turnaround
+• Competitive pricing
+
+Located in Hawthorne, NJ with additional presence in NYC, Rush Boxes has been serving brands since 1985.`,
+    tags: ["Custom Packaging", "E-commerce", "B2B", "Manufacturing"],
+    image: "https://images.unsplash.com/photo-1607166452427-7e4477c5e2c2?w=1600&h=900&fit=crop",
+    website: "https://rushboxes.com",
+    stats: { types: "8+ Box Types", experience: "Since 1985", location: "NJ & NYC" },
+    year: "2024",
+    client: "Rush Boxes",
+    services: ["Web Design", "E-commerce", "Product Configurator", "Quote System"],
+    challenge: "Build an e-commerce platform for custom packaging that allows customers to easily configure, visualize, and order custom boxes with instant pricing.",
+    solution: "We created a user-friendly platform with an intuitive box configurator, instant quote system, design template downloads, and streamlined checkout process.",
+    results: [
+      { metric: "8+", label: "Box Types" },
+      { metric: "1985", label: "Founded" },
+      { metric: "Fast", label: "Turnaround" },
+      { metric: "Custom", label: "Sizes" },
+    ],
+    testimonial: {
+      quote: "Rush Boxes has been our packaging partner for years. Quality products, great service, and competitive prices.",
+      author: "E-commerce Brand Owner",
+      role: "Rush Boxes Customer",
+    },
+    gallery: [
+      "https://images.unsplash.com/photo-1607166452427-7e4477c5e2c2?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800&h=800&fit=crop",
+    ],
+    nextProject: { slug: "scriptra", title: "Scriptra" },
+    prevProject: { slug: "rush-video", title: "Rush Video" },
   },
 };
 
@@ -396,7 +276,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Back to Works
+              Back to Products
             </Link>
 
             <motion.div
@@ -409,24 +289,17 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 {project.year}
               </span>
               <span className="text-black/50">{project.client}</span>
-              {project.website && (
-                <a
-                  href={project.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black text-sm rounded-full transition-colors"
-                >
-                  Visit website
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7h6m0 0v6m0-6L11 19a4 4 0 01-6-6l12-12"
-                    />
-                  </svg>
-                </a>
-              )}
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black text-sm rounded-full transition-colors"
+              >
+                Visit Live
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
             </motion.div>
 
             <motion.h1
@@ -501,8 +374,22 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             src={project.image}
             alt={project.title}
             fill
-            className="object-contain p-12"
+            className="object-cover"
           />
+          {/* Overlay with website link */}
+          <a
+            href={project.website}
+            target="_blank"
+            rel="noreferrer"
+            className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 transition-colors group"
+          >
+            <span className="px-6 py-3 bg-white rounded-full font-medium text-black opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+              Visit {project.title}
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </span>
+          </a>
         </motion.div>
       </section>
 
@@ -529,14 +416,16 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             className="space-y-8"
           >
             <div>
-              <h3 className="text-sm font-medium text-black/40 uppercase tracking-wider mb-3">Client</h3>
-              <p className="text-lg text-black">{project.client}</p>
+              <h3 className="text-sm font-medium text-black/40 uppercase tracking-wider mb-3">Website</h3>
+              <a href={project.website} target="_blank" rel="noreferrer" className="text-lg text-black hover:underline">
+                {project.website.replace('https://', '')}
+              </a>
             </div>
             <div>
               <h3 className="text-sm font-medium text-black/40 uppercase tracking-wider mb-3">Services</h3>
               <div className="flex flex-wrap gap-2">
                 {project.services.map((service) => (
-                  <span key={service} className="text-black">
+                  <span key={service} className="text-black text-sm bg-black/5 px-3 py-1 rounded-full">
                     {service}
                   </span>
                 ))}
@@ -560,7 +449,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               viewport={{ once: true }}
               className="p-8 rounded-3xl bg-white"
             >
-              <span className="text-sm font-medium text-[#DCDFFF] uppercase tracking-wider">The Challenge</span>
+              <span className="text-sm font-medium text-[#6366f1] uppercase tracking-wider">The Challenge</span>
               <h3 className="text-2xl sm:text-3xl font-bold text-black mt-4 mb-4">What we faced</h3>
               <p className="text-black/60 leading-relaxed">{project.challenge}</p>
             </motion.div>
@@ -610,27 +499,6 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         </div>
       </section>
 
-      {/* Testimonial */}
-      <section className="bg-black text-white py-20">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <div className="text-6xl text-white/20 font-serif mb-8">&ldquo;</div>
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-relaxed mb-8">
-              {project.testimonial.quote}
-            </p>
-            <div>
-              <div className="text-lg font-semibold">{project.testimonial.author}</div>
-              <div className="text-white/50">{project.testimonial.role}</div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Gallery */}
       <section className="container-custom py-20">
         <motion.div
@@ -652,25 +520,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               transition={{ delay: index * 0.1 }}
               className="relative aspect-square rounded-2xl overflow-hidden bg-[#F8F8F8]"
             >
-              {img.endsWith(".mp4") ? (
-                <video
-                  src={img}
-                  playsInline
-                  muted
-                  loop
-                  autoPlay
-                  preload="metadata"
-                  poster={project.image}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : (
-                <Image
-                  src={img}
-                  alt={`${project.title} gallery ${index + 1}`}
-                  fill
-                  className="object-contain p-8"
-                />
-              )}
+              <Image
+                src={img}
+                alt={`${project.title} gallery ${index + 1}`}
+                fill
+                className="object-cover"
+              />
             </motion.div>
           ))}
         </div>
@@ -715,17 +570,17 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[#DCDFFF] rounded-3xl p-12 text-center"
+          className="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-3xl p-12 text-center text-white"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
-            Have a project in mind?
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            Want to build something amazing?
           </h2>
-          <p className="text-lg text-black/60 mb-8 max-w-xl mx-auto">
-            Let&apos;s create something amazing together. Get in touch and we&apos;ll get back to you within 24 hours.
+          <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto">
+            Let&apos;s create your next product together. Get in touch and we&apos;ll get back to you within 24 hours.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-black/90 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors"
           >
             Start a project
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -740,4 +595,3 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     </main>
   );
 }
-

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 
 export default function Testimonial() {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -64,25 +63,24 @@ export default function Testimonial() {
     });
   };
 
-  const logos = [
-    "/logo-carsome.webp",
-    "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    "/logo-vanheusen.webp",
-    "/logo-carsome.webp",
-    "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    "/logo-vanheusen.webp",
+  // Products we've built
+  const productLogos = [
+    { name: "Scriptra", url: "https://scriptra.space" },
+    { name: "Rush Photos", url: "https://rush.photos" },
+    { name: "Rush Video", url: "https://rush.video" },
+    { name: "Rush Boxes", url: "https://rushboxes.com" },
   ];
 
-  const infiniteLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos, ...logos,...logos, ...logos, ...logos, ...logos, ...logos];
+  const infiniteLogos = [...productLogos, ...productLogos, ...productLogos, ...productLogos, ...productLogos, ...productLogos, ...productLogos, ...productLogos, ...productLogos, ...productLogos];
 
   const cards = [
     { 
-      bg: "bg-[#DCDFFF]",
+      bg: "bg-[#6366f1]",
       content: (
         <div className="p-4 sm:p-6">
-          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;Hindra handled everything - our brand, website, and social media. One team made it so easy.&rdquo;</p>
-          <p className="text-sm font-medium text-black">Sarah Chen</p>
-          <p className="text-xs text-black/60">Founder, TechFlow</p>
+          <p className="text-base sm:text-lg text-white/90 mb-3 sm:mb-4">&ldquo;Scriptra has 10x&apos;d our content output. What took hours now takes minutes.&rdquo;</p>
+          <p className="text-sm font-medium text-white">Content Creator</p>
+          <p className="text-xs text-white/60">Scriptra User</p>
         </div>
       )
     },
@@ -90,9 +88,9 @@ export default function Testimonial() {
       bg: "bg-[#E9DCC8]",
       content: (
         <div className="p-4 sm:p-6">
-          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;From zero followers to 50K in 6 months. Their content strategy is incredible.&rdquo;</p>
-          <p className="text-sm font-medium text-black">Michael Torres</p>
-          <p className="text-xs text-black/60">CEO, Startup Labs</p>
+          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;Rush Photos delivered exactly what we needed - professional shots at an unbeatable price.&rdquo;</p>
+          <p className="text-sm font-medium text-black">E-commerce Brand</p>
+          <p className="text-xs text-black/60">Rush Photos Customer</p>
         </div>
       )
     },
@@ -100,9 +98,9 @@ export default function Testimonial() {
       bg: "bg-white",
       content: (
         <div className="p-4 sm:p-6">
-          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;We launched in 3 weeks with a complete brand package. Best decision we made.&rdquo;</p>
-          <p className="text-sm font-medium text-black">Emma Williams</p>
-          <p className="text-xs text-black/60">Co-founder, Scale Inc</p>
+          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;The AI-powered videos from Rush Video converted 3x better than our old product photos.&rdquo;</p>
+          <p className="text-sm font-medium text-black">Amazon Seller</p>
+          <p className="text-xs text-black/60">Rush Video Customer</p>
         </div>
       )
     },
@@ -110,9 +108,9 @@ export default function Testimonial() {
       bg: "bg-black",
       content: (
         <div className="p-4 sm:p-6">
-          <p className="text-base sm:text-lg text-white/80 mb-3 sm:mb-4">&ldquo;They manage our social daily. Our engagement is up 300%. True partners.&rdquo;</p>
-          <p className="text-sm font-medium text-white">David Kim</p>
-          <p className="text-xs text-white/60">CMO, Innovate Co</p>
+          <p className="text-base sm:text-lg text-white/80 mb-3 sm:mb-4">&ldquo;Rush Boxes custom packaging elevated our brand. Quality boxes, great prices.&rdquo;</p>
+          <p className="text-sm font-medium text-white">Product Brand Owner</p>
+          <p className="text-xs text-white/60">Rush Boxes Customer</p>
         </div>
       )
     },
@@ -120,9 +118,9 @@ export default function Testimonial() {
       bg: "bg-[#DCDFFF]",
       content: (
         <div className="p-4 sm:p-6">
-          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;No more juggling vendors. One team, one vision, perfect execution every time.&rdquo;</p>
-          <p className="text-sm font-medium text-black">Lisa Park</p>
-          <p className="text-xs text-black/60">Marketing Director, Motion AI</p>
+          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;Hindra builds products that actually work. We use Scriptra daily for our content.&rdquo;</p>
+          <p className="text-sm font-medium text-black">Marketing Agency</p>
+          <p className="text-xs text-black/60">Hindra Products User</p>
         </div>
       )
     },
@@ -139,20 +137,18 @@ export default function Testimonial() {
           ref={logoRef}
           className="flex items-center gap-12 sm:gap-16 md:gap-24 will-change-transform"
         >
-          {infiniteLogos.map((src, i) => (
-            <div key={i} className="w-24 h-10 sm:w-32 sm:h-12 md:w-40 md:h-16 relative select-none flex-shrink-0">
-              <Image
-                src={src}
-                alt="Client logo"
-                fill
-                sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 160px"
-                className="object-contain"
-                style={{
-                  filter: "grayscale(100%) brightness(120%)",
-                  opacity: 0.4,
-                }}
-              />
-            </div>
+          {infiniteLogos.map((product, i) => (
+            <a
+              key={i}
+              href={product.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 select-none px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-black/5 hover:bg-black/10 transition-colors"
+            >
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold text-black/40 hover:text-black/60 transition-colors whitespace-nowrap">
+                {product.name}
+              </span>
+            </a>
           ))}
         </div>
       </div>

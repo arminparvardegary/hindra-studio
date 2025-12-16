@@ -8,114 +8,56 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 
-const categories = ["All", "Branding", "Web Design", "Motion", "E-commerce"];
+const categories = ["All", "SaaS", "E-commerce", "Web Platform", "Video"];
 
 const projects = [
   {
-    id: "ford-mustang",
-    title: "Ford Mustang",
-    category: "Web Design",
-    description: "A complete digital experience redesign for Ford&apos;s legendary muscle car",
-    image: "/images/ford.png",
-    tags: ["Automotive", "3D Experience", "UI/UX"],
+    id: "scriptra",
+    title: "Scriptra",
+    category: "SaaS",
+    description: "AI-powered content creation platform for generating viral hooks, captions, and social media content",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=900&fit=crop",
+    tags: ["AI Platform", "SaaS", "Content Creation", "Next.js"],
     year: "2024",
     featured: true,
-    color: "#DCDFFF",
-  },
-  {
-    id: "kumu-app",
-    title: "Kumu",
-    category: "Branding",
-    description: "Brand identity and mobile app design for Southeast Asia&apos;s fastest-growing platform",
-    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    tags: ["Mobile App", "Brand Identity", "UI/UX"],
-    year: "2024",
-    featured: true,
-    color: "#E9DCC8",
-  },
-  {
-    id: "carsome",
-    title: "Carsome",
-    category: "E-commerce",
-    description: "Complete brand refresh and e-commerce platform for Southeast Asia&apos;s largest car marketplace",
-    image: "/logo-carsome.webp",
-    tags: ["E-commerce", "Branding", "Web Platform"],
-    year: "2023",
-    featured: true,
-    color: "#DCDFFF",
-  },
-  {
-    id: "van-heusen",
-    title: "Van Heusen",
-    category: "E-commerce",
-    description: "Digital campaign and e-commerce experience for the iconic fashion brand",
-    image: "/logo-vanheusen.webp",
-    tags: ["Fashion", "E-commerce", "Campaign"],
-    year: "2023",
-    featured: true,
-    color: "#E9DCC8",
-  },
-  {
-    id: "techflow",
-    title: "TechFlow",
-    category: "Branding",
-    description: "Complete brand identity for a B2B SaaS startup",
-    image: "/images/ford.png",
-    tags: ["Logo", "Brand Guidelines", "Visual Identity"],
-    year: "2024",
-    color: "#DCDFFF",
-  },
-  {
-    id: "bloom",
-    title: "Bloom",
-    category: "Web Design",
-    description: "E-commerce website for a sustainable fashion brand",
-    image: "/logo-vanheusen.webp",
-    tags: ["UI/UX", "Development", "E-commerce"],
-    year: "2024",
-    color: "#E9DCC8",
-  },
-  {
-    id: "artisan",
-    title: "Artisan",
-    category: "Motion",
-    description: "Animated brand identity for a creative agency",
-    image: "/logo-kumu_2025-04-02-191834_xdcl.webp",
-    tags: ["Motion Graphics", "Animation", "Video"],
-    year: "2023",
-    color: "#DCDFFF",
-  },
-  {
-    id: "greenleaf",
-    title: "GreenLeaf",
-    category: "Branding",
-    description: "Brand strategy for an eco-friendly product line",
-    image: "/logo-carsome.webp",
-    tags: ["Brand Strategy", "Research", "Positioning"],
-    year: "2023",
-    color: "#E9DCC8",
+    color: "#6366f1",
+    website: "https://scriptra.space",
   },
   {
     id: "rush-photos",
     title: "Rush Photos",
-    category: "Web Design",
-    description: "Professional product photography — from $25/angle • 3–5 day delivery • unlimited revisions on select packages",
-    image: "/images/rush-photos-hero.jpg",
-    tags: ["Product Photography", "E-commerce", "From $25/angle", "3–5 days"],
+    category: "E-commerce",
+    description: "Professional product photography service — from $25/angle • 3–5 day delivery • unlimited revisions",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=900&fit=crop",
+    tags: ["Product Photography", "E-commerce", "From $25/angle"],
     year: "2024",
     featured: true,
     color: "#DCDFFF",
+    website: "https://rush.photos",
   },
   {
     id: "rush-video",
     title: "Rush Video",
-    category: "Motion",
-    description: "AI-powered product videos that sell • 2–5 day delivery • unlimited revisions",
-    image: "/images/rush-video-hero.jpg",
-    tags: ["AI Video", "Product Videos", "2–5 days", "Commercial rights"],
+    category: "Video",
+    description: "AI-powered product videos that convert • 2–5 day delivery • unlimited revisions",
+    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&h=900&fit=crop",
+    tags: ["AI Video", "Product Videos", "2–5 days"],
     year: "2024",
     featured: true,
     color: "#E9DCC8",
+    website: "https://rush.video",
+  },
+  {
+    id: "rush-boxes",
+    title: "Rush Boxes",
+    category: "E-commerce",
+    description: "Custom packaging solutions — Mailer boxes, gift boxes, product boxes with instant quotes",
+    image: "https://images.unsplash.com/photo-1607166452427-7e4477c5e2c2?w=1200&h=900&fit=crop",
+    tags: ["Custom Packaging", "E-commerce", "B2B"],
+    year: "2024",
+    featured: true,
+    color: "#f59e0b",
+    website: "https://rushboxes.com",
   },
 ];
 
@@ -169,9 +111,9 @@ export default function WorksPage() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black mb-8 leading-[1.1]"
             >
-              Projects we&apos;re
+              Products we&apos;ve
               <br />
-              <span className="text-gradient">proud of</span>
+              <span className="text-gradient">built & launched</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -179,8 +121,8 @@ export default function WorksPage() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-xl sm:text-2xl text-black/60 leading-relaxed max-w-2xl"
             >
-              A showcase of our best work across branding, web design, motion, and strategy.
-              Each project represents a unique challenge and creative solution.
+              From AI-powered content tools to product photography services and custom packaging.
+              Real products serving real customers worldwide.
             </motion.p>
           </motion.div>
         </motion.div>
@@ -371,10 +313,10 @@ export default function WorksPage() {
         <div className="container-custom">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "120+", label: "Projects Completed" },
-              { value: "50+", label: "Happy Clients" },
-              { value: "15", label: "Awards Won" },
-              { value: "8+", label: "Years Experience" },
+              { value: "4", label: "Live Products" },
+              { value: "500+", label: "Happy Customers" },
+              { value: "24/7", label: "AI-Powered" },
+              { value: "2017", label: "Founded" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

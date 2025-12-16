@@ -108,27 +108,27 @@ export default function Hero() {
               <Avatar className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 ring-1 ring-white/10">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Customer"
                 />
                 <AvatarFallback>SC</AvatarFallback>
               </Avatar>
               <Avatar className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 ring-1 ring-white/10">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Customer"
                 />
                 <AvatarFallback>MT</AvatarFallback>
               </Avatar>
               <Avatar className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 ring-1 ring-white/10">
                 <AvatarImage
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
-                  alt="Client"
+                  alt="Customer"
                 />
                 <AvatarFallback>EW</AvatarFallback>
               </Avatar>
             </div>
             <p className="text-xs sm:text-sm md:text-base text-gray-400">
-              120+ brands transformed
+              4 live products serving customers worldwide
             </p>
           </div>
         </div>
