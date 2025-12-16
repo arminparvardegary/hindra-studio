@@ -1,0 +1,62 @@
+version: "3.8"
+
+networks:
+  web:
+    external: true
+
+services:
+  # ===================
+  # Traefik - Reverse Proxy
+  # ===================
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: always
+    networks:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/acme.json:/acme.json
+    command:
+      - "--api.dashboard=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      # HTTP to HTTPS redirect
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # Docker provider
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=web"
+      # Let's Encrypt
+      - "--certificatesresolvers.letsencrypt.acme.email=moein@hindra.studio"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+
+  # ===================
+  # Hindra Studio
+  # ===================
+  hindra:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hindra
+    restart: always
+    networks:
+      - web
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    labels:
+      - "traefik.enable=true"
+      # HTTP Router
+      - "traefik.http.routers.hindra.rule=Host(`hindra.studio`) || Host(`www.hindra.studio`)"
+      - "traefik.http.routers.hindra.entrypoints=websecure"
+      - "traefik.http.routers.hindra.tls.certresolver=letsencrypt"
+      # Service
+      - "traefik.http.services.hindra.loadbalancer.server.port=3000"
+
