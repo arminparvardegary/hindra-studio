@@ -289,17 +289,17 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 {project.year}
               </span>
               <span className="text-black/50">{project.client}</span>
-              <a
-                href={project.website}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black text-sm rounded-full transition-colors"
-              >
+                <a
+                  href={project.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black text-sm rounded-full transition-colors"
+                >
                 Visit Live
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+                  </svg>
+                </a>
             </motion.div>
 
             <motion.h1
@@ -520,12 +520,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               transition={{ delay: index * 0.1 }}
               className="relative aspect-square rounded-2xl overflow-hidden bg-[#F8F8F8]"
             >
-              <Image
-                src={img}
-                alt={`${project.title} gallery ${index + 1}`}
-                fill
+                <Image
+                  src={img}
+                  alt={`${project.title} gallery ${index + 1}`}
+                  fill
                 className="object-cover"
-              />
+                />
             </motion.div>
           ))}
         </div>

@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
   FileText, 
@@ -11,7 +12,6 @@ import {
   X,
   LogOut
 } from 'lucide-react';
-import { useState } from 'react';
 
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
@@ -26,7 +26,66 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Skip auth check on login page
+    if (pathname === '/admin/login') {
+      setLoading(false);
+      setIsAuthenticated(true);
+      return;
+    }
+
+    // Check if user is authenticated
+    const session = localStorage.getItem('hindra_admin_session');
+    if (session) {
+      try {
+        const parsed = JSON.parse(session);
+        const expiresAt = new Date(parsed.expiresAt);
+        if (expiresAt > new Date()) {
+          setIsAuthenticated(true);
+        } else {
+          localStorage.removeItem('hindra_admin_session');
+          router.push('/admin/login');
+        }
+      } catch {
+        router.push('/admin/login');
+      }
+    } else {
+      router.push('/admin/login');
+    }
+    setLoading(false);
+  }, [pathname, router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('hindra_admin_session');
+    router.push('/admin/login');
+  };
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <svg className="w-8 h-8 animate-spin text-black" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+        </svg>
+      </div>
+    );
+  }
+
+  // Don't show layout on login page
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
+  // Redirect if not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -88,13 +147,19 @@ export default function AdminLayout({
           })}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 space-y-2">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200 w-full"
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </button>
           <Link
             href="/"
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all duration-200"
           >
-            <LogOut className="w-5 h-5" />
-            Back to Website
+            ← Back to Website
           </Link>
         </div>
       </aside>

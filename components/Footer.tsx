@@ -126,10 +126,10 @@ export default function Footer() {
         </div>
 
         <div className="relative z-10">
-          {/* Newsletter Section */}
+          {/* Newsletter Section - Compact & Mobile Optimized */}
           <div className="border-b border-white/10">
-            <div className="container-custom py-16 sm:py-20">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="container-custom py-8 sm:py-12">
+              <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -211,67 +211,35 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Main Footer Content */}
-          <div className="container-custom py-16 sm:py-20">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
-              {/* Brand Column */}
-              <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-8 lg:mb-0">
-                <Link href="/" className="inline-block mb-6">
+          {/* Main Footer Content - Compact & Mobile Optimized */}
+          <div className="container-custom py-8 sm:py-12">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+              {/* Brand Column - Full width on mobile */}
+              <div className="col-span-2 sm:col-span-1 mb-2 sm:mb-0">
+                <Link href="/" className="inline-block mb-3 sm:mb-4">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center"
+                    className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center"
                   >
-                    <span className="text-3xl font-bold text-black">H</span>
+                    <span className="text-xl sm:text-2xl font-bold text-black">H</span>
                   </motion.div>
                 </Link>
-                <p className="text-white/60 mb-6 max-w-xs">
-                  End-to-end digital solutions. AI, automation, web, mobile, design. We build it all from zero to hero.
+                <p className="text-white/60 text-xs sm:text-sm mb-3 sm:mb-4 max-w-[200px] sm:max-w-xs">
+                  End-to-end digital solutions. AI, automation, web, mobile, design.
                 </p>
-                
-                {/* Status indicator */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                  </span>
-                  <span className="text-sm text-white/70">Available for projects</span>
-                </div>
               </div>
 
               {/* Services */}
               <div>
-                <h3 className="font-semibold mb-6 text-white">Services</h3>
-                <ul className="space-y-3">
-                  {footerLinks.services.map((link) => (
+                <h3 className="font-semibold mb-3 sm:mb-4 text-white text-xs sm:text-sm">Services</h3>
+                <ul className="space-y-1.5 sm:space-y-2">
+                  {footerLinks.services.slice(0, 4).map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                        className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm"
                       >
-                        <span>{link.name}</span>
-                        <svg className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Packages */}
-              <div>
-                <h3 className="font-semibold mb-6 text-white">Packages</h3>
-                <ul className="space-y-3">
-                  {footerLinks.packages.map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        href={link.href}
-                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-1 group"
-                      >
-                        <span>{link.name}</span>
-                        <svg className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                        {link.name}
                       </Link>
                     </li>
                   ))}
@@ -280,23 +248,20 @@ export default function Footer() {
 
               {/* Company */}
               <div>
-                <h3 className="font-semibold mb-6 text-white">Company</h3>
-                <ul className="space-y-3">
-                  {footerLinks.company.map((link) => (
+                <h3 className="font-semibold mb-3 sm:mb-4 text-white text-xs sm:text-sm">Company</h3>
+                <ul className="space-y-1.5 sm:space-y-2">
+                  {footerLinks.company.slice(0, 4).map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                        className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm inline-flex items-center gap-1.5"
                       >
                         <span>{link.name}</span>
                         {link.badge && (
-                          <span className="px-2 py-0.5 text-[10px] font-medium bg-green-500 text-white rounded-full">
+                          <span className="px-1 py-0.5 text-[8px] sm:text-[10px] font-medium bg-green-500 text-white rounded-full">
                             {link.badge}
                           </span>
                         )}
-                        <svg className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
                       </Link>
                     </li>
                   ))}
@@ -305,26 +270,26 @@ export default function Footer() {
 
               {/* Social & Contact */}
               <div>
-                <h3 className="font-semibold mb-6 text-white">Connect</h3>
-                <div className="flex flex-wrap gap-3 mb-6">
+                <h3 className="font-semibold mb-3 sm:mb-4 text-white text-xs sm:text-sm">Connect</h3>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                   {socialLinks.map((social) => (
                     <motion.a
                       key={social.name}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-black transition-colors"
+                      className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-black transition-colors"
                       aria-label={social.name}
                     >
-                      {social.icon}
+                      <span className="[&>svg]:w-4 [&>svg]:h-4 sm:[&>svg]:w-5 sm:[&>svg]:h-5">{social.icon}</span>
                     </motion.a>
                   ))}
                 </div>
                 <a
                   href="mailto:hello@hindra.studio"
-                  className="text-white/60 hover:text-white transition-colors text-sm"
+                  className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm break-all"
                 >
                   hello@hindra.studio
                 </a>
@@ -332,33 +297,17 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Bottom Bar */}
+          {/* Bottom Bar - Compact & Mobile Optimized */}
           <div className="border-t border-white/10">
-            <div className="container-custom py-6">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-white/40 text-sm text-center sm:text-left">
-                  © {currentYear} Hindra Studio. All rights reserved.
+            <div className="container-custom py-3 sm:py-4">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3">
+                <p className="text-white/40 text-[10px] sm:text-xs text-center sm:text-left">
+                  © {currentYear} Hindra Studio
                 </p>
-                
-                <div className="flex items-center gap-6 text-sm text-white/40">
-                  <span className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-[#DCDFFF] rounded-full" />
-                    Dubai, UAE
-                  </span>
+                <div className="flex items-center gap-2 sm:gap-4 text-[10px] sm:text-xs text-white/40">
+                  <span>Dubai, UAE</span>
                   <span className="hidden sm:inline">•</span>
-                  <span>Working globally</span>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={scrollToTop}
-                    className="text-white/40 hover:text-white transition-colors text-sm flex items-center gap-1"
-                  >
-                    Back to top
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                    </svg>
-                  </button>
+                  <span className="hidden sm:inline">Working globally</span>
                 </div>
               </div>
             </div>

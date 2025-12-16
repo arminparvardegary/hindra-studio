@@ -166,16 +166,16 @@ export default function Built() {
 
             {faqs.map((faq, index) => (
               <details key={index} className={index === 0 ? "rounded-xl border shadow-sm" : "bg-gray-100 rounded-xl shadow-sm"}>
-                <summary className="flex justify-between items-center px-3 sm:px-4 py-2.5 sm:py-3 cursor-pointer list-none">
+              <summary className="flex justify-between items-center px-3 sm:px-4 py-2.5 sm:py-3 cursor-pointer list-none">
                   <span className="font-semibold text-gray-800 text-sm sm:text-base">{faq.question}</span>
                   <Image src='/chevron-down-solid-full.svg' alt="Expand" width={16} height={16} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform" />
-                </summary>
-                <div className="px-3 sm:px-4 pb-2.5 sm:pb-3">
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+              </summary>
+              <div className="px-3 sm:px-4 pb-2.5 sm:pb-3">
+                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                     {faq.answer}
-                  </p>
-                </div>
-              </details>
+                </p>
+              </div>
+            </details>
             ))}
           </div>
         </div>

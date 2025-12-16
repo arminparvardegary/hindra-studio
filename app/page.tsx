@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      <section className="h-[100rem]">
+      <section>
         <Header />
         <Hero />
         <Showcase />
