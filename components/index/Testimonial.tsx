@@ -88,7 +88,7 @@ export default function Testimonial() {
       bg: "bg-[#E9DCC8]",
       content: (
         <div className="p-4 sm:p-6">
-          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;Rush Photos delivered exactly what we needed - professional shots at an unbeatable price.&rdquo;</p>
+          <p className="text-base sm:text-lg text-black/80 mb-3 sm:mb-4">&ldquo;Rush Photos delivered exactly what we needed: professional shots at an unbeatable price.&rdquo;</p>
           <p className="text-sm font-medium text-black">E-commerce Brand</p>
           <p className="text-xs text-black/60">Rush Photos Customer</p>
         </div>

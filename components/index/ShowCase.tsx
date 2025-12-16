@@ -33,21 +33,21 @@ const BASE: Slide[] = [
     title: "Rush Photos",
     badges: ["PRODUCT PHOTO", "E-COMMERCE", "FROM $25/ANGLE"],
     kind: "image",
-    src: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=800&fit=crop",
+    src: "/images/rush-photos-hero.jpg",
   },
   {
     id: "rush-video",
     title: "Rush Video",
-    badges: ["PRODUCT VIDEO", "AI-POWERED", "2–5 DAY DELIVERY"],
+    badges: ["PRODUCT VIDEO", "AI POWERED", "2 TO 5 DAY DELIVERY"],
     kind: "image",
-    src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&h=800&fit=crop",
+    src: "/images/rush-video-hero.jpg",
   },
   {
     id: "rush-boxes",
     title: "Rush Boxes",
     badges: ["PACKAGING", "CUSTOM BOXES", "B2B"],
     kind: "image",
-    src: "https://images.unsplash.com/photo-1607166452427-7e4477c5e2c2?w=1200&h=800&fit=crop",
+    src: "/images/portfolio/rush-boxes-hero.png",
   },
 ];
 

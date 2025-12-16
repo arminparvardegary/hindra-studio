@@ -39,17 +39,17 @@ const projects: Record<string, Project> = {
     title: "Scriptra",
     subtitle: "AI-POWERED CONTENT CREATION PLATFORM",
     description: "The ultimate AI tool for creators, marketers, and brands to generate high-converting hooks, captions, and viral content.",
-    fullDescription: `Scriptra is our flagship SaaS product - an AI-powered content creation platform designed for modern creators and marketers.
+    fullDescription: `Scriptra is our flagship SaaS product, an AI-powered content creation platform designed for modern creators and marketers.
 
 The platform leverages advanced AI models to help users generate viral hooks, engaging captions, and high-converting content for social media platforms including TikTok, Instagram, YouTube, and Twitter.
 
 Key features include:
-• AI Hook Generator - Create attention-grabbing opening lines
-• Caption Generator - Write engaging posts in seconds
-• Viral Research - Analyze trending content patterns
-• Multi-platform Support - Optimized for all major platforms
-• Content Calendar - Plan and schedule your content
-• Analytics Dashboard - Track performance metrics`,
+• AI Hook Generator: Create attention-grabbing opening lines
+• Caption Generator: Write engaging posts in seconds
+• Viral Research: Analyze trending content patterns
+• Multi-platform Support: Optimized for all major platforms
+• Content Calendar: Plan and schedule your content
+• Analytics Dashboard: Track performance metrics`,
     tags: ["AI Platform", "SaaS", "Next.js", "TypeScript", "OpenAI"],
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&h=900&fit=crop",
     website: "https://scriptra.space",
@@ -81,7 +81,7 @@ Key features include:
   "rush-photos": {
     title: "Rush Photos",
     subtitle: "PROFESSIONAL PRODUCT PHOTOGRAPHY SERVICE",
-    description: "Professional product photography from $25/angle with 3-5 day delivery and unlimited revisions.",
+    description: "Professional product photography from $25/angle with 3 to 5 day delivery and unlimited revisions.",
     fullDescription: `Rush Photos is revolutionizing product photography with an innovative platform that combines professional photography expertise with cutting-edge technology.
 
 We built a sleek, conversion-focused website featuring:
@@ -91,16 +91,16 @@ We built a sleek, conversion-focused website featuring:
 • Four distinct photography styles
 
 Photography Styles:
-• E-commerce - Clean white background shots
-• Lifestyle - Styled scenes with props
-• Ghost Mannequin - Clothing photography
-• 360° Spin - Interactive product views
+• E-commerce: Clean white background shots
+• Lifestyle: Styled scenes with props
+• Ghost Mannequin: Clothing photography
+• 360° Spin: Interactive product views
 
 Pricing starts at just $25/angle with 3-5 day delivery and unlimited revisions on select packages.`,
     tags: ["Product Photography", "E-commerce", "Web Design", "Portfolio"],
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&h=900&fit=crop",
+    image: "/images/rush-photos-hero.jpg",
     website: "https://rush.photos",
-    stats: { styles: "4 Styles", pricing: "From $25", delivery: "3-5 Days" },
+    stats: { styles: "4 Styles", pricing: "From $25", delivery: "3 to 5 Days" },
     year: "2024",
     client: "Rush Photos",
     services: ["Web Design", "UX/UI Design", "Interactive Elements", "E-commerce Integration"],
@@ -109,7 +109,7 @@ Pricing starts at just $25/angle with 3-5 day delivery and unlimited revisions o
     results: [
       { metric: "4", label: "Photo Styles" },
       { metric: "$25", label: "Starting Price" },
-      { metric: "3-5", label: "Days Delivery" },
+      { metric: "3 to 5", label: "Days Delivery" },
       { metric: "100%", label: "Satisfaction" },
     ],
     testimonial: {
@@ -134,14 +134,14 @@ Pricing starts at just $25/angle with 3-5 day delivery and unlimited revisions o
 We designed and developed a modern, conversion-optimized website that clearly demonstrates the AI-powered video creation process:
 
 Video Packages:
-• Product Video Package - Essential product videos
-• Complete Video Package - Full video suite with multiple angles
+• Product Video Package: Essential product videos
+• Complete Video Package: Full video suite with multiple angles
 
 Camera Styles:
-• Dolly In - Cinematic approach shots
-• Orbit - 360° rotating views
-• Top Down - Flat lay presentations
-• Spinning - Product rotation videos
+• Dolly In: Cinematic approach shots
+• Orbit: 360° rotating views
+• Top Down: Flat lay presentations
+• Spinning: Product rotation videos
 
 Features:
 • 2-5 day delivery
@@ -149,9 +149,9 @@ Features:
 • Commercial rights included
 • Multiple format exports`,
     tags: ["AI Video", "Product Videos", "Web Platform", "SaaS"],
-    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&h=900&fit=crop",
+    image: "/images/rush-video-hero.jpg",
     website: "https://rush.video",
-    stats: { styles: "4 Camera Styles", delivery: "2-5 Days", formats: "Multiple" },
+    stats: { styles: "4 Camera Styles", delivery: "2 to 5 Days", formats: "Multiple" },
     year: "2024",
     client: "Rush Videos",
     services: ["Web Design", "UI/UX Design", "Brand Strategy", "Video Integration"],
@@ -159,7 +159,7 @@ Features:
     solution: "We built a clean, modern website with prominent video examples, clear package options, professional color grading showcases, and a straightforward onboarding process.",
     results: [
       { metric: "4", label: "Camera Styles" },
-      { metric: "2-5", label: "Days Delivery" },
+      { metric: "2 to 5", label: "Days Delivery" },
       { metric: "100%", label: "Satisfaction" },
       { metric: "∞", label: "Revisions" },
     ],
@@ -185,14 +185,14 @@ Features:
 The platform offers a wide range of packaging options:
 
 Box Types:
-• Mailer Boxes - Sturdy, self-locking packaging
-• Shipper Boxes - Durable shipping solutions
-• Folded Boxes - Easy assembly, maximum protection
-• Corrugated Boxes - Heavy-duty protection
-• Cardboard Boxes - Versatile packaging solution
-• Gift Boxes - Perfect for special occasions
-• Custom Boxes - Tailored to your needs
-• Setup Boxes - Ready-to-use packaging
+• Mailer Boxes: Sturdy, self-locking packaging
+• Shipper Boxes: Durable shipping solutions
+• Folded Boxes: Easy assembly, maximum protection
+• Corrugated Boxes: Heavy-duty protection
+• Cardboard Boxes: Versatile packaging solution
+• Gift Boxes: Perfect for special occasions
+• Custom Boxes: Tailored to your needs
+• Setup Boxes: Ready-to-use packaging
 
 Features:
 • Instant online quotes
@@ -204,7 +204,7 @@ Features:
 
 Located in Hawthorne, NJ with additional presence in NYC, Rush Boxes has been serving brands since 1985.`,
     tags: ["Custom Packaging", "E-commerce", "B2B", "Manufacturing"],
-    image: "https://images.unsplash.com/photo-1607166452427-7e4477c5e2c2?w=1600&h=900&fit=crop",
+    image: "/images/portfolio/rush-boxes-hero.png",
     website: "https://rushboxes.com",
     stats: { types: "8+ Box Types", experience: "Since 1985", location: "NJ & NYC" },
     year: "2024",
@@ -224,9 +224,9 @@ Located in Hawthorne, NJ with additional presence in NYC, Rush Boxes has been se
       role: "Rush Boxes Customer",
     },
     gallery: [
-      "https://images.unsplash.com/photo-1607166452427-7e4477c5e2c2?w=800&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800&h=800&fit=crop",
+      "/images/portfolio/rush-boxes-hero.png",
+      "/images/portfolio/rush-boxes-1.png",
+      "/images/portfolio/rush-boxes-2.png",
     ],
     nextProject: { slug: "scriptra", title: "Scriptra" },
     prevProject: { slug: "rush-video", title: "Rush Video" },

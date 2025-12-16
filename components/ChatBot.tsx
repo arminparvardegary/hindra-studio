@@ -66,7 +66,7 @@ function formatInlineStyles(text: string) {
   });
 }
 
-const WELCOME_MESSAGE = "Hi! 👋 I'm Hindra's AI assistant.\n\nWe're a complete brand solution - we handle everything from branding to social media to websites.\n\nOne team, one package. How can I help?";
+const WELCOME_MESSAGE = "Hi! 👋 I'm Hindra's AI assistant.\n\nWe're a complete brand solution. We handle everything from branding to social media to websites.\n\nOne team, one package. How can I help?";
 
 const QUICK_ACTIONS = [
   "What's included in your packages?",

@@ -81,7 +81,7 @@ export default function ServicesSection() {
               From Zero to Hero
             </h2>
             <p className="text-lg text-black/60">
-              We handle everything. Brand identity, social media, website, content - all under one roof. 
+              We handle everything. Brand identity, social media, website, content, all under one roof. 
               One team. One vision. Complete package.
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function ServicesSection() {
               One Team. One Package. Everything You Need.
             </h3>
             <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-              Stop juggling multiple vendors. We handle your entire brand journey - from the first logo sketch to daily social media posts. Your brand deserves a dedicated team.
+              Stop juggling multiple vendors. We handle your entire brand journey from the first logo sketch to daily social media posts. Your brand deserves a dedicated team.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

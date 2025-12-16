@@ -225,7 +225,7 @@ export default function Footer() {
                   </motion.div>
                 </Link>
                 <p className="text-white/60 mb-6 max-w-xs">
-                  End-to-end digital solutions. AI, automation, web, mobile, design - we build it all from zero to hero.
+                  End-to-end digital solutions. AI, automation, web, mobile, design. We build it all from zero to hero.
                 </p>
                 
                 {/* Status indicator */}
