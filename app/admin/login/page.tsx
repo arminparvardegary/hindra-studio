@@ -41,8 +41,12 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm sm:max-w-md">
         {/* Logo */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-black rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
-            <span className="text-2xl sm:text-3xl font-bold text-white">H</span>
+          <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4">
+            <img 
+              src="/icons/Logo.svg" 
+              alt="Hindra Logo" 
+              className="w-full h-full object-contain"
+            />
           </div>
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Hindra Admin</h1>
           <p className="text-gray-500 mt-1 sm:mt-2 text-sm sm:text-base">Sign in to access the admin panel</p>

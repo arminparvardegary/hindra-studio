@@ -219,9 +219,13 @@ export default function Footer() {
                 <Link href="/" className="inline-block mb-3 sm:mb-4">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center"
+                    className="w-10 h-10 sm:w-12 sm:h-12"
                   >
-                    <span className="text-xl sm:text-2xl font-bold text-black">H</span>
+                    <img 
+                      src="/icons/Logo.svg" 
+                      alt="Hindra Logo" 
+                      className="w-full h-full object-contain"
+                    />
                   </motion.div>
                 </Link>
                 <p className="text-white/60 text-xs sm:text-sm mb-3 sm:mb-4 max-w-[200px] sm:max-w-xs">

@@ -35,15 +35,15 @@ function Card({ src, alt, href, title, subtitle, priority, external }: CardProps
           priority={priority}
         />
       </div>
-      
+
       {/* Minimal caption below image */}
       <div className="p-3 sm:p-4 bg-white">
         <h3 className="text-sm sm:text-base font-semibold text-black mb-0.5 sm:mb-1 group-hover:text-black/70 transition-colors">
-          {title}
-        </h3>
-        {subtitle && (
+                {title}
+              </h3>
+              {subtitle && (
           <p className="text-xs sm:text-sm text-neutral-600 line-clamp-1">{subtitle}</p>
-        )}
+              )}
       </div>
     </LinkComponent>
   );
