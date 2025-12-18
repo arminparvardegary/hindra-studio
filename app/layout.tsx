@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
+import ChatBot from "@/components/ChatBot";
+import CookieConsent from "@/components/CookieConsent";
+import SocialProof from "@/components/SocialProof";
 import CommandPalette from "@/components/CommandPalette";
-import FloatingWidgets from "@/components/FloatingWidgets";
+import CostCalculator from "@/components/CostCalculator";
+import ExitIntent from "@/components/ExitIntent";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -198,14 +207,20 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} antialiased bg-white text-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
         <div className="print:hidden">
           <ScrollProgress />
           <CommandPalette />
         </div>
         {children}
-        <FloatingWidgets />
+        <div id="floating-widgets" className="print:hidden" style={{ display: 'var(--widgets-display, block)' }}>
+          <CostCalculator />
+          <ChatBot />
+          <SocialProof />
+          <ExitIntent />
+          <CookieConsent />
+        </div>
       </body>
     </html>
   );
