@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/public/icons/Logo.svg";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,8 +15,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-xl font-bold text-black">H</span>
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+                <Image
+                  src={Logo}
+                  alt="Hindra Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </Link>
             <p className="text-white/50 text-sm max-w-xs">
@@ -23,7 +31,7 @@ export default function Footer() {
           </div>
 
           {/* Products */}
-              <div>
+          <div>
             <h3 className="font-medium text-sm mb-4 text-white/70 uppercase tracking-wider">Products</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
@@ -40,17 +48,17 @@ export default function Footer() {
                 <a href="https://rush.video" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
                   Rush Video
                 </a>
-                    </li>
+              </li>
               <li>
                 <a href="https://rushboxes.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
                   Rush Boxes
                 </a>
-                    </li>
-                </ul>
-              </div>
+              </li>
+            </ul>
+          </div>
 
-              {/* Company */}
-              <div>
+          {/* Company */}
+          <div>
             <h3 className="font-medium text-sm mb-4 text-white/70 uppercase tracking-wider">Company</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
@@ -72,13 +80,13 @@ export default function Footer() {
                 <Link href="/careers" className="text-white/50 hover:text-white transition-colors inline-flex items-center gap-2">
                   Careers
                   <span className="px-1.5 py-0.5 text-[10px] bg-green-500 text-white rounded">Hiring</span>
-                      </Link>
-                    </li>
-                </ul>
-              </div>
+                </Link>
+              </li>
+            </ul>
+          </div>
 
           {/* Connect */}
-              <div>
+          <div>
             <h3 className="font-medium text-sm mb-4 text-white/70 uppercase tracking-wider">Connect</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
@@ -102,17 +110,17 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-white/10">
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
         <div className="container-custom py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-white/40 text-xs">
-                  © {currentYear} Hindra Studio. All rights reserved.
-                </p>
-                
+            © {currentYear} Hindra Studio. All rights reserved.
+          </p>
+
           <div className="flex items-center gap-4 text-xs text-white/40">
             <Link href="/privacy" className="hover:text-white/60 transition-colors">
               Privacy
@@ -122,11 +130,11 @@ export default function Footer() {
             </Link>
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                    Dubai, UAE
-                  </span>
-          </div>
+              Istanbul, Turkey
+            </span>
           </div>
         </div>
-      </footer>
+      </div>
+    </footer>
   );
 }

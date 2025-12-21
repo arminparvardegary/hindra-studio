@@ -129,11 +129,8 @@ const jsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "1122 Goffle Rd.",
-    addressLocality: "Hawthorne",
-    addressRegion: "NJ",
-    postalCode: "07506",
-    addressCountry: "US",
+    addressLocality: "Istanbul",
+    addressCountry: "TR",
   },
   founder: {
     "@type": "Person",
