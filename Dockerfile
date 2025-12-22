@@ -18,7 +18,17 @@ RUN npm run build
 RUN cp -r public .next/standalone/ || true
 RUN cp -r .next/static .next/standalone/.next/ || true
 
-WORKDIR /app/.next/standalone
+
+# Set up non-root user for security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Set correct permissions
+RUN chown -R nextjs:nodejs /app/.next/standalone
+RUN chown -R nextjs:nodejs /app/.next/static
+RUN chown -R nextjs:nodejs /app/public
+
+USER nextjs
 
 EXPOSE 3000
 
