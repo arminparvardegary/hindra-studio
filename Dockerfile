@@ -35,4 +35,5 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+# Fix: Point to the correct location of server.js in standalone build
+CMD ["node", ".next/standalone/server.js"]
