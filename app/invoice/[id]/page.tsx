@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { CheckCircle, FileText, Calendar, AlertCircle } from 'lucide-react';
 import { Invoice, currencySymbols } from '@/types/invoice';
-import { getInvoiceById, saveInvoice, formatCurrency, formatDate, calculateDiscount } from '@/lib/invoice-utils';
+import { getInvoiceByIdAsync, saveInvoiceAsync, formatCurrency, formatDate, calculateDiscount } from '@/lib/invoice-utils';
 import SignaturePad from '@/components/admin/SignaturePad';
 
 export default function PublicInvoicePage() {
@@ -14,22 +14,26 @@ export default function PublicInvoicePage() {
   const [signing, setSigning] = useState(false);
   const [signed, setSigned] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  
+
   const [signatureType, setSignatureType] = useState<'text' | 'drawn'>('text');
   const [signatureText, setSignatureText] = useState('');
   const [signatureData, setSignatureData] = useState('');
 
   useEffect(() => {
-    const id = params.id as string;
-    const data = getInvoiceById(id);
-    
-    if (data) {
-      setInvoice(data);
-      if (data.clientSignedAt) {
-        setSigned(true);
+    const fetchInvoice = async () => {
+      const id = params.id as string;
+      const data = await getInvoiceByIdAsync(id);
+
+      if (data) {
+        setInvoice(data);
+        if (data.clientSignedAt) {
+          setSigned(true);
+        }
       }
-    }
-    setLoading(false);
+      setLoading(false);
+    };
+
+    fetchInvoice();
   }, [params.id]);
 
   const handleSign = async () => {
@@ -54,7 +58,7 @@ export default function PublicInvoicePage() {
       status: 'pending',
     };
 
-    saveInvoice(updatedInvoice);
+    await saveInvoiceAsync(updatedInvoice);
     setInvoice(updatedInvoice);
     setSigned(true);
     setSigning(false);
@@ -112,9 +116,9 @@ export default function PublicInvoicePage() {
                 <p className="text-white/60 text-sm mb-1">Agreement</p>
                 <h1 className="text-2xl font-bold">{invoice.invoiceNumber}</h1>
               </div>
-              <img 
-                src="/icons/Logo.svg" 
-                alt="Hindra Logo" 
+              <img
+                src="/icons/Logo.svg"
+                alt="Hindra Logo"
                 className="w-14 h-14"
               />
             </div>
@@ -199,7 +203,7 @@ export default function PublicInvoicePage() {
                     className="w-5 h-5 mt-0.5 rounded border-gray-300 text-black focus:ring-black"
                   />
                   <span className="text-sm text-gray-700">
-                    I have read and agree to the terms and conditions stated above. 
+                    I have read and agree to the terms and conditions stated above.
                     I understand that by signing below, I am legally bound by this agreement.
                   </span>
                 </label>
@@ -207,7 +211,7 @@ export default function PublicInvoicePage() {
                 {/* Signature */}
                 <div className={`transition-opacity ${agreedToTerms ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
                   <h3 className="font-bold text-gray-900 mb-4">Your Signature</h3>
-                  
+
                   <SignaturePad
                     signatureType={signatureType}
                     signatureText={signatureText}
@@ -252,9 +256,9 @@ export default function PublicInvoicePage() {
                       {invoice.clientSignatureText}
                     </p>
                   ) : (
-                    <img 
-                      src={invoice.clientSignatureData} 
-                      alt="Your Signature" 
+                    <img
+                      src={invoice.clientSignatureData}
+                      alt="Your Signature"
                       className="h-20 object-contain mb-2"
                     />
                   )}
@@ -269,9 +273,9 @@ export default function PublicInvoicePage() {
           {/* Footer */}
           <div className="bg-gray-50 p-6 text-center flex items-center justify-center gap-2">
             <p className="text-sm text-gray-400">Powered by</p>
-            <img 
-              src="/icons/Logo.svg" 
-              alt="Hindra" 
+            <img
+              src="/icons/Logo.svg"
+              alt="Hindra"
               className="w-5 h-5"
             />
             <p className="text-sm font-semibold text-gray-500">Hindra</p>
