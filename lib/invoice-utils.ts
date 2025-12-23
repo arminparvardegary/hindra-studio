@@ -52,7 +52,7 @@ export function formatCurrency(amount: number, currency: string = 'USD'): string
     IRR: '﷼',
     AED: 'د.إ',
   };
-  
+
   const symbol = symbols[currency] || '$';
   return `${amount.toFixed(2)}${symbol}`;
 }
@@ -85,13 +85,13 @@ function getLocalInvoices(): Invoice[] {
 function saveLocalInvoice(invoice: Invoice): void {
   const invoices = getLocalInvoices();
   const existingIndex = invoices.findIndex((inv) => inv.id === invoice.id);
-  
+
   if (existingIndex >= 0) {
     invoices[existingIndex] = invoice;
   } else {
     invoices.unshift(invoice);
   }
-  
+
   localStorage.setItem(INVOICES_KEY, JSON.stringify(invoices));
 }
 
@@ -100,21 +100,44 @@ function deleteLocalInvoice(id: string): void {
   localStorage.setItem(INVOICES_KEY, JSON.stringify(invoices));
 }
 
+// Convert camelCase to snake_case for Supabase
+function toSnakeCase(obj: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {};
+  for (const key in obj) {
+    const snakeKey = key.replace(/([A-Z])/g, '_$1').toLowerCase();
+    result[snakeKey] = obj[key];
+  }
+  return result;
+}
+
+// Convert snake_case to camelCase from Supabase
+function toCamelCase(obj: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {};
+  for (const key in obj) {
+    const camelKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    result[camelKey] = obj[key];
+  }
+  return result;
+}
+
 // Supabase functions
 async function getSupabaseInvoices(): Promise<Invoice[]> {
   const result = await supabase.from('invoices').select('*');
-  
+
   if (result.error) {
     console.error('Error fetching invoices from Supabase:', result.error);
     return getLocalInvoices(); // Fallback to localStorage
   }
-  
-  return result.data || [];
+
+  // Convert snake_case to camelCase
+  return (result.data || []).map((inv: Record<string, any>) => toCamelCase(inv) as Invoice);
 }
 
 async function saveSupabaseInvoice(invoice: Invoice): Promise<void> {
-  const result = await supabase.from('invoices').upsert(invoice as unknown as Record<string, unknown>);
-  
+  // Convert camelCase to snake_case for Supabase
+  const snakeCaseInvoice = toSnakeCase(invoice as unknown as Record<string, any>);
+  const result = await supabase.from('invoices').upsert(snakeCaseInvoice);
+
   if (result.error) {
     console.error('Error saving invoice to Supabase:', result.error);
     saveLocalInvoice(invoice); // Fallback to localStorage
@@ -123,7 +146,7 @@ async function saveSupabaseInvoice(invoice: Invoice): Promise<void> {
 
 async function deleteSupabaseInvoice(id: string): Promise<void> {
   const result = await supabase.from('invoices').delete().eq('id', id);
-  
+
   if (result.error) {
     console.error('Error deleting invoice from Supabase:', result.error);
     deleteLocalInvoice(id); // Fallback to localStorage
@@ -146,7 +169,7 @@ export async function getInvoicesAsync(): Promise<Invoice[]> {
 export function saveInvoice(invoice: Invoice): void {
   // Save to localStorage immediately
   saveLocalInvoice(invoice);
-  
+
   // Also save to Supabase if configured
   if (isSupabaseConfigured()) {
     saveSupabaseInvoice(invoice).catch(console.error);
@@ -163,7 +186,7 @@ export async function saveInvoiceAsync(invoice: Invoice): Promise<void> {
 export function deleteInvoice(id: string): void {
   // Delete from localStorage immediately
   deleteLocalInvoice(id);
-  
+
   // Also delete from Supabase if configured
   if (isSupabaseConfigured()) {
     deleteSupabaseInvoice(id).catch(console.error);
@@ -184,7 +207,7 @@ export function getInvoiceById(id: string): Invoice | undefined {
 export async function getInvoiceByIdAsync(id: string): Promise<Invoice | undefined> {
   if (isSupabaseConfigured()) {
     const result = await supabase.from('invoices').select('*');
-    
+
     if (!result.error && result.data) {
       const invoice = result.data.find((inv: Invoice) => inv.id === id);
       if (invoice) return invoice;
