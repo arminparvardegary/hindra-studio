@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { 
-  FileText, 
-  PlusCircle, 
-  Search, 
+import {
+  FileText,
+  PlusCircle,
+  Search,
   Filter,
   Trash2,
   Eye,
@@ -14,12 +14,12 @@ import {
   Download
 } from 'lucide-react';
 import { Invoice } from '@/types/invoice';
-import { 
-  getInvoices, 
-  deleteInvoice, 
-  formatCurrency, 
+import {
+  getInvoicesAsync,
+  deleteInvoiceAsync,
+  formatCurrency,
   formatDate,
-  getStatusColor 
+  getStatusColor
 } from '@/lib/invoice-utils';
 
 export default function InvoicesPage() {
@@ -32,27 +32,27 @@ export default function InvoicesPage() {
     loadInvoices();
   }, []);
 
-  const loadInvoices = () => {
-    const data = getInvoices();
+  const loadInvoices = async () => {
+    const data = await getInvoicesAsync();
     setInvoices(data);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this invoice?')) {
-      deleteInvoice(id);
-      loadInvoices();
+      await deleteInvoiceAsync(id);
+      await loadInvoices();
     }
     setOpenMenuId(null);
   };
 
   const filteredInvoices = invoices.filter((invoice) => {
-    const matchesSearch = 
+    const matchesSearch =
       invoice.invoiceNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
       invoice.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       invoice.clientEmail.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     const matchesStatus = statusFilter === 'all' || invoice.status === statusFilter;
-    
+
     return matchesSearch && matchesStatus;
   });
 
@@ -138,7 +138,7 @@ export default function InvoicesPage() {
                   {filteredInvoices.map((invoice) => (
                     <tr key={invoice.id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-6 py-4">
-                        <Link 
+                        <Link
                           href={`/admin/invoices/${invoice.id}`}
                           className="font-medium text-black hover:underline"
                         >
@@ -175,8 +175,8 @@ export default function InvoicesPage() {
                           </button>
                           {openMenuId === invoice.id && (
                             <>
-                              <div 
-                                className="fixed inset-0 z-10" 
+                              <div
+                                className="fixed inset-0 z-10"
                                 onClick={() => setOpenMenuId(null)}
                               />
                               <div className="absolute right-0 top-full mt-1 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-20 py-1">
@@ -219,7 +219,7 @@ export default function InvoicesPage() {
               {filteredInvoices.map((invoice) => (
                 <div key={invoice.id} className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <Link 
+                    <Link
                       href={`/admin/invoices/${invoice.id}`}
                       className="font-medium text-black hover:underline"
                     >
@@ -266,8 +266,8 @@ export default function InvoicesPage() {
           <div className="p-12 text-center">
             <FileText className="w-12 h-12 text-gray-300 mx-auto mb-4" />
             <p className="text-gray-500 mb-2">
-              {searchQuery || statusFilter !== 'all' 
-                ? 'No invoices match your filters' 
+              {searchQuery || statusFilter !== 'all'
+                ? 'No invoices match your filters'
                 : 'No invoices yet'}
             </p>
             {!searchQuery && statusFilter === 'all' && (

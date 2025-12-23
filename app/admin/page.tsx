@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FileText, DollarSign, Clock, CheckCircle, PlusCircle, ArrowRight, PenTool } from 'lucide-react';
 import { Invoice } from '@/types/invoice';
-import { getInvoices, formatCurrency, getStatusColor, formatDate } from '@/lib/invoice-utils';
+import { getInvoicesAsync, formatCurrency, getStatusColor, formatDate } from '@/lib/invoice-utils';
 
 export default function AdminDashboard() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -16,17 +16,21 @@ export default function AdminDashboard() {
   });
 
   useEffect(() => {
-    const data = getInvoices();
-    setInvoices(data);
-    
-    setStats({
-      total: data.length,
-      signed: data.filter(i => i.clientSignedAt).length,
-      pending: data.filter(i => !i.clientSignedAt && i.status === 'pending').length,
-      totalRevenue: data
-        .filter(i => i.clientSignedAt)
-        .reduce((sum, i) => sum + i.total, 0),
-    });
+    const fetchData = async () => {
+      const data = await getInvoicesAsync();
+      setInvoices(data);
+
+      setStats({
+        total: data.length,
+        signed: data.filter(i => i.clientSignedAt).length,
+        pending: data.filter(i => !i.clientSignedAt && i.status === 'pending').length,
+        totalRevenue: data
+          .filter(i => i.clientSignedAt)
+          .reduce((sum, i) => sum + i.total, 0),
+      });
+    };
+
+    fetchData();
   }, []);
 
   const recentInvoices = invoices.slice(0, 5);
@@ -143,9 +147,8 @@ export default function AdminDashboard() {
                 className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
               >
                 <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                    invoice.clientSignedAt ? 'bg-green-100' : 'bg-gray-100'
-                  }`}>
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${invoice.clientSignedAt ? 'bg-green-100' : 'bg-gray-100'
+                    }`}>
                     {invoice.clientSignedAt ? (
                       <CheckCircle className="w-5 h-5 text-green-600" />
                     ) : (

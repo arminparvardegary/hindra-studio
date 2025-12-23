@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  Plus, 
-  Trash2, 
-  Eye, 
+import {
+  Plus,
+  Trash2,
+  Eye,
   Check,
   Copy,
   Link as LinkIcon,
@@ -20,7 +20,7 @@ import {
   calculateTax,
   calculateDiscount,
   calculateTotal,
-  saveInvoice,
+  saveInvoiceAsync,
   formatCurrency,
 } from '@/lib/invoice-utils';
 import InvoicePreview from './InvoicePreview';
@@ -38,7 +38,7 @@ export default function InvoiceForm({ initialInvoice }: InvoiceFormProps) {
 
   const [invoice, setInvoice] = useState<Invoice>(() => {
     if (initialInvoice) return initialInvoice;
-    
+
     return {
       ...defaultInvoice,
       id: generateId(),
@@ -110,13 +110,13 @@ By signing this document, you agree to the following terms:
 
   const handleSave = async () => {
     setIsSaving(true);
-    
+
     const invoiceToSave = {
       ...invoice,
       status: 'pending' as const,
     };
-    
-    saveInvoice(invoiceToSave);
+
+    await saveInvoiceAsync(invoiceToSave);
     setSaved(true);
     setIsSaving(false);
   };
@@ -131,7 +131,7 @@ By signing this document, you agree to the following terms:
   const copyLink = async () => {
     // First save
     await handleSave();
-    
+
     const link = getShareLink();
     await navigator.clipboard.writeText(link);
     setCopied(true);
@@ -161,9 +161,9 @@ By signing this document, you agree to the following terms:
       {/* Header */}
       <div className="bg-gradient-to-r from-black to-gray-800 rounded-2xl p-6 text-white">
         <div className="flex items-center gap-4">
-          <img 
-            src="/icons/Logo.svg" 
-            alt="Hindra Logo" 
+          <img
+            src="/icons/Logo.svg"
+            alt="Hindra Logo"
             className="w-12 h-12"
           />
           <div className="flex-1">
@@ -384,11 +384,10 @@ By signing this document, you agree to the following terms:
               />
               <button
                 onClick={copyLink}
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
-                  copied 
-                    ? 'bg-green-500 text-white' 
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${copied
+                    ? 'bg-green-500 text-white'
                     : 'bg-gray-100 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               </button>
@@ -408,11 +407,10 @@ By signing this document, you agree to the following terms:
           <button
             onClick={handleSave}
             disabled={isSaving || !invoice.clientName || !invoice.clientEmail}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all ${
-              saved
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all ${saved
                 ? 'bg-green-500 text-white'
                 : 'bg-black text-white hover:bg-gray-800'
-            } disabled:opacity-50 disabled:cursor-not-allowed`}
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {isSaving ? (
               'Saving...'
@@ -425,7 +423,7 @@ By signing this document, you agree to the following terms:
               'Save & Get Link'
             )}
           </button>
-          
+
           {saved && (
             <button
               onClick={copyLink}

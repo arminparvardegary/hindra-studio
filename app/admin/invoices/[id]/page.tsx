@@ -3,21 +3,21 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { 
-  ArrowLeft, 
-  Edit, 
-  Download, 
-  Trash2, 
-  CheckCircle, 
-  XCircle, 
-  Share2, 
-  Copy, 
+import {
+  ArrowLeft,
+  Edit,
+  Download,
+  Trash2,
+  CheckCircle,
+  XCircle,
+  Share2,
+  Copy,
   Check,
   ExternalLink,
   Mail
 } from 'lucide-react';
 import { Invoice } from '@/types/invoice';
-import { getInvoiceById, deleteInvoice, saveInvoice, getStatusColor, formatDate } from '@/lib/invoice-utils';
+import { getInvoiceByIdAsync, deleteInvoiceAsync, saveInvoiceAsync, getStatusColor, formatDate } from '@/lib/invoice-utils';
 import InvoicePreview from '@/components/admin/InvoicePreview';
 
 export default function InvoiceViewPage() {
@@ -29,26 +29,30 @@ export default function InvoiceViewPage() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const id = params.id as string;
-    const data = getInvoiceById(id);
-    
-    if (data) {
-      setInvoice(data);
-    }
-    setLoading(false);
+    const fetchInvoice = async () => {
+      const id = params.id as string;
+      const data = await getInvoiceByIdAsync(id);
+
+      if (data) {
+        setInvoice(data);
+      }
+      setLoading(false);
+    };
+
+    fetchInvoice();
   }, [params.id]);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (invoice && confirm('Are you sure you want to delete this invoice?')) {
-      deleteInvoice(invoice.id);
+      await deleteInvoiceAsync(invoice.id);
       router.push('/admin/invoices');
     }
   };
 
-  const handleStatusChange = (status: Invoice['status']) => {
+  const handleStatusChange = async (status: Invoice['status']) => {
     if (invoice) {
       const updated = { ...invoice, status };
-      saveInvoice(updated);
+      await saveInvoiceAsync(updated);
       setInvoice(updated);
     }
   };
@@ -56,7 +60,7 @@ export default function InvoiceViewPage() {
   const handlePrint = () => {
     // Add print-mode class to body for better print styling
     document.body.classList.add('printing');
-    
+
     // Small delay to ensure styles are applied
     setTimeout(() => {
       window.print();
@@ -117,7 +121,7 @@ export default function InvoiceViewPage() {
       {/* Share Modal */}
       {showShareModal && (
         <>
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 z-50"
             onClick={() => setShowShareModal(false)}
           />
@@ -141,9 +145,8 @@ export default function InvoiceViewPage() {
                 />
                 <button
                   onClick={copyLink}
-                  className={`p-2 rounded-lg transition-all ${
-                    copied ? 'bg-green-100 text-green-600' : 'bg-gray-200 hover:bg-gray-300'
-                  }`}
+                  className={`p-2 rounded-lg transition-all ${copied ? 'bg-green-100 text-green-600' : 'bg-gray-200 hover:bg-gray-300'
+                    }`}
                 >
                   {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -159,7 +162,7 @@ export default function InvoiceViewPage() {
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copied ? 'Copied!' : 'Copy Link'}
               </button>
-              
+
               <button
                 onClick={shareViaEmail}
                 className="w-full flex items-center justify-center gap-2 py-3 bg-gray-100 rounded-xl hover:bg-gray-200"
@@ -236,7 +239,7 @@ export default function InvoiceViewPage() {
               Mark as Paid
             </button>
           )}
-          
+
           {invoice.status === 'pending' && (
             <button
               onClick={() => handleStatusChange('cancelled')}
