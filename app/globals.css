@@ -76,6 +76,7 @@
   }
 
   body {
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
     @apply antialiased bg-white dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300;
   }
 

@@ -42,24 +42,24 @@ export default function Hero() {
                   prefersReducedMotion
                     ? undefined
                     : {
-                        color: [
-                          "#D1D5DB",
-                          "#128850",
-                          "#FFB522",
-                          "#DFE780",
-                          "#D1D5DB",
-                        ],
-                      }
+                      color: [
+                        "#D1D5DB",
+                        "#128850",
+                        "#FFB522",
+                        "#DFE780",
+                        "#D1D5DB",
+                      ],
+                    }
                 }
                 transition={
                   prefersReducedMotion
                     ? undefined
                     : {
-                        duration: 4,
-                        repeat: Infinity,
-                        repeatDelay: 7,
-                        delay: index * 0.05,
-                      }
+                      duration: 4,
+                      repeat: Infinity,
+                      repeatDelay: 7,
+                      delay: index * 0.05,
+                    }
                 }
               >
                 {char === " " ? "\u00A0" : char}
@@ -78,23 +78,23 @@ export default function Hero() {
                     prefersReducedMotion
                       ? undefined
                       : {
-                          color: [
-                            "#12885133",
-                            "#ffb52248",
-                            "#dee7803f",
-                            "#000000",
-                          ],
-                        }
+                        color: [
+                          "#12885133",
+                          "#ffb52248",
+                          "#dee7803f",
+                          "#000000",
+                        ],
+                      }
                   }
                   transition={
                     prefersReducedMotion
                       ? undefined
                       : {
-                          duration: 6,
-                          repeat: Infinity,
-                          repeatDelay: 7,
-                          delay: (index + 20) * 0.05,
-                        }
+                        duration: 6,
+                        repeat: Infinity,
+                        repeatDelay: 7,
+                        delay: (index + 20) * 0.05,
+                      }
                   }
                 >
                   {char}
@@ -107,7 +107,7 @@ export default function Hero() {
             <div className="flex -space-x-3 sm:-space-x-4">
               <Avatar className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 ring-1 ring-white/10">
                 <AvatarImage
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
                   alt="Customer"
                 />
                 <AvatarFallback>SC</AvatarFallback>
@@ -121,7 +121,7 @@ export default function Hero() {
               </Avatar>
               <Avatar className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 ring-1 ring-white/10">
                 <AvatarImage
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
                   alt="Customer"
                 />
                 <AvatarFallback>EW</AvatarFallback>

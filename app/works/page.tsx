@@ -97,14 +97,8 @@ export default function WorksPage() {
             transition={{ duration: 0.6 }}
             className="max-w-5xl"
           >
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="tag-soft mb-6 inline-block"
-            >
-              Our Work
-            </motion.span>
+            <div className="mb-6">
+            </div>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -167,11 +161,10 @@ export default function WorksPage() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
                     ? "bg-black text-white scale-105"
                     : "bg-[#F8F8F8] text-black hover:bg-[#DCDFFF]"
-                }`}
+                  }`}
               >
                 {category}
                 {activeCategory === category && (
@@ -249,20 +242,9 @@ export default function WorksPage() {
                       </motion.div>
 
                       {/* Featured badge */}
-                      {project.featured && (
-                        <div className="absolute top-4 left-4">
-                          <span className="px-4 py-2 bg-black text-white rounded-full text-xs font-medium">
-                            Featured
-                          </span>
-                        </div>
-                      )}
 
-                      {/* Year badge */}
-                      <div className="absolute top-4 right-4">
-                        <span className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-black">
-                          {project.year}
-                        </span>
-                      </div>
+
+
                     </div>
 
                     {/* Project info */}
@@ -275,13 +257,7 @@ export default function WorksPage() {
                         <span className="text-sm text-black/40">{project.category}</span>
                       </div>
                       <p className="text-black/60 mb-4 text-lg">{project.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="tag">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+
                     </div>
                   </Link>
                 </motion.article>
@@ -341,7 +317,7 @@ export default function WorksPage() {
         {/* Background elements */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#DCDFFF]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#E9DCC8]/10 rounded-full blur-3xl" />
-        
+
         <div className="container-custom text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

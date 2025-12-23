@@ -87,15 +87,6 @@ export default function ContactPage() {
             className="text-center max-w-3xl mx-auto"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-              <Greeting />
-              <motion.span
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="tag-soft inline-block"
-              >
-                Get in Touch
-              </motion.span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
               Let&apos;s create something{" "}
@@ -438,9 +429,6 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
-              FAQ
-            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
               Frequently asked questions
             </h2>

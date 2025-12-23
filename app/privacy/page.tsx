@@ -17,7 +17,7 @@ export default function PrivacyPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl mx-auto"
           >
-            <span className="tag-soft mb-6 inline-block">Legal</span>
+
             <h1 className="text-4xl sm:text-5xl font-bold text-black mb-6">
               Privacy Policy
             </h1>
@@ -30,8 +30,8 @@ export default function PrivacyPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-black mb-4">Introduction</h2>
                   <p>
-                    Hindra Studio (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy and is committed 
-                    to protecting your personal data. This privacy policy explains how we collect, 
+                    Hindra Studio (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy and is committed
+                    to protecting your personal data. This privacy policy explains how we collect,
                     use, and safeguard your information when you visit our website.
                   </p>
                 </section>
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-black mb-4">Data Security</h2>
                   <p>
-                    We implement appropriate security measures to protect your personal information 
+                    We implement appropriate security measures to protect your personal information
                     against unauthorized access, alteration, disclosure, or destruction.
                   </p>
                 </section>
@@ -80,8 +80,8 @@ export default function PrivacyPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-black mb-4">Cookies</h2>
                   <p>
-                    We use cookies to enhance your browsing experience. You can control cookie 
-                    preferences through your browser settings. Essential cookies are necessary 
+                    We use cookies to enhance your browsing experience. You can control cookie
+                    preferences through your browser settings. Essential cookies are necessary
                     for the website to function properly.
                   </p>
                 </section>

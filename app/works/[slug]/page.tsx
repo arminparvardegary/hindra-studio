@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, use } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,6 +30,8 @@ interface Project {
     role: string;
   };
   gallery: string[];
+  process: { title: string; description: string }[];
+  palette: string[];
   nextProject: { slug: string; title: string };
   prevProject: { slug: string; title: string };
 }
@@ -75,6 +77,13 @@ Key features include:
       "https://images.unsplash.com/photo-1684163760006-2f24e5e2d5d1?w=800&h=800&fit=crop",
       "https://images.unsplash.com/photo-1686191128892-3b37add4c844?w=800&h=800&fit=crop",
     ],
+    process: [
+      { title: "Discovery", description: "Analyzed the content creation landscape and identified pain points for creators." },
+      { title: "AI Integration", description: "Fine-tuned GPT-4 models specifically for viral hook generation." },
+      { title: "UX Design", description: "Created a distraction-free interface optimized for rapid ideation." },
+      { title: "Launch", description: "Released to a beta group of 500+ creators for feedback and iteration." },
+    ],
+    palette: ["#6366f1", "#4f46e5", "#1e1b4b", "#ffffff"],
     nextProject: { slug: "rush-photos", title: "Rush Photos" },
     prevProject: { slug: "rush-boxes", title: "Rush Boxes" },
   },
@@ -122,6 +131,13 @@ Pricing starts at just $25/angle with 3-5 day delivery and unlimited revisions o
       "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=800&h=800&fit=crop",
       "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=800&fit=crop",
     ],
+    process: [
+      { title: "Briefing", description: "Client submits product details and desired style references." },
+      { title: "Logistics", description: "Products are shipped to our studio with tracking integration." },
+      { title: "Shooting", description: "Professional photographers capture products in our state-of-the-art studio." },
+      { title: "Editing", description: "High-end retouching and color correction for a polished look." },
+    ],
+    palette: ["#DCDFFF", "#1a1a1a", "#ffffff", "#808080"],
     nextProject: { slug: "rush-video", title: "Rush Video" },
     prevProject: { slug: "scriptra", title: "Scriptra" },
   },
@@ -173,6 +189,13 @@ Features:
       "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=800&fit=crop",
       "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=800&h=800&fit=crop",
     ],
+    process: [
+      { title: "Concept", description: "AI generates video concepts based on product features." },
+      { title: "Generation", description: "High-fidelity video scenes are generated using custom models." },
+      { title: "Editing", description: "Automated stitching and transition application." },
+      { title: "Delivery", description: "Final render delivered in multiple aspect ratios." },
+    ],
+    palette: ["#E9DCC8", "#000000", "#FFB522", "#ffffff"],
     nextProject: { slug: "rush-boxes", title: "Rush Boxes" },
     prevProject: { slug: "rush-photos", title: "Rush Photos" },
   },
@@ -228,22 +251,29 @@ Located in Hawthorne, NJ with additional presence in NYC, Rush Boxes has been se
       "/images/portfolio/rush-boxes-1.png",
       "/images/portfolio/rush-boxes-2.png",
     ],
+    process: [
+      { title: "Strategy", description: "Identified the need for transparent, instant packaging quotes." },
+      { title: "Design", description: "Created a visual box configurator for real-time preview." },
+      { title: "Development", description: "Built a complex pricing engine handling dimensions and materials." },
+      { title: "Optimization", description: "Streamlined the checkout flow for B2B bulk orders." },
+    ],
+    palette: ["#f59e0b", "#FFFBEB", "#1f2937", "#ffffff"],
     nextProject: { slug: "scriptra", title: "Scriptra" },
     prevProject: { slug: "rush-video", title: "Rush Video" },
   },
 };
 
-export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export default function ProjectPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const project = projects[slug];
 
@@ -255,58 +285,60 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     <main className="bg-white overflow-x-hidden">
       <Header />
 
-      {/* Hero Section */}
-      <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Enhanced */}
+      <section ref={containerRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-[#FAFAFA] to-white">
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
-          className="absolute inset-0 bg-gradient-to-b from-[#F8F8F8] to-white"
-        />
-        
+          className="absolute inset-0 -z-10"
+        >
+          <div className="absolute top-20 right-[10%] w-[500px] h-[500px] bg-[#DCDFFF]/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-[10%] w-[400px] h-[400px] bg-[#E9DCC8]/20 rounded-full blur-3xl" />
+        </motion.div>
+
         <div className="container-custom relative z-10 pt-32 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-5xl mx-auto"
           >
             <Link
               href="/works"
-              className="inline-flex items-center gap-2 text-black/50 hover:text-black mb-8 transition-colors"
+              className="inline-flex items-center gap-2 text-black/40 hover:text-black mb-12 transition-colors group"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Back to Products
+              Back to Projects
             </Link>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex flex-wrap items-center justify-center gap-4 mb-6"
+              transition={{ delay: 0.2 }}
+              className="flex flex-wrap items-center justify-center gap-4 mb-8"
             >
-              <span className="px-4 py-2 bg-black text-white text-sm rounded-full">
-                {project.year}
-              </span>
-              <span className="text-black/50">{project.client}</span>
-                <a
-                  href={project.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black text-sm rounded-full transition-colors"
-                >
+              <span className="text-black/60 font-medium">{project.year}</span>
+              <span className="text-black/20">•</span>
+              <span className="text-black/40 font-medium">{project.client}</span>
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2 bg-black/5 hover:bg-black hover:text-white text-black text-sm font-medium rounded-full transition-all group"
+              >
                 Visit Live
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
+                </svg>
+              </a>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-black mb-4"
+              transition={{ delay: 0.3 }}
+              className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-black mb-6 tracking-tight"
             >
               {project.title}
             </motion.h1>
@@ -314,98 +346,73 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-xl sm:text-2xl text-black/40 font-medium tracking-wide mb-8"
+              transition={{ delay: 0.4 }}
+              className="text-xl sm:text-2xl lg:text-3xl text-black/50 font-light tracking-wide mb-10"
             >
               {project.subtitle}
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-wrap justify-center gap-2"
-            >
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 bg-black/5 rounded-full text-sm text-black/70"
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
+
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="text-xs text-black/40 uppercase tracking-widest">Scroll</span>
-            <div className="w-6 h-10 rounded-full border-2 border-black/20 flex items-start justify-center p-2">
-              <motion.div
-                className="w-1 h-2 rounded-full bg-black/40"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-            </div>
-          </motion.div>
-        </motion.div>
       </section>
 
-      {/* Hero Image */}
-      <section className="container-custom -mt-20 mb-20">
+      {/* Hero Image - Enhanced */}
+      <section className="container-custom -mt-32 mb-32">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative aspect-video rounded-3xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl"
+          transition={{ duration: 0.8 }}
+          className="relative aspect-[16/9] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-black shadow-2xl"
         >
           <Image
             src={project.image}
             alt={project.title}
             fill
             className="object-cover"
+            priority
           />
-          {/* Overlay with website link */}
-          <a
-            href={project.website}
-            target="_blank"
-            rel="noreferrer"
-            className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 transition-colors group"
-          >
-            <span className="px-6 py-3 bg-white rounded-full font-medium text-black opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
-              Visit {project.title}
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </span>
-          </a>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         </motion.div>
       </section>
 
-      {/* Overview Section */}
-      <section className="container-custom py-20">
-        <div className="grid lg:grid-cols-3 gap-12">
+      {/* Quick Stats - New Section */}
+      <section className="container-custom mb-32">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {Object.entries(project.stats).map(([key, value], index) => (
+            <motion.div
+              key={key}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="text-center p-8 rounded-2xl bg-[#FAFAFA] border border-black/5"
+            >
+              <div className="text-3xl sm:text-4xl font-bold text-black mb-2">
+                {value}
+              </div>
+              <div className="text-sm text-black/50 uppercase tracking-wider font-medium">{key}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Overview - Enhanced */}
+      <section className="container-custom mb-32">
+        <div className="grid lg:grid-cols-12 gap-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2"
+            className="lg:col-span-7"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">Overview</h2>
-            <p className="text-lg text-black/60 leading-relaxed whitespace-pre-line">
-              {project.fullDescription}
-            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-black mb-8">Project Overview</h2>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-xl text-black/70 leading-relaxed whitespace-pre-line">
+                {project.fullDescription}
+              </p>
+            </div>
           </motion.div>
 
           <motion.div
@@ -413,71 +420,174 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="space-y-8"
+            className="lg:col-span-5 space-y-10"
           >
             <div>
-              <h3 className="text-sm font-medium text-black/40 uppercase tracking-wider mb-3">Website</h3>
-              <a href={project.website} target="_blank" rel="noreferrer" className="text-lg text-black hover:underline">
-                {project.website.replace('https://', '')}
-              </a>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-black/40 uppercase tracking-wider mb-3">Services</h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-4">
                 {project.services.map((service) => (
-                  <span key={service} className="text-black text-sm bg-black/5 px-3 py-1 rounded-full">
+                  <span key={service} className="text-black/60 font-medium">
                     {service}
                   </span>
                 ))}
               </div>
             </div>
+
             <div>
-              <h3 className="text-sm font-medium text-black/40 uppercase tracking-wider mb-3">Year</h3>
-              <p className="text-lg text-black">{project.year}</p>
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xl text-black hover:text-black/60 transition-colors font-medium underline underline-offset-4"
+              >
+                {project.website.replace('https://', '')}
+              </a>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Challenge & Solution */}
-      <section className="bg-[#F8F8F8] py-20">
+      {/* Challenge & Solution - Enhanced */}
+      <section className="py-32 bg-black text-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-8 rounded-3xl bg-white"
             >
-              <span className="text-sm font-medium text-[#6366f1] uppercase tracking-wider">The Challenge</span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-black mt-4 mb-4">What we faced</h3>
-              <p className="text-black/60 leading-relaxed">{project.challenge}</p>
+              <h3 className="text-3xl sm:text-4xl font-bold mb-6">The Challenge</h3>
+              <p className="text-xl text-white/70 leading-relaxed">{project.challenge}</p>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-8 rounded-3xl bg-black text-white"
             >
-              <span className="text-sm font-medium text-[#E9DCC8] uppercase tracking-wider">The Solution</span>
-              <h3 className="text-2xl sm:text-3xl font-bold mt-4 mb-4">How we solved it</h3>
-              <p className="text-white/70 leading-relaxed">{project.solution}</p>
+              <h3 className="text-3xl sm:text-4xl font-bold mb-6">Our Solution</h3>
+              <p className="text-xl text-white/70 leading-relaxed">{project.solution}</p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Results */}
-      <section className="container-custom py-20">
+      {/* Process - Enhanced */}
+      <section className="container-custom py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="tag mb-4">Impact</span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-black">The Results</h2>
+          <h2 className="text-5xl sm:text-6xl font-bold text-black">Our Process</h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {project.process.map((step, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15 }}
+              className="relative group"
+            >
+              <div className="relative">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-black to-black/80 flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                  {index + 1}
+                </div>
+                <h3 className="text-2xl font-bold text-black mb-4">{step.title}</h3>
+                <p className="text-black/60 leading-relaxed text-lg">{step.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Color Palette - Enhanced */}
+      <section className="py-32 bg-gradient-to-b from-[#FAFAFA] to-white">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl sm:text-6xl font-bold text-black mb-6">Color Palette</h2>
+            <p className="text-xl text-black/60 max-w-2xl mx-auto">
+              Carefully selected colors that define the brand identity and visual language
+            </p>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center gap-8">
+            {project.palette.map((color, index) => (
+              <motion.div
+                key={color}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group cursor-pointer"
+              >
+                <div
+                  className="w-48 h-48 rounded-3xl shadow-xl transition-all group-hover:scale-105 group-hover:shadow-2xl border-4 border-white"
+                  style={{ backgroundColor: color }}
+                />
+                <div className="mt-6 text-center">
+                  <p className="text-lg font-bold text-black mb-1">{color}</p>
+                  <p className="text-sm text-black/40 uppercase tracking-wider">
+                    {color === '#ffffff' || color === '#FFFFFF' ? 'White' :
+                      color === '#000000' ? 'Black' :
+                        'Brand Color'}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery - Enhanced */}
+      <section className="container-custom py-32">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-5xl sm:text-6xl font-bold text-black">Gallery</h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {project.gallery.map((img, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="relative aspect-square rounded-3xl overflow-hidden bg-[#FAFAFA] group cursor-pointer"
+            >
+              <Image
+                src={img}
+                alt={`${project.title} gallery ${index + 1}`}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-[3deg]"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Results */}
+      <section className="container-custom py-32">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-5xl sm:text-6xl font-bold text-black">The Results</h2>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -488,74 +598,42 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="text-center p-6 rounded-2xl bg-[#F8F8F8]"
+              className="text-center p-10 rounded-3xl bg-gradient-to-br from-[#FAFAFA] to-white border border-black/5"
             >
-              <div className="text-4xl sm:text-5xl font-bold text-black mb-2">
+              <div className="text-5xl sm:text-6xl font-bold text-black mb-4">
                 {result.metric}
               </div>
-              <div className="text-sm text-black/50">{result.label}</div>
+              <div className="text-sm text-black/50 uppercase tracking-wider font-medium">{result.label}</div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Gallery */}
-      <section className="container-custom py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold text-black">Gallery</h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {project.gallery.map((img, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="relative aspect-square rounded-2xl overflow-hidden bg-[#F8F8F8]"
-            >
-                <Image
-                  src={img}
-                  alt={`${project.title} gallery ${index + 1}`}
-                  fill
-                className="object-cover"
-                />
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Navigation */}
+      {/* Project Navigation */}
       <section className="border-t border-black/10">
         <div className="container-custom">
           <div className="grid md:grid-cols-2">
             <Link
               href={`/works/${project.prevProject.slug}`}
-              className="group p-8 md:p-12 border-r border-black/10 hover:bg-[#F8F8F8] transition-colors"
+              className="group p-12 md:p-16 border-r border-black/10 hover:bg-[#FAFAFA] transition-all"
             >
-              <span className="text-sm text-black/40">Previous Project</span>
-              <div className="flex items-center gap-4 mt-2">
-                <svg className="w-6 h-6 group-hover:-translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="text-xs text-black/40 uppercase tracking-wider font-semibold block mb-4">Previous</span>
+              <div className="flex items-center gap-4">
+                <svg className="w-8 h-8 group-hover:-translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-                <span className="text-2xl font-bold text-black">{project.prevProject.title}</span>
+                <span className="text-3xl font-bold text-black">{project.prevProject.title}</span>
               </div>
             </Link>
 
             <Link
               href={`/works/${project.nextProject.slug}`}
-              className="group p-8 md:p-12 hover:bg-[#F8F8F8] transition-colors text-right"
+              className="group p-12 md:p-16 hover:bg-[#FAFAFA] transition-all text-right"
             >
-              <span className="text-sm text-black/40">Next Project</span>
-              <div className="flex items-center justify-end gap-4 mt-2">
-                <span className="text-2xl font-bold text-black">{project.nextProject.title}</span>
-                <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="text-xs text-black/40 uppercase tracking-wider font-semibold block mb-4">Next</span>
+              <div className="flex items-center justify-end gap-4">
+                <span className="text-3xl font-bold text-black">{project.nextProject.title}</span>
+                <svg className="w-8 h-8 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>
@@ -564,29 +642,95 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="container-custom py-20">
+      {/* CTA - Enhanced */}
+      <section className="container-custom py-32">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-3xl p-12 text-center text-white"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-[3rem] p-16 md:p-24 text-center text-white overflow-hidden group"
+          style={{
+            background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)'
+          }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Want to build something amazing?
-          </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto">
-            Let&apos;s create your next product together. Get in touch and we&apos;ll get back to you within 24 hours.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors"
-          >
-            Start a project
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+          {/* Animated Background Orbs */}
+          <motion.div
+            className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20"
+            style={{ background: 'radial-gradient(circle, #DCDFFF 0%, transparent 70%)' }}
+            animate={{
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl opacity-20"
+            style={{ background: 'radial-gradient(circle, #E9DCC8 0%, transparent 70%)' }}
+            animate={{
+              x: [0, -40, 0],
+              y: [0, -30, 0],
+              scale: [1, 1.15, 1]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40" />
+
+          <div className="relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-8 tracking-tight">
+                Let's Create
+                <br />
+                <span className="bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
+                  Something Amazing
+                </span>
+              </h2>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed"
+            >
+              Ready to bring your vision to life? Let's collaborate and build your next breakthrough product together.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <Link
+                href="/contact"
+                className="group/btn inline-flex items-center gap-3 px-12 py-6 bg-white text-black rounded-full font-bold text-lg transition-all hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-1 active:translate-y-0"
+              >
+                <span>Start Your Project</span>
+                <svg className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
         </motion.div>
       </section>
 

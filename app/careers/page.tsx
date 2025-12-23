@@ -143,25 +143,15 @@ export default function CareersPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-medium mb-6"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              We&apos;re hiring!
-            </motion.div>
-            
+            <div className="mb-6">
+            </div>
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
               Join our team of{" "}
               <span className="text-gradient">creative minds</span>
             </h1>
             <p className="text-xl text-black/60 leading-relaxed max-w-2xl mx-auto">
-              We&apos;re building something special at Hindra. Join us and work on exciting 
+              We&apos;re building something special at Hindra. Join us and work on exciting
               projects with talented people from around the world.
             </p>
           </motion.div>
@@ -213,7 +203,7 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="tag mb-4">Open Positions</span>
+
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
               Find your next role
             </h2>
@@ -277,7 +267,7 @@ export default function CareersPage() {
                     >
                       <div className="p-6 pt-0 border-t border-black/10">
                         <p className="text-black/70 mb-6">{position.description}</p>
-                        
+
                         <h4 className="font-semibold text-black mb-3">Requirements</h4>
                         <ul className="space-y-2 mb-6">
                           {position.requirements.map((req, i) => (
@@ -337,19 +327,19 @@ export default function CareersPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="tag mb-4">Our Culture</span>
+
               <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
                 Built on trust, driven by curiosity
               </h2>
               <div className="space-y-4 text-black/60">
                 <p>
-                  At Hindra, we believe the best work comes from teams that trust each other. 
-                  We&apos;ve built a culture where everyone has a voice and ideas are valued regardless 
+                  At Hindra, we believe the best work comes from teams that trust each other.
+                  We&apos;ve built a culture where everyone has a voice and ideas are valued regardless
                   of title or tenure.
                 </p>
                 <p>
-                  We&apos;re curious people who love learning. Whether it&apos;s a new design tool, 
-                  a programming language, or an industry we&apos;ve never worked in, we&apos;re always 
+                  We&apos;re curious people who love learning. Whether it&apos;s a new design tool,
+                  a programming language, or an industry we&apos;ve never worked in, we&apos;re always
                   excited to expand our horizons.
                 </p>
               </div>

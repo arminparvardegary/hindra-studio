@@ -10,9 +10,11 @@ type CardProps = {
   title: string;
   subtitle?: string;
   external?: boolean;
+  className?: string;
+  aspectRatio?: string;
 };
 
-function Card({ src, alt, href, title, subtitle, external }: CardProps) {
+function Card({ src, alt, href, title, subtitle, external, className = "", aspectRatio = "aspect-[4/3]" }: CardProps) {
   const LinkComponent = external ? 'a' : Link;
   const linkProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
@@ -20,10 +22,10 @@ function Card({ src, alt, href, title, subtitle, external }: CardProps) {
     <LinkComponent
       href={href}
       aria-label={title}
-      className="group block relative overflow-hidden bg-neutral-950 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+      className={`group block relative overflow-hidden bg-neutral-950 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 ${className}`}
       {...linkProps}
     >
-      <div className="aspect-[4/3] relative">
+      <div className={`${aspectRatio} relative`}>
         <Image
           src={src}
           alt={alt}
@@ -31,10 +33,10 @@ function Card({ src, alt, href, title, subtitle, external }: CardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
         />
-        
+
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-        
+
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
           <h3 className="text-white text-lg sm:text-xl font-semibold tracking-tight">
@@ -63,32 +65,32 @@ const projects = [
     title: 'Scriptra',
     subtitle: 'AI Content Creation Platform',
     image: '/images/portfolio/scriptra-hero.png',
-    href: 'https://scriptra.space',
-    external: true,
+    href: '/works/scriptra',
+    external: false,
   },
   {
     id: 'rush-video',
     title: 'Rush Video',
     subtitle: 'AI Product Videos',
     image: '/images/portfolio/rush-video-hero.jpg',
-    href: 'https://rush.video',
-    external: true,
+    href: '/works/rush-video',
+    external: false,
   },
   {
     id: 'rush-boxes',
     title: 'Rush Boxes',
     subtitle: 'Custom Packaging Solutions',
     image: '/images/portfolio/rush-boxes-hero.png',
-    href: 'https://rushboxes.com',
-    external: true,
+    href: '/works/rush-boxes',
+    external: false,
   },
   {
     id: 'rush-photos',
     title: 'Rush Photos',
     subtitle: 'Professional Product Photography',
     image: '/images/portfolio/rush-boxes-clean.png',
-    href: 'https://rush.photos',
-    external: true,
+    href: '/works/rush-photos',
+    external: false,
   },
 ];
 
@@ -118,19 +120,27 @@ export default function WorksSection() {
           </Link>
         </div>
 
-        {/* Grid - Clean 2x2 */}
+        {/* Grid - 2 on top, 1 full width below */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          {projects.map((project) => (
-            <Card
-              key={project.id}
-              src={project.image}
-              alt={project.title}
-              href={project.href}
-              title={project.title}
-              subtitle={project.subtitle}
-              external={project.external}
-            />
-          ))}
+          {projects.slice(0, 3).map((project, index) => {
+            // First two items are standard
+            // Third item is full width
+            const isFullWidth = index === 2;
+
+            return (
+              <Card
+                key={project.id}
+                src={project.image}
+                alt={project.title}
+                href={project.href}
+                title={project.title}
+                subtitle={project.subtitle}
+                external={project.external}
+                className={isFullWidth ? "sm:col-span-2" : ""}
+                aspectRatio={isFullWidth ? "aspect-video sm:aspect-[3/1]" : "aspect-video"}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

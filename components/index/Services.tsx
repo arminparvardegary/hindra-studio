@@ -11,50 +11,50 @@ type Service = {
 };
 
 const SERVICES: Service[] = [
-  { 
-    title: "Brand Identity", 
+  {
+    title: "Brand Identity",
     description: "Logo, visual identity & brand guidelines",
     Icon: Palette,
     color: "bg-purple-100"
   },
-  { 
-    title: "Social Media", 
+  {
+    title: "Social Media",
     description: "Page setup, content & daily management",
     Icon: Instagram,
     color: "bg-pink-100"
   },
-  { 
-    title: "Website & Deploy", 
+  {
+    title: "Website & Deploy",
     description: "Custom website with full deployment",
     Icon: Globe,
     color: "bg-blue-100"
   },
-  { 
-    title: "Content Creation", 
+  {
+    title: "Content Creation",
     description: "Photos, videos, reels & graphics",
     Icon: Video,
     color: "bg-orange-100"
   },
-  { 
-    title: "AI & Automation", 
+  {
+    title: "AI & Automation",
     description: "Chatbots & marketing automation",
     Icon: Bot,
     color: "bg-green-100"
   },
-  { 
-    title: "Launch & Growth", 
+  {
+    title: "Launch & Growth",
     description: "Go-to-market strategy & analytics",
     Icon: Rocket,
     color: "bg-amber-100"
   },
-  { 
-    title: "Community Management", 
+  {
+    title: "Community Management",
     description: "Engagement & audience growth",
     Icon: Users,
     color: "bg-cyan-100"
   },
-  { 
-    title: "Complete Package", 
+  {
+    title: "Complete Package",
     description: "Everything your brand needs",
     Icon: TrendingUp,
     color: "bg-[#DCDFFF]"
@@ -71,9 +71,6 @@ export default function ServicesSection() {
         <div className="flex flex-col items-center gap-12 sm:gap-16">
           {/* Header */}
           <div className="text-center max-w-3xl">
-            <p className="text-sm font-medium uppercase tracking-widest text-black/50 mb-4">
-              Complete Brand Solution
-            </p>
             <h2
               id="services-title"
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6"
@@ -81,7 +78,7 @@ export default function ServicesSection() {
               From Zero to Hero
             </h2>
             <p className="text-lg text-black/60">
-              We handle everything. Brand identity, social media, website, content, all under one roof. 
+              We handle everything. Brand identity, social media, website, content, all under one roof.
               One team. One vision. Complete package.
             </p>
           </div>
@@ -95,7 +92,7 @@ export default function ServicesSection() {
               >
                 {/* Background color on hover */}
                 <div className={`absolute inset-0 ${color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                
+
                 <div className="relative z-10">
                   <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mb-4 group-hover:bg-white/50 transition-colors`}>
                     <Icon className="h-6 w-6 text-black" strokeWidth={1.5} />

@@ -7,39 +7,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import { siteConfig } from "@/lib/siteConfig";
 
-const team = [
-  {
-    name: "Alex Rivera",
-    role: "Founder & Strategy Lead",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Sarah Chen",
-    role: "Creative Director",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Marcus Johnson",
-    role: "Lead Developer",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Emily Watson",
-    role: "Content & Social Lead",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "David Park",
-    role: "Video & Motion Lead",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Lisa Thompson",
-    role: "Client Success Manager",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
-  },
-];
+const team = siteConfig.team;
 
 const values = [
   {
@@ -100,7 +70,7 @@ export default function AboutPage() {
   return (
     <main className="bg-white overflow-x-hidden">
       <Header />
-      
+
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-center">
         <motion.div
@@ -108,14 +78,8 @@ export default function AboutPage() {
           className="container-custom py-20"
         >
           <div className="max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-            >
-              <span className="tag-soft">About Hindra</span>
-            </motion.div>
+            <div className="mb-8">
+            </div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -134,9 +98,9 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl sm:text-2xl text-black/60 leading-relaxed max-w-3xl"
             >
-              Hindra Studio is where you come when your brand needs to grow up a little 
-              without losing its soul. We help founders, companies and studios turn 
-              half-formed ideas into clear brands, fast websites and videos people 
+              Hindra Studio is where you come when your brand needs to grow up a little
+              without losing its soul. We help founders, companies and studios turn
+              half-formed ideas into clear brands, fast websites and videos people
               actually want to watch.
             </motion.p>
           </div>
@@ -152,7 +116,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 noise" />
         </div>
-        
+
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {stats.map((stat, index) => (
@@ -190,22 +154,21 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="tag mb-6">Our Story</span>
               <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-black mb-8">
                 Born from a passion for design
               </h2>
               <div className="space-y-6 text-lg text-black/60 leading-relaxed">
                 <p>
-                  Hindra was born from a simple belief: great design has the power to 
-                  transform businesses and create meaningful connections between brands 
+                  Hindra was born from a simple belief: great design has the power to
+                  transform businesses and create meaningful connections between brands
                   and their audiences.
                 </p>
                 <p>
-                  We mix design, development, motion and smart use of AI so you can 
+                  We mix design, development, motion and smart use of AI so you can
                   ship more, stress less and look as strong as the work you deliver.
                 </p>
                 <p>
-                  Today, we continue to push boundaries, combining strategic thinking 
+                  Today, we continue to push boundaries, combining strategic thinking
                   with creative excellence to deliver work that makes an impact.
                 </p>
               </div>
@@ -234,7 +197,7 @@ export default function AboutPage() {
                     <p className="text-black/60 mt-2">Since 2017</p>
                   </motion.div>
                 </div>
-                
+
                 {/* Floating elements */}
                 <motion.div
                   className="absolute top-8 left-8 w-16 h-16 bg-white/50 rounded-2xl backdrop-blur-sm"
@@ -262,12 +225,11 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="tag mb-4">Our Values</span>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-black mb-6">
               What drives us forward
             </h2>
             <p className="text-lg text-black/60 max-w-2xl mx-auto">
-              These principles guide everything we do, from how we work with 
+              These principles guide everything we do, from how we work with
               clients to how we approach each project.
             </p>
           </motion.div>
@@ -307,12 +269,11 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="tag mb-4">Our Team</span>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-black mb-6">
               Meet the people behind Hindra
             </h2>
             <p className="text-lg text-black/60 max-w-2xl mx-auto">
-              A diverse team of designers, developers, and strategists united by 
+              A diverse team of designers, developers, and strategists united by
               a passion for creating exceptional work.
             </p>
           </motion.div>
@@ -335,20 +296,24 @@ export default function AboutPage() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   {/* Hover overlay content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                     <div className="flex gap-3">
-                      <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                      </a>
-                      <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                      </a>
+                      {member.links.linkedin && (
+                        <a href={member.links.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                          </svg>
+                        </a>
+                      )}
+                      {member.links.twitter && (
+                        <a href={member.links.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                          </svg>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -399,11 +364,8 @@ export default function AboutPage() {
                 <div className="text-7xl font-bold text-white/10 mb-4">{item.step}</div>
                 <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                 <p className="text-white/60 leading-relaxed">{item.description}</p>
-                
-                {/* Connector line */}
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-white/20 to-transparent" />
-                )}
+
+
               </motion.div>
             ))}
           </div>
@@ -423,13 +385,13 @@ export default function AboutPage() {
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/30 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full blur-3xl" />
-            
+
             <div className="relative z-10">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
                 Ready to work together?
               </h2>
               <p className="text-xl text-black/60 max-w-xl mx-auto mb-10">
-                We&apos;re always looking for talented people to join our team and 
+                We&apos;re always looking for talented people to join our team and
                 exciting projects to work on.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
