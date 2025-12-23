@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
-import ChatBot from "@/components/ChatBot";
-import CookieConsent from "@/components/CookieConsent";
-import SocialProof from "@/components/SocialProof";
 import CommandPalette from "@/components/CommandPalette";
-import CostCalculator from "@/components/CostCalculator";
-import ExitIntent from "@/components/ExitIntent";
+import MarketingWidgets from "@/components/MarketingWidgets";
 
 const geistSans = Inter({
   variable: "--font-geist-sans",
@@ -211,13 +207,7 @@ export default function RootLayout({
           <CommandPalette />
         </div>
         {children}
-        <div id="floating-widgets" className="print:hidden" style={{ display: 'var(--widgets-display, block)' }}>
-          <CostCalculator />
-          <ChatBot />
-          <SocialProof />
-          <ExitIntent />
-          <CookieConsent />
-        </div>
+        <MarketingWidgets />
       </body>
     </html>
   );
