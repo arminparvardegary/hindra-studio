@@ -177,13 +177,13 @@ export default function Built() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-full h-20 bg-gray-50 rounded-2xl flex items-center justify-center ${social.hoverColor} transition-colors`}
+                    className={`group w-full h-20 bg-gray-50 rounded-2xl flex items-center justify-center ${social.hoverColor} transition-all duration-300`}
                     aria-label={social.name}
                   >
                     {social.icon ? (
-                      <Image src={social.icon} alt={social.name} width={32} height={32} className="w-8 h-8" />
+                      <Image src={social.icon} alt={social.name} width={32} height={32} className="w-8 h-8 group-hover:brightness-0 group-hover:invert transition-all duration-300" />
                     ) : (
-                      <span className="text-2xl font-bold">𝕏</span>
+                      <span className="text-2xl font-bold group-hover:text-white transition-all duration-300">𝕏</span>
                     )}
                   </a>
                 ))}

@@ -70,12 +70,12 @@ export const siteConfig = {
 
     // Social Links
     socials: [
-        { name: "LinkedIn", url: "https://linkedin.com/company/hindra-studio", icon: "/linkedin.svg", hoverColor: "hover:bg-blue-100" },
-        { name: "YouTube", url: "https://youtube.com/@hindrastudio", icon: "/youtube.svg", hoverColor: "hover:bg-red-100" },
-        { name: "Instagram", url: "https://instagram.com/hindrastudio", icon: "/instagram.svg", hoverColor: "hover:bg-pink-100" },
-        { name: "Behance", url: "https://behance.net/hindrastudio", icon: "/behance.svg", hoverColor: "hover:bg-blue-100" },
-        { name: "Dribbble", url: "https://dribbble.com/hindrastudio", icon: "/dribbble.svg", hoverColor: "hover:bg-pink-100" },
-        { name: "X", url: "https://twitter.com/hindrastudio", icon: null, hoverColor: "hover:bg-gray-200" },
+        { name: "LinkedIn", url: "https://linkedin.com/company/hindra-studio", icon: "/linkedin.svg", hoverColor: "hover:bg-gray-800" },
+        { name: "YouTube", url: "https://youtube.com/@hindrastudio", icon: "/youtube.svg", hoverColor: "hover:bg-gray-800" },
+        { name: "Instagram", url: "https://instagram.com/hindrastudio", icon: "/instagram.svg", hoverColor: "hover:bg-gray-800" },
+        { name: "Behance", url: "https://behance.net/hindrastudio", icon: "/behance.svg", hoverColor: "hover:bg-gray-800" },
+        { name: "Dribbble", url: "https://dribbble.com/hindrastudio", icon: "/dribbble.svg", hoverColor: "hover:bg-gray-800" },
+        { name: "X", url: "https://twitter.com/hindrastudio", icon: null, hoverColor: "hover:bg-gray-800" },
     ],
 
     // FAQs
