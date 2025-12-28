@@ -4,6 +4,7 @@ import "./globals.css";
 import ScrollProgress from "@/components/ScrollProgress";
 import CommandPalette from "@/components/CommandPalette";
 import MarketingWidgets from "@/components/MarketingWidgets";
+import GSAPProvider from "@/components/GSAPProvider";
 
 const geistSans = Inter({
   variable: "--font-geist-sans",
@@ -190,7 +191,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
@@ -202,12 +203,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
-        <div className="print:hidden">
-          <ScrollProgress />
-          <CommandPalette />
-        </div>
-        {children}
-        <MarketingWidgets />
+        <GSAPProvider>
+          <div className="print:hidden">
+            <ScrollProgress />
+            <CommandPalette />
+          </div>
+          {children}
+          <MarketingWidgets />
+        </GSAPProvider>
       </body>
     </html>
   );
