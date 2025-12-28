@@ -134,13 +134,38 @@ async function getSupabaseInvoices(): Promise<Invoice[]> {
 }
 
 async function saveSupabaseInvoice(invoice: Invoice): Promise<void> {
+  const client = getSupabaseClient();
+  if (!client) {
+    saveLocalInvoice(invoice);
+    return;
+  }
+
   // Convert camelCase to snake_case for Supabase
   const snakeCaseInvoice = toSnakeCase(invoice as unknown as Record<string, any>);
-  const result = await supabase.from('invoices').upsert(snakeCaseInvoice);
 
-  if (result.error) {
-    console.error('Error saving invoice to Supabase:', result.error);
-    saveLocalInvoice(invoice); // Fallback to localStorage
+  // Build the URL with upsert preference
+  const url = `${client.url}/rest/v1/invoices`;
+  const headers = {
+    'apikey': client.key,
+    'Authorization': `Bearer ${client.key}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'resolution=merge-duplicates,return=representation',
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(snakeCaseInvoice),
+    });
+
+    if (!response.ok) {
+      console.error('Error saving invoice to Supabase:', await response.text());
+      saveLocalInvoice(invoice);
+    }
+  } catch (error) {
+    console.error('Error saving invoice to Supabase:', error);
+    saveLocalInvoice(invoice);
   }
 }
 
@@ -209,8 +234,11 @@ export async function getInvoiceByIdAsync(id: string): Promise<Invoice | undefin
     const result = await supabase.from('invoices').select('*');
 
     if (!result.error && result.data) {
-      const invoice = result.data.find((inv: Invoice) => inv.id === id);
-      if (invoice) return invoice;
+      const invoice = result.data.find((inv: Record<string, any>) => inv.id === id);
+      if (invoice) {
+        // Convert snake_case to camelCase
+        return toCamelCase(invoice) as Invoice;
+      }
     }
   }
   return getInvoiceById(id);

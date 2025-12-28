@@ -11,7 +11,7 @@ import {
   Link as LinkIcon,
   ExternalLink
 } from 'lucide-react';
-import { Invoice, InvoiceItem, defaultInvoice, currencySymbols } from '@/types/invoice';
+import { Invoice, InvoiceItem, defaultInvoice, currencySymbols, paymentTermsOptions } from '@/types/invoice';
 import {
   generateId,
   generateInvoiceNumber,
@@ -230,6 +230,23 @@ By signing this document, you agree to the following terms:
               <option value="AED">AED (د.إ)</option>
             </select>
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Payment Terms</label>
+            <select
+              value={invoice.paymentTerms}
+              onChange={(e) => updateField('paymentTerms', e.target.value as Invoice['paymentTerms'])}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-2 focus:ring-black/10 outline-none bg-white"
+            >
+              {Object.entries(paymentTermsOptions).map(([key, option]) => (
+                <option key={key} value={key}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500 mt-1">
+              {paymentTermsOptions[invoice.paymentTerms]?.description}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -385,8 +402,8 @@ By signing this document, you agree to the following terms:
               <button
                 onClick={copyLink}
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${copied
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-gray-100 hover:bg-gray-200'
                   }`}
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -408,8 +425,8 @@ By signing this document, you agree to the following terms:
             onClick={handleSave}
             disabled={isSaving || !invoice.clientName || !invoice.clientEmail}
             className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all ${saved
-                ? 'bg-green-500 text-white'
-                : 'bg-black text-white hover:bg-gray-800'
+              ? 'bg-green-500 text-white'
+              : 'bg-black text-white hover:bg-gray-800'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {isSaving ? (

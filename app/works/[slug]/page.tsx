@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +36,8 @@ interface Project {
   prevProject: { slug: string; title: string };
 }
 
-const projects: Record<string, Project> = {
+// Static fallback projects
+const staticProjects: Record<string, Project> = {
   "scriptra": {
     title: "Scriptra",
     subtitle: "AI-POWERED CONTENT CREATION PLATFORM",
@@ -263,9 +264,73 @@ Located in Hawthorne, NJ with additional presence in NYC, Rush Boxes has been se
   },
 };
 
+// Helper function to map API response to Project interface
+function mapApiToProject(work: Record<string, unknown>, allWorks: Record<string, unknown>[]): Project {
+  // Calculate prev/next navigation
+  const currentIndex = allWorks.findIndex(w => w.slug === work.slug);
+  const prevIndex = currentIndex > 0 ? currentIndex - 1 : allWorks.length - 1;
+  const nextIndex = currentIndex < allWorks.length - 1 ? currentIndex + 1 : 0;
+  const prevWork = allWorks[prevIndex] as { slug: string; title: string };
+  const nextWork = allWorks[nextIndex] as { slug: string; title: string };
+
+  return {
+    title: work.title as string,
+    subtitle: work.subtitle as string,
+    description: work.description as string,
+    fullDescription: work.full_description as string,
+    tags: (work.tags as string[]) || [],
+    image: work.image as string,
+    website: work.website as string,
+    stats: (work.stats as Record<string, string>) || {},
+    year: work.year as string,
+    client: work.client as string,
+    services: (work.services as string[]) || [],
+    challenge: work.challenge as string,
+    solution: work.solution as string,
+    results: (work.results as { metric: string; label: string }[]) || [],
+    testimonial: {
+      quote: (work.testimonial_quote as string) || '',
+      author: (work.testimonial_author as string) || '',
+      role: (work.testimonial_role as string) || '',
+    },
+    gallery: (work.gallery as string[]) || [],
+    process: (work.process as { title: string; description: string }[]) || [],
+    palette: (work.palette as string[]) || [],
+    nextProject: { slug: nextWork?.slug || '', title: nextWork?.title || '' },
+    prevProject: { slug: prevWork?.slug || '', title: prevWork?.title || '' },
+  };
+}
+
 export default function ProjectPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const containerRef = useRef<HTMLDivElement>(null);
+  const [project, setProject] = useState<Project | null>(staticProjects[slug] || null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch project from API
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        // Fetch all works to determine prev/next
+        const allWorksRes = await fetch('/api/works');
+        if (allWorksRes.ok) {
+          const allWorks = await allWorksRes.json();
+          if (allWorks && allWorks.length > 0) {
+            const work = allWorks.find((w: { slug: string }) => w.slug === slug);
+            if (work) {
+              setProject(mapApiToProject(work, allWorks));
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch project, using static data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [slug]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -275,10 +340,20 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 300]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const project = projects[slug];
+  // Show loading state briefly, then check if project exists
+  if (!loading && !project) {
+    notFound();
+  }
 
   if (!project) {
-    notFound();
+    return (
+      <main className="bg-white overflow-x-hidden min-h-screen flex items-center justify-center">
+        <svg className="w-8 h-8 animate-spin text-black" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+        </svg>
+      </main>
+    );
   }
 
   return (

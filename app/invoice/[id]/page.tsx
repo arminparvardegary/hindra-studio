@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { CheckCircle, FileText, Calendar, AlertCircle } from 'lucide-react';
-import { Invoice, currencySymbols } from '@/types/invoice';
+import { CheckCircle, FileText, Calendar, AlertCircle, CreditCard } from 'lucide-react';
+import { Invoice, currencySymbols, paymentTermsOptions } from '@/types/invoice';
 import { getInvoiceByIdAsync, saveInvoiceAsync, formatCurrency, formatDate, calculateDiscount } from '@/lib/invoice-utils';
 import SignaturePad from '@/components/admin/SignaturePad';
 
@@ -113,8 +113,9 @@ export default function PublicInvoicePage() {
           <div className="bg-gradient-to-r from-black to-gray-800 text-white p-8">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white/60 text-sm mb-1">Agreement</p>
-                <h1 className="text-2xl font-bold">{invoice.invoiceNumber}</h1>
+                <p className="text-white/60 text-sm mb-1">Agreement for</p>
+                <h1 className="text-2xl font-bold">{invoice.clientName}</h1>
+                <p className="text-white/60 text-sm mt-1">{invoice.invoiceNumber}</p>
               </div>
               <img
                 src="/icons/Logo.svg"
@@ -164,6 +165,26 @@ export default function PublicInvoicePage() {
                       <span className="font-medium">{formatCurrency(item.total, invoice.currency)}</span>
                     </div>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* Payment Terms */}
+            {invoice.paymentTerms && (
+              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl p-5 mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <CreditCard className="w-5 h-5 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-amber-700 font-medium">Payment Terms</p>
+                    <p className="text-lg font-bold text-amber-900">
+                      {paymentTermsOptions[invoice.paymentTerms]?.label || '50% / 50%'}
+                    </p>
+                    <p className="text-sm text-amber-600">
+                      {paymentTermsOptions[invoice.paymentTerms]?.description || ''}
+                    </p>
+                  </div>
                 </div>
               </div>
             )}

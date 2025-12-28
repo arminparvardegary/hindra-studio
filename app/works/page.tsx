@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,9 +10,11 @@ import NavBar from "@/components/NavBar";
 
 const categories = ["All", "SaaS", "E-commerce", "Web Platform", "Video"];
 
-const projects = [
+// Fallback static projects (used if API fails or DB is empty)
+const staticProjects = [
   {
     id: "scriptra",
+    slug: "scriptra",
     title: "Scriptra",
     category: "SaaS",
     description: "AI-powered content creation platform for generating viral hooks, captions, and social media content",
@@ -25,6 +27,7 @@ const projects = [
   },
   {
     id: "rush-photos",
+    slug: "rush-photos",
     title: "Rush Photos",
     category: "E-commerce",
     description: "Professional product photography service from $25/angle with 3 to 5 day delivery and unlimited revisions",
@@ -37,6 +40,7 @@ const projects = [
   },
   {
     id: "rush-video",
+    slug: "rush-video",
     title: "Rush Video",
     category: "Video",
     description: "AI-powered product videos that convert with 2 to 5 day delivery and unlimited revisions",
@@ -49,6 +53,7 @@ const projects = [
   },
   {
     id: "rush-boxes",
+    slug: "rush-boxes",
     title: "Rush Boxes",
     category: "E-commerce",
     description: "Custom packaging solutions including mailer boxes, gift boxes, and product boxes with instant quotes",
@@ -61,10 +66,58 @@ const projects = [
   },
 ];
 
+interface Project {
+  id: string;
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  tags: string[];
+  year: string;
+  featured: boolean;
+  color: string;
+  website: string;
+}
+
 export default function WorksPage() {
+  const [projects, setProjects] = useState<Project[]>(staticProjects);
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/api/works');
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            // Map API response to project format
+            const apiProjects = data.map((work: { slug: string; title: string; category: string; description: string; image: string; tags: string[]; year: string; featured: boolean; color: string; website: string }) => ({
+              id: work.slug,
+              slug: work.slug,
+              title: work.title,
+              category: work.category,
+              description: work.description,
+              image: work.image,
+              tags: work.tags || [],
+              year: work.year,
+              featured: work.featured,
+              color: work.color,
+              website: work.website,
+            }));
+            setProjects(apiProjects);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch works, using static data:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -162,8 +215,8 @@ export default function WorksPage() {
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                    ? "bg-black text-white scale-105"
-                    : "bg-[#F8F8F8] text-black hover:bg-[#DCDFFF]"
+                  ? "bg-black text-white scale-105"
+                  : "bg-[#F8F8F8] text-black hover:bg-[#DCDFFF]"
                   }`}
               >
                 {category}

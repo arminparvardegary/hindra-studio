@@ -3,18 +3,21 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  PlusCircle, 
-  Settings, 
+import {
+  LayoutDashboard,
+  FileText,
+  PlusCircle,
+  Settings,
   Menu,
   X,
-  LogOut
+  LogOut,
+  Briefcase
 } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Works', href: '/admin/works', icon: Briefcase },
+  { name: 'New Work', href: '/admin/works/new', icon: PlusCircle },
   { name: 'Agreements', href: '/admin/invoices', icon: FileText },
   { name: 'New Agreement', href: '/admin/invoices/new', icon: PlusCircle },
   { name: 'Settings', href: '/admin/settings', icon: Settings },
@@ -91,7 +94,7 @@ export default function AdminLayout({
     <div className="min-h-screen bg-gray-50">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
@@ -105,15 +108,15 @@ export default function AdminLayout({
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-                <Link href="/admin" className="flex items-center gap-2">
-            <img 
-              src="/icons/Logo.svg" 
-              alt="Hindra Logo" 
+          <Link href="/admin" className="flex items-center gap-2">
+            <img
+              src="/icons/Logo.svg"
+              alt="Hindra Logo"
               className="w-8 h-8"
             />
             <span className="font-semibold text-lg">Hindra Admin</span>
           </Link>
-          <button 
+          <button
             onClick={() => setSidebarOpen(false)}
             className="lg:hidden p-1 hover:bg-gray-100 rounded"
           >
@@ -123,9 +126,9 @@ export default function AdminLayout({
 
         <nav className="p-4 space-y-1">
           {navigation.map((item) => {
-            const isActive = pathname === item.href || 
+            const isActive = pathname === item.href ||
               (item.href !== '/admin' && pathname.startsWith(item.href));
-            
+
             return (
               <Link
                 key={item.name}
@@ -134,8 +137,8 @@ export default function AdminLayout({
                 className={`
                   flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
                   transition-all duration-200
-                  ${isActive 
-                    ? 'bg-black text-white' 
+                  ${isActive
+                    ? 'bg-black text-white'
                     : 'text-gray-700 hover:bg-gray-100'
                   }
                 `}
@@ -168,15 +171,15 @@ export default function AdminLayout({
       <div className="lg:pl-64 print:pl-0">
         {/* Top bar */}
         <header className="sticky top-0 z-30 h-16 bg-white border-b border-gray-200 flex items-center px-4 lg:px-8 print:hidden">
-          <button 
+          <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden p-2 hover:bg-gray-100 rounded-lg mr-4"
           >
             <Menu className="w-5 h-5" />
           </button>
           <h1 className="text-lg font-semibold text-gray-900">
-            {navigation.find(n => 
-              pathname === n.href || 
+            {navigation.find(n =>
+              pathname === n.href ||
               (n.href !== '/admin' && pathname.startsWith(n.href))
             )?.name || 'Admin Panel'}
           </h1>

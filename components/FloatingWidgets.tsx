@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation';
 import CostCalculator from '@/components/CostCalculator';
 import ChatBot from '@/components/ChatBot';
-import SocialProof from '@/components/SocialProof';
 import CookieConsent from '@/components/CookieConsent';
 
 export default function FloatingWidgets() {
@@ -19,9 +18,9 @@ export default function FloatingWidgets() {
     <div id="floating-widgets" className="print:hidden" style={{ display: 'var(--widgets-display, block)' }}>
       <CostCalculator />
       <ChatBot />
-      <SocialProof />
       <CookieConsent />
     </div>
   );
 }
+
 

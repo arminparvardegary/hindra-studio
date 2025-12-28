@@ -2,9 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import ChatBot from './ChatBot';
-import SocialProof from './SocialProof';
 import CostCalculator from './CostCalculator';
-import ExitIntent from './ExitIntent';
 import CookieConsent from './CookieConsent';
 
 export default function MarketingWidgets() {
@@ -22,9 +20,9 @@ export default function MarketingWidgets() {
         <div id="floating-widgets" className="print:hidden">
             <CostCalculator />
             <ChatBot />
-            <SocialProof />
-            <ExitIntent />
             <CookieConsent />
         </div>
     );
 }
+
+
