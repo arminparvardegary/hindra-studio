@@ -14,12 +14,14 @@ export default function GSAPProvider({
 }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.08, // Lower = smoother/slower deceleration (0.05-0.15 range)
+      duration: 1.8, // Longer duration for more noticeable smooth effect
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease-out
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       touchMultiplier: 2,
+      infinite: false,
     });
 
     lenis.on("scroll", ScrollTrigger.update);

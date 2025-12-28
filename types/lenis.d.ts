@@ -1,5 +1,6 @@
 declare module 'lenis' {
   interface LenisOptions {
+    lerp?: number
     duration?: number
     easing?: (t: number) => number
     smoothWheel?: boolean
